@@ -1,0 +1,228 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class Unit : MonoBehaviour, ISelectable, IMovable
+{
+    NavMeshAgent agent;
+    NavMeshObstacle obs;
+    UnitAnimation anim;
+    [SerializeField] GameObject selectionMarker;
+    public enum UnitState
+    {
+        Idle,
+        Moving,
+        Foraging,
+        //Building,
+        //Dead
+    }
+    public UnitState state;
+    public enum EndAction
+    {
+        None,
+        Forage,
+        Deposit,
+        //Build
+        //attack,
+        //fetch
+    }
+    public EndAction endAction;
+
+    [Header("Foraging")]
+    public IForageable forageTarget;
+    public ForagedResourceData carriedResource;
+    public int carriedAmount;
+    public int carryCapacity = 5;
+    public float forageSpeed = 2f;
+    Coroutine forageRoutine;
+
+    public IDepositable depositTarget;
+
+    [Header("Slot")]
+    public ISlotProvider currentSlotProvider;
+    public string slotProviderName = " "; //just for debug
+    private void Start()
+    {
+        UnitManager.inst.units.Add(this);
+        agent = GetComponent<NavMeshAgent>();
+        obs = GetComponent<NavMeshObstacle>();
+        anim=GetComponent<UnitAnimation>();
+        state=UnitState.Idle;
+    }
+    void Update()
+    {
+        if (state==UnitState.Moving && HasReachedDestination())
+        {
+            DoEndAction();
+        }
+
+        if (state == UnitState.Foraging && forageTarget!=null && forageTarget.IsDepleted) //not needed any more??
+        {
+            state = UnitState.Idle;
+            //find closest dropOff-point?
+        }
+
+
+        //switch agent and obstacle
+        /*
+        if (state == UnitState.Moving)
+        {
+            agent.enabled = true;
+        }
+        else
+        {
+            agent.enabled=false;
+        }
+        obs.enabled=!agent.enabled;
+        */
+    }
+    public void SetSelected(bool selected)
+    {
+        selectionMarker.SetActive(selected);
+    }
+
+    public void MoveTo(Vector3 destination)
+    {
+        agent.SetDestination(destination);
+        state=UnitState.Moving;
+    }
+    public void ReleaseSlot()
+    {
+        if (currentSlotProvider != null)
+        {
+            currentSlotProvider.ReleaseSlot(this);
+            currentSlotProvider = null;
+        }
+    }
+    void DoEndAction()
+    {
+        switch (endAction)
+        {
+            case EndAction.None:
+                state = UnitState.Idle;    
+            break;
+
+            case EndAction.Forage:
+                if (forageTarget != null && !forageTarget.IsDepleted)
+                {
+                    state = UnitState.Foraging;
+                    FacePosition(forageTarget.Position);
+                    StartForaging();
+                }
+                else { ClearEndAction();}
+                    break;
+
+            case EndAction.Deposit:
+                if (depositTarget != null && carriedResource != null && carriedAmount > 0)
+                {
+                    //OmniStorage storage = depositTarget.GetComponent<>(OmniStorage);
+                    DepositAtStorage(depositTarget.Storage);
+                }
+                else{ ClearEndAction();}
+            break;  
+
+            //case EndAction.Build: break;
+        }
+    }
+    void ClearEndAction()
+    {
+        endAction = EndAction.None;
+        forageTarget = null;
+        depositTarget = null;
+        //state = UnitState.Idle; //this is ugly sometimes? looks better without...
+        anim.ApplyState(state);
+    }
+    bool HasReachedDestination()
+    {
+        if (agent.pathPending)
+            return false;
+
+        if (agent.remainingDistance > agent.stoppingDistance)
+            return false;
+
+        if (agent.hasPath && agent.velocity.sqrMagnitude > 0.01f)
+            return false;
+
+        return true;
+    }
+    public void FacePosition(Vector3 targetPosition)
+    {
+        Vector3 direction = targetPosition - transform.position;
+        direction.y = 0f; // keep upright
+
+        if (direction.sqrMagnitude < 0.0001f)
+            return;
+
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = lookRotation;
+    }
+    void OnDestroy()
+    {
+        if (UnitManager.inst != null)
+        {
+            UnitManager.inst.units.Remove(this);
+            UnitManager.inst.selectedUnits.Remove(this);
+        }
+    }
+
+    //forage loop routine
+    void StartForaging()
+    {
+        if (carriedResource != null && carriedResource != forageTarget.Resource)
+        {
+            forageTarget = null;
+            state = UnitState.Idle; 
+            return; 
+        }
+        if (forageRoutine != null)
+        {
+            Debug.Log("duplicate routine!");
+            return;
+        }
+
+        StopForaging();
+        forageRoutine = StartCoroutine(ForageLoop());
+    }
+    void StopForaging()
+    {
+        if (forageRoutine != null)
+        {
+            StopCoroutine(forageRoutine);
+            forageRoutine = null;
+        }
+    }
+
+    IEnumerator ForageLoop()
+    {
+        while (
+            state == UnitState.Foraging &&
+            forageTarget != null
+        )
+        {
+            forageTarget.Forage(this);
+
+            if (carriedAmount >= carryCapacity)
+            {
+                StopForaging();
+                //GoToNearestDropOff();
+                yield break;
+            }
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        StopForaging();
+    }
+
+    public void DepositAtStorage(OmniStorage storage)
+    {
+        if (carriedResource == null || carriedAmount <= 0)
+            return;
+
+        storage.Deposit(carriedResource, carriedAmount);
+
+        carriedResource = null;
+        carriedAmount = 0;
+        ClearEndAction();
+    }
+}

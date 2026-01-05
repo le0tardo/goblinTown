@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188bef0a1de24d34f86523ecaa212562, type: 3}
+  m_Name: StockPile
+  m_EditorClassIdentifier: 
+  buildingName: StockPile
+  acceptedResources:
+  - {fileID: 11400000, guid: 57185a3da7f68ab45bc2926303cb094d, type: 2}
+  - {fileID: 11400000, guid: 616e80c623d71464794d79c3a8744685, type: 2}
+  - {fileID: 11400000, guid: 0c6331f87e7530947b692dcf6305516c, type: 2}
+  Capacity: 50
