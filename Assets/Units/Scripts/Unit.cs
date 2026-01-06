@@ -219,10 +219,33 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         if (carriedResource == null || carriedAmount <= 0)
             return;
 
-        storage.Deposit(carriedResource, carriedAmount);
+        var village = VillageResourceManager.inst;
+        VillageResource vr = carriedResource.villageResource;
 
-        carriedResource = null;
-        carriedAmount = 0;
-        ClearEndAction();
+        if (!village.villageResources.TryGetValue(vr, out int currentAmount))
+            return;
+        if (!village.villageCaps.TryGetValue(vr, out int cap))
+            return;
+
+        if (currentAmount >= cap)
+        {
+            ClearEndAction();
+            return;
+        }
+
+        // Clamp
+        int spaceLeft = cap - currentAmount;
+        int depositAmount = Mathf.Min(carriedAmount, spaceLeft);
+
+        storage.Deposit(carriedResource, depositAmount);
+
+        carriedAmount -= depositAmount;
+
+        if (carriedAmount <= 0)
+        {
+            carriedResource = null;
+            carriedAmount = 0;
+            ClearEndAction();
+        }
     }
 }

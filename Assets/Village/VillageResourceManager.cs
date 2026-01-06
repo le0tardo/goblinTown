@@ -13,6 +13,7 @@ public class VillageResourceManager : MonoBehaviour
 
     public static VillageResourceManager inst { get; private set; }
     public Dictionary<VillageResource, int> villageResources = new Dictionary<VillageResource, int>();
+    public Dictionary<VillageResource, int> villageCaps = new Dictionary<VillageResource, int>();
 
     [SerializeField] VillageResourceGUI gui;
     [SerializeField] VillageResource[] villageResourceList;
@@ -26,6 +27,10 @@ public class VillageResourceManager : MonoBehaviour
         foreach (var villageResource in villageResourceList)
         {
             villageResources.Add(villageResource, 0);
+        }
+        foreach (var villageResource in villageResourceList) //resourceCap
+        {
+            villageCaps.Add(villageResource, 50);
         }
 
         foreach (var entry in StartingResources)
@@ -48,6 +53,34 @@ public class VillageResourceManager : MonoBehaviour
 
         gui.UpdateResource(data, villageResources[data]);
     }
+
+    public void ChangeCap(int changeAmount) // chatGpt wrote this
+    {
+        if (changeAmount == 0)
+            return;
+
+        // Copy keys so we can safely modify values
+        var keys = new List<VillageResource>(villageCaps.Keys);
+
+        foreach (var resource in keys)
+        {
+            villageCaps[resource] += changeAmount;
+
+            // Optional safety clamp
+            if (villageCaps[resource] < 0)
+                villageCaps[resource] = 0;
+
+            // Optional: clamp current amount if cap shrinks
+            if (villageResources.TryGetValue(resource, out int current))
+            {
+                if (current > villageCaps[resource])
+                    villageResources[resource] = villageCaps[resource];
+            }
+        }
+
+        gui.UpdateAllResources(villageResources);
+    }
+
 
     public void SpendBuildingCost(BuildingObject building)
     {

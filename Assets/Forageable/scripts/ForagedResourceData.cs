@@ -7,7 +7,7 @@ using UnityEngine;
 public class ForagedResourceData : ScriptableObject
 {
 
-    public VillageResource category;
+    public VillageResource villageResource;
     public string resourceName;
     //public GameObject resourceModel;
     public Mesh mesh;

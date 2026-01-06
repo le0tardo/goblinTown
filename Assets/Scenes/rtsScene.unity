@@ -2273,6 +2273,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotImage: {fileID: 746738040}
   slotText: {fileID: 1190560715}
+  resource: {fileID: 0}
+  requiredAmount: 0
 --- !u!1 &144719029
 GameObject:
   m_ObjectHideFlags: 0
@@ -3910,6 +3912,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotImage: {fileID: 1465910953}
   slotText: {fileID: 1002778971}
+  resource: {fileID: 0}
+  requiredAmount: 0
 --- !u!1 &199366214
 GameObject:
   m_ObjectHideFlags: 0
@@ -6065,7 +6069,7 @@ MonoBehaviour:
   - resource: {fileID: 11400000, guid: 10472c2fa2e85e94d8a447da2647383a, type: 2}
     amount: 10
   - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
-    amount: 50
+    amount: 49
   gui: {fileID: 568638429}
   villageResourceList:
   - {fileID: 11400000, guid: 10472c2fa2e85e94d8a447da2647383a, type: 2}
@@ -9579,7 +9583,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -840, y: 420}
+  m_AnchoredPosition: {x: -860, y: 490}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &568638429
@@ -17378,6 +17382,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotImage: {fileID: 354512587}
   slotText: {fileID: 134011032}
+  resource: {fileID: 0}
+  requiredAmount: 0
 --- !u!1 &1115873164
 GameObject:
   m_ObjectHideFlags: 0
@@ -35236,6 +35242,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotImage: {fileID: 1745688581}
   slotText: {fileID: 164911561}
+  resource: {fileID: 0}
+  requiredAmount: 0
 --- !u!1 &1996598394
 GameObject:
   m_ObjectHideFlags: 0

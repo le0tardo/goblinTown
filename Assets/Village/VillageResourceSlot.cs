@@ -6,10 +6,14 @@ public class VillageResourceSlot : MonoBehaviour
 {
     [SerializeField]Image img;
     [SerializeField]TextMeshProUGUI txt;
-    public void Set(VillageResource data, int amount)
+    public void Set(VillageResource resource) //both resource and cap
     {
-        img.sprite = data.resourceIcon;
-        txt.text = amount.ToString();
-    }
+        var village = VillageResourceManager.inst;
 
+        village.villageResources.TryGetValue(resource, out int amount);
+        village.villageCaps.TryGetValue(resource, out int cap);
+
+        img.sprite = resource.resourceIcon;
+        txt.text = $"{amount}/{cap}";
+    }
 }

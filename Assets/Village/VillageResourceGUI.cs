@@ -10,16 +10,18 @@ public class VillageResourceGUI : MonoBehaviour
     {
         foreach (var kvp in resources)
         {
-            VillageResourceSlot slot = Instantiate(slotPrefab, this.transform);
-            slot.Set(kvp.Key, kvp.Value);
+            VillageResourceSlot slot = Instantiate(slotPrefab, transform);
+            slot.Set(kvp.Key);
+
             slots.Add(kvp.Key, slot);
         }
     }
+
     public void UpdateResource(VillageResource data, int amount)
     {
         if (slots.TryGetValue(data, out var slot))
         {
-            slot.Set(data, amount);
+            slot.Set(data);
         }
     }
 

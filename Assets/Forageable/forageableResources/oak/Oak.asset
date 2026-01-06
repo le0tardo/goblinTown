@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1a936e5c080a3479c6e0ff4e61ab8b, type: 3}
   m_Name: Oak
   m_EditorClassIdentifier: 
-  resourceType: 0
-  category: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
+  villageResource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
   resourceName: Oak
-  resourceModel: {fileID: 0}
   mesh: {fileID: 340698725581318852, guid: 133db9403c805074c8e2299a5577ce56, type: 3}
   material: {fileID: 2100000, guid: f7391373f9586f243ad06d9097893842, type: 2}
   resourceSprite: {fileID: 21300000, guid: 00219acd7c4b1b94086fe59f4dc35735, type: 3}

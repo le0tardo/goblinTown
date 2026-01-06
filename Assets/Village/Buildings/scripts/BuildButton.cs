@@ -35,7 +35,7 @@ public class BuildButton : MonoBehaviour
         for (int i = 0; i < building.costs.Length; i++)
         {
             costSlots[i].gameObject.SetActive(true);
-            costSlots[i].SetValue(building.costs[i].resource.resourceIcon,building.costs[i].amount);
+            costSlots[i].SetValue(building.costs[i].resource,building.costs[i].resource.resourceIcon,building.costs[i].amount);
         }
     }
 
@@ -43,15 +43,18 @@ public class BuildButton : MonoBehaviour
     {
         button.interactable = CanAffordBuilding(building);
 
-        for(int i=0; i < costSlots.Length; i++)
+        var village = VillageResourceManager.inst;
+        for (int i = 0; i < costSlots.Length; i++)
         {
             if (!costSlots[i].gameObject.activeInHierarchy)
-            {
-                return;
-            }
-            costSlots[i].SetColor(CanAffordBuilding(building));
+                continue;
+
+            var cost = building.costs[i];
+
+            village.villageResources.TryGetValue(cost.resource, out int available);
+
+            costSlots[i].UpdateColor(available);
         }
-        
     }
 
     bool CanAffordBuilding(BuildingObject building)
@@ -69,8 +72,6 @@ public class BuildButton : MonoBehaviour
 
         return true;
     }
-
-
 
     public void ClickBuild()
     {
