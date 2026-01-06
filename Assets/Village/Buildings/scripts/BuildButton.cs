@@ -12,11 +12,12 @@ public class BuildButton : MonoBehaviour
     [SerializeField] Image image;
     [SerializeField] TextMeshProUGUI title;
     [SerializeField] TextMeshProUGUI type;
+    [SerializeField] BuildCostSlot[] costSlots;
     Button button;
 
     public bool canAfford =false;
 
-    private void Awake()
+    private void Start()
     {
         button = GetComponent<Button>();
         if (building != null)
@@ -25,18 +26,32 @@ public class BuildButton : MonoBehaviour
             type.text = building.buildingType.ToString();
             image.sprite = building.buildingIcon;
         }
+
+        for (int i = 0; i < costSlots.Length; i++)
+        {
+            costSlots[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < building.costs.Length; i++)
+        {
+            costSlots[i].gameObject.SetActive(true);
+            costSlots[i].SetValue(building.costs[i].resource.resourceIcon,building.costs[i].amount);
+        }
     }
 
-    private void OnEnable()
+    void Update()
     {
-        if (CanAffordBuilding(building))
+        button.interactable = CanAffordBuilding(building);
+
+        for(int i=0; i < costSlots.Length; i++)
         {
-            button.enabled = true;
+            if (!costSlots[i].gameObject.activeInHierarchy)
+            {
+                return;
+            }
+            costSlots[i].SetColor(CanAffordBuilding(building));
         }
-        else
-        {
-            button.enabled = false;
-        }
+        
     }
 
     bool CanAffordBuilding(BuildingObject building)
@@ -59,6 +74,7 @@ public class BuildButton : MonoBehaviour
 
     public void ClickBuild()
     {
+        UnitManager.inst.ClearSelection();
         BuildingManager.inst.SetBuilding(building);
     }
 

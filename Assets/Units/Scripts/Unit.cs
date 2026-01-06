@@ -176,7 +176,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         }
         if (forageRoutine != null)
         {
-            Debug.Log("duplicate routine!");
+            //Debug.Log("duplicate routine!");
             return;
         }
 
