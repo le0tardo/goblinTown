@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da5be578a90ec4d408791bb9bc26e7d5, type: 3}
-  m_Name: Food
+  m_Script: {fileID: 11500000, guid: b68f34a74552dca40920d6d4a4abfa8e, type: 3}
+  m_Name: Wood
   m_EditorClassIdentifier: 
-  macroCat: 1
-  macroIcon: {fileID: 21300000, guid: 6e26464df1569d24590a9565044e979f, type: 3}
+  resource: 0
+  resourceIcon: {fileID: 21300000, guid: 3760654cfdd334c44bc66a12dc2ad802, type: 3}

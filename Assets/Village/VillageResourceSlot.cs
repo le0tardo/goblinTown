@@ -6,9 +6,9 @@ public class VillageResourceSlot : MonoBehaviour
 {
     [SerializeField]Image img;
     [SerializeField]TextMeshProUGUI txt;
-    public void Set(MacroResourceCategory data, int amount)
+    public void Set(VillageResource data, int amount)
     {
-        img.sprite = data.macroIcon;
+        img.sprite = data.resourceIcon;
         txt.text = amount.ToString();
     }
 

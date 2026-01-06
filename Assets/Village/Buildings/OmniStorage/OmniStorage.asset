@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb043fc87bc49474588a01066b192508, type: 3}
+  m_Name: OmniStorage
+  m_EditorClassIdentifier: 
+  buildingName: Storage Hut
+  buildingIcon: {fileID: 21300000, guid: 52f76053e7b952749a3d0d7b758889fa, type: 3}
+  buildingType: 0
+  costs:
+  - resource: {fileID: 11400000, guid: 10472c2fa2e85e94d8a447da2647383a, type: 2}
+    amount: 10
+  - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
+    amount: 30
+  footprintSize: {x: 1.33, y: 1.33}
+  previewMesh: {fileID: 5874029526669689052, guid: de8ed1637ca11f44089a664adcc6081e, type: 3}
+  buildingPrefab: {fileID: 2670088052604193542, guid: a24fa8387216d6e4daa3b9c157661127, type: 3}

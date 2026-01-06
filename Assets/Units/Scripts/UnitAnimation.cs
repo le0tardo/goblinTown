@@ -45,11 +45,11 @@ public class UnitAnimation : MonoBehaviour
        if(state==Unit.UnitState.Moving) anim.SetTrigger("moving"); carryObject.SetActive(carrying);
         if (state == Unit.UnitState.Foraging)
         {
-            if (unit.carriedResource.category.macroCat == MacroResourceCategory.MacroCat.Food)
+            if (unit.carriedResource.category.resource == VillageResource.Resource.Food)
             {
                anim.SetTrigger("foraging");
             }
-            if (unit.carriedResource.category.macroCat == MacroResourceCategory.MacroCat.Wood)
+            if (unit.carriedResource.category.resource == VillageResource.Resource.Wood)
             {
                 anim.SetTrigger("forageTree");
             }

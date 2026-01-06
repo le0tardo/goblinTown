@@ -6,24 +6,8 @@ using UnityEngine;
 )]
 public class ForagedResourceData : ScriptableObject
 {
-    /*public enum ForageResource
-    {
-        //woods
-        Oak,
-        Birch,
-        Pine,
-        //foods
-        Berry,
-        Fish,
-        //stones
-        Stone,
-        //clay
-        Clay
-         
-    }
-    */
-    //public ForageResource resourceType;
-    public MacroResourceCategory category;
+
+    public VillageResource category;
     public string resourceName;
     //public GameObject resourceModel;
     public Mesh mesh;

@@ -4,9 +4,9 @@ using UnityEngine;
 public class VillageResourceGUI : MonoBehaviour
 {
     [SerializeField] VillageResourceSlot slotPrefab;
-    Dictionary<MacroResourceCategory, VillageResourceSlot> slots = new Dictionary<MacroResourceCategory, VillageResourceSlot>();
+    Dictionary<VillageResource, VillageResourceSlot> slots = new Dictionary<VillageResource, VillageResourceSlot>();
 
-    public void Initialize(Dictionary<MacroResourceCategory, int> resources)
+    public void Initialize(Dictionary<VillageResource, int> resources)
     {
         foreach (var kvp in resources)
         {
@@ -15,11 +15,19 @@ public class VillageResourceGUI : MonoBehaviour
             slots.Add(kvp.Key, slot);
         }
     }
-    public void UpdateResource(MacroResourceCategory data, int amount)
+    public void UpdateResource(VillageResource data, int amount)
     {
         if (slots.TryGetValue(data, out var slot))
         {
             slot.Set(data, amount);
+        }
+    }
+
+    public void UpdateAllResources(Dictionary<VillageResource, int> resources)
+    {
+        foreach (var kvp in resources)
+        {
+            UpdateResource(kvp.Key, kvp.Value);
         }
     }
 }
