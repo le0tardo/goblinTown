@@ -10,8 +10,8 @@ public class BuildCostSlot : MonoBehaviour
     public int requiredAmount;
     private void Awake()
     {
-        slotImage = GetComponentInChildren<Image>();
-        slotText = GetComponentInChildren<TextMeshProUGUI>();
+        //if(slotImage=null)slotImage = GetComponentInChildren<Image>();
+        //if(slotText=null)slotText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void SetValue(VillageResource res,Sprite spr, int val)

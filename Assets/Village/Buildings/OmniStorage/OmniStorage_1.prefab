@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 619178014014256177}
   - component: {fileID: 1466207260376518322}
   m_Layer: 0
-  m_Name: OmniStorage
+  m_Name: OmniStorage_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

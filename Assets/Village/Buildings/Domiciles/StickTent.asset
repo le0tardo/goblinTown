@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb043fc87bc49474588a01066b192508, type: 3}
-  m_Name: OmniStorage
+  m_Name: StickTent
   m_EditorClassIdentifier: 
-  buildingName: Storage Hut
-  buildingIcon: {fileID: 21300000, guid: af39105107d4a3b418cc6154ec923a5d, type: 3}
+  buildingName: Stick Tent
+  buildingIcon: {fileID: 21300000, guid: ef89529ec4b26124a91c958516135759, type: 3}
   buildingType: 0
   costs:
   - resource: {fileID: 11400000, guid: 10472c2fa2e85e94d8a447da2647383a, type: 2}
-    amount: 10
+    amount: 5
   - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
-    amount: 30
-  footprintSize: {x: 1.33, y: 1.33}
-  previewMesh: {fileID: 5874029526669689052, guid: de8ed1637ca11f44089a664adcc6081e, type: 3}
-  buildingPrefab: {fileID: 2670088052604193542, guid: a24fa8387216d6e4daa3b9c157661127, type: 3}
+    amount: 20
+  footprintSize: {x: 0, y: 0}
+  previewMesh: {fileID: -5869687395913500032, guid: b193e7938d0eda2419891762002ff439, type: 3}
+  buildingPrefab: {fileID: 0}

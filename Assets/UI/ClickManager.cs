@@ -120,6 +120,27 @@ public class ClickManager : MonoBehaviour
             else
             {
                 BuildingManager.inst.DeselectBuilding();
+                float radius = 1.5f; // spacing from center
+                int count = UnitManager.inst.selectedUnits.Count;
+
+                for (int i = 0; i < count; i++)
+                {
+                    Unit unit = UnitManager.inst.selectedUnits[i];
+
+                    float angle = (2 * Mathf.PI / count) * i;
+
+                    Vector3 offset = new Vector3(
+                        Mathf.Cos(angle),
+                        0,
+                        Mathf.Sin(angle)
+                    ) * radius;
+
+                    Vector3 destination = hit.point + offset;
+
+                    unit.MoveTo(destination);
+                    unit.endAction = Unit.EndAction.None;
+                    unit.ReleaseSlot();
+                }
             }
         }
         else
