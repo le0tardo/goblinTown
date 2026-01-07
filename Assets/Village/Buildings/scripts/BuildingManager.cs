@@ -116,6 +116,15 @@ public class BuildingManager : MonoBehaviour
         ClearPreview();
         DeselectBuilding();
     }
+
+    public void DestroyBuilding()
+    {
+        if (selectedBuilding != null)
+        {
+            //instantiate some destory vfx here
+            Destroy(selectedBuilding.gameObject);
+        }
+    }
     bool CanAffordBuilding(BuildingObject building)
     {
         var village = VillageResourceManager.inst;
@@ -153,22 +162,6 @@ public class BuildingManager : MonoBehaviour
         }
 
         return true;
-    }
-
-    void OnDrawGizmos()
-    {
-        if (currentBuilding == null)
-            return;
-
-        if (previewInstance == null)
-            return;
-
-        Vector3 pos = previewInstance.transform.position;
-
-        bool valid = IsPlacementValid(pos);
-
-        Gizmos.color = valid ? Color.green : Color.red;
-        Gizmos.DrawWireSphere(pos, currentBuilding.footprintSize.x*2);
     }
 
 }

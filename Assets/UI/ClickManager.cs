@@ -36,6 +36,11 @@ public class ClickManager : MonoBehaviour
                 HandleBoxSelection(dragStartPos, dragCurrentPos);
             }
         }
+        if (Input.GetMouseButtonUp(1))
+        {
+            UnitManager.inst.ClearSelection();
+            BuildingManager.inst.DeselectBuilding();
+        }
     }
 
 
