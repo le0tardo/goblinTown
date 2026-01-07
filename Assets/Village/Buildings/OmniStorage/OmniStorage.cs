@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class OmniStorage : MonoBehaviour, IBuilding, IDepositable
+public class OmniStorage : MonoBehaviour, IDepositable
 {
 
     public Vector3 Position => transform.position;

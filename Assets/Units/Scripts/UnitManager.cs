@@ -8,10 +8,25 @@ public class UnitManager : MonoBehaviour
     public List<Unit> units = new List<Unit>();
     public List<Unit> selectedUnits = new List<Unit>();
 
+    [SerializeField]UnitCounter counter;
+    public int maxUnits=1;
+    //public int maxSelectedUnits;
+
     private void Awake()
     {
         if (inst != null && inst != this){ Destroy(gameObject); return; }
         inst = this;
+    }
+
+    public void AddUnit(Unit unit)
+    {
+        units.Add(unit);
+        counter.UpdateUnitCount();
+    }
+    public void RemoveUnit(Unit unit)
+    {
+        units.Remove(unit);
+        counter.UpdateUnitCount();
     }
 
     public void SelectUnit(Unit unit)

@@ -43,7 +43,8 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     public string slotProviderName = " "; //just for debug
     private void Start()
     {
-        UnitManager.inst.units.Add(this);
+        //UnitManager.inst.units.Add(this);
+        UnitManager.inst.AddUnit(this);
         agent = GetComponent<NavMeshAgent>();
         obs = GetComponent<NavMeshObstacle>();
         anim=GetComponent<UnitAnimation>();
@@ -160,7 +161,8 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     {
         if (UnitManager.inst != null)
         {
-            UnitManager.inst.units.Remove(this);
+            //UnitManager.inst.units.Remove(this);
+            UnitManager.inst.RemoveUnit(this);
             UnitManager.inst.selectedUnits.Remove(this);
         }
     }

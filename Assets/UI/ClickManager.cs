@@ -59,6 +59,10 @@ public class ClickManager : MonoBehaviour
     }
     void HandleClick()
     {
+        // Ignore clicks while placing buildings
+        if (BuildingManager.inst != null && BuildingManager.inst.isPlacingBuilding)
+            return;
+
         // 0. UI
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             return;
@@ -87,10 +91,42 @@ public class ClickManager : MonoBehaviour
                     UnitManager.inst.ClearSelection();
                     UnitManager.inst.SelectUnit(unit);
                 }
+                BuildingManager.inst.DeselectBuilding();
             }
 
             return;
         }
+
+        //2b buildings
+        IBuilding building=hit.collider.GetComponentInParent<IBuilding>();
+        if (building != null)
+        {
+            if (UnitManager.inst.selectedUnits.Count <= 0)
+            {
+                if (BuildingManager.inst.selectedBuilding == null)
+                {
+                    BuildingManager.inst.SelectBuilding(building.Bbh);
+                }
+                else if (BuildingManager.inst.selectedBuilding == building.Bbh)
+                {
+                    BuildingManager.inst.DeselectBuilding();
+                }
+                else
+                {
+                    BuildingManager.inst.DeselectBuilding();
+                    BuildingManager.inst.SelectBuilding(building.Bbh);
+                }
+            }
+            else
+            {
+                BuildingManager.inst.DeselectBuilding();
+            }
+        }
+        else
+        {
+            BuildingManager.inst.DeselectBuilding();
+        }
+
         //3 forageable objects
         IForageable forageable = hit.collider.GetComponentInParent<IForageable>();
         if (forageable != null)
@@ -200,6 +236,7 @@ public class ClickManager : MonoBehaviour
         Rect selectionRect = GetScreenRect(start, end);
 
         UnitManager.inst.ClearSelection();
+        BuildingManager.inst.DeselectBuilding();
 
         foreach (Unit unit in UnitManager.inst.units)
         {

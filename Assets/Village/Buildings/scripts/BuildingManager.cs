@@ -3,7 +3,8 @@ using UnityEngine;
 public class BuildingManager : MonoBehaviour
 {
     public static BuildingManager inst;
-    [SerializeField] public BuildingObject currentBuilding;
+    [SerializeField] public BuildingObject currentBuilding; //building to place!
+    [SerializeField] public BuildingBehaviour selectedBuilding;
 
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask nonBlockingLayers;
@@ -16,10 +17,26 @@ public class BuildingManager : MonoBehaviour
 
     float gridSize = 0.5f;
 
+    public bool isPlacingBuilding=false;
     private void Awake()
     {
         if (inst != null && inst != this){Destroy(gameObject);return;}inst = this;
     }
+
+    #region //selection
+    public void SelectBuilding(BuildingBehaviour bbh)
+    {
+        selectedBuilding= bbh;
+        bbh.SelectBuilding();
+    }
+    public void DeselectBuilding()
+    {
+        if (selectedBuilding == null) {  return; }
+        BuildingBehaviour bbh= selectedBuilding;
+        bbh.DeselectBuilding();
+        selectedBuilding= null;
+    }
+    #endregion
     public void SetBuilding(BuildingObject building)
     {
         currentBuilding = building;
@@ -31,13 +48,20 @@ public class BuildingManager : MonoBehaviour
         if (currentBuilding == null)
             return;
 
+        isPlacingBuilding = true;
         UpdatePreview();
 
         if (Input.GetMouseButtonDown(0) && IsPlacementValid(previewInstance.transform.position)&&CanAffordBuilding(currentBuilding)) //can afford, add in updatePreview!!
         {
             VillageResourceManager.inst.SpendBuildingCost(currentBuilding);
             PlaceBuilding(previewInstance.transform.position);
+            Invoke("DelayBool", 0.25f);
         }
+    }
+
+    void DelayBool()
+    {
+        isPlacingBuilding = false;
     }
     void CreatePreviewObject()
     {
@@ -90,6 +114,7 @@ public class BuildingManager : MonoBehaviour
         );
 
         ClearPreview();
+        DeselectBuilding();
     }
     bool CanAffordBuilding(BuildingObject building)
     {
