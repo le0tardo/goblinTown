@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   villageResource: {fileID: 11400000, guid: 3e7ce838c868bce49899709c7f9460e0, type: 2}
   resourceName: Rocks
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  resourceSprite: {fileID: 21300000, guid: 2ca92a2d101e24e49947fa594cb43616, type: 3}
+  mesh: {fileID: -5180504364571445338, guid: cde2763bedcffad41bf3e394837d47c1, type: 3}
+  material: {fileID: 2100000, guid: 17fa0f75077659048a85aecc4599de67, type: 2}
+  resourceSprite: {fileID: 21300000, guid: 9727ef7fec903f043bd2ce3488d28d8d, type: 3}

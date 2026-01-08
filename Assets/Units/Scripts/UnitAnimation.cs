@@ -8,10 +8,13 @@ public class UnitAnimation : MonoBehaviour
 
     [SerializeField] GameObject carryObject;
     int randomIdle;
+
+    UnitEquipment equip;
     private void Start()
     {
         anim = GetComponent<Animator>();
         unit = GetComponent<Unit>();
+        equip = GetComponent<UnitEquipment>();
 
         lastState = unit.state;
         if(carryObject.activeInHierarchy)carryObject.SetActive(false);
@@ -41,8 +44,8 @@ public class UnitAnimation : MonoBehaviour
     }
     public void ApplyState(Unit.UnitState state)
     {
-       if(state==Unit.UnitState.Idle) anim.SetTrigger("idle"); anim.SetBool("carrying", carrying);carryObject.SetActive(carrying);
-       if(state==Unit.UnitState.Moving) anim.SetTrigger("moving"); carryObject.SetActive(carrying);
+       if(state==Unit.UnitState.Idle) anim.SetTrigger("idle"); anim.SetBool("carrying", carrying);carryObject.SetActive(carrying);equip.UneqipTools();
+       if(state==Unit.UnitState.Moving) anim.SetTrigger("moving"); carryObject.SetActive(carrying); equip.UneqipTools();
         if (state == Unit.UnitState.Foraging)
         {
             if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Food)
@@ -52,6 +55,7 @@ public class UnitAnimation : MonoBehaviour
             if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Wood)
             {
                 anim.SetTrigger("forageTree");
+                equip.EquipAxe();
             }
             carryObject.SetActive(false);
         }

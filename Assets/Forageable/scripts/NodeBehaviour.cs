@@ -15,9 +15,10 @@ public class NodeBehaviour : MonoBehaviour,IForageable
     public Vector3 Position => transform.position;
 
     [SerializeField] float interactionRange = 1f; //dont think this is used
-    public float InteractionRange => interactionRange; //or this
+    public float InteractionRange => interactionRange; //or this... but need for interface atm...
 
     [SerializeField] Animator anim;
+    public bool renewableResource = true;
     [SerializeField] float respawnTime=10f; //set from scriptable object class?
 
     private void Start()
@@ -58,7 +59,15 @@ public class NodeBehaviour : MonoBehaviour,IForageable
                 anim.enabled = true;
                 anim.SetTrigger("depleat");
                 Invoke("DisableAnim", 1f);
-                Invoke("Respawn",respawnTime);
+                if (renewableResource)
+                {
+                    Invoke("Respawn", respawnTime);
+                }
+                else
+                {
+                    Invoke("DestoryNode",1f);
+                }
+
             }
             isDepleted = true;
         }
@@ -86,5 +95,10 @@ public class NodeBehaviour : MonoBehaviour,IForageable
         {
             anim.enabled=false;
         }
+    }
+
+    void DestoryNode()
+    {
+        Destroy(gameObject);
     }
 }
