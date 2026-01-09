@@ -1,10 +1,13 @@
-using System.Security.Claims;
 using UnityEngine;
 
-public class PickupBehaviour : MonoBehaviour, IPickupable
+public class PickupBehaviour : MonoBehaviour, IPickupable, IHoverable
 {
     [SerializeField] public ForagedResourceData resource;
     public ForagedResourceData Resource=>resource;
+
+    string displayName;
+    public string DisplayName => displayName;
+
     MeshRenderer rend;
     MeshFilter filt;
 
@@ -12,6 +15,7 @@ public class PickupBehaviour : MonoBehaviour, IPickupable
 
     private void Start()
     {
+        displayName =resource.resourceName;
         rend = GetComponentInChildren<MeshRenderer>();
         filt = GetComponentInChildren<MeshFilter>();
 
