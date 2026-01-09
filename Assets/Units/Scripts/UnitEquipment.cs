@@ -21,6 +21,9 @@ public class UnitEquipment : MonoBehaviour
     {
         if(!axe.activeSelf)axe.SetActive(true);
     }
-
+    public void EquipPickAxe()
+    {
+        if (!pickAxe.activeSelf) pickAxe.SetActive(true);
+    }
 
 }

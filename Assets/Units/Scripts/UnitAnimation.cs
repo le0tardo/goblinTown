@@ -57,6 +57,12 @@ public class UnitAnimation : MonoBehaviour
                 anim.SetTrigger("forageTree");
                 equip.EquipAxe();
             }
+            if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Stone)
+            {
+                anim.SetTrigger("forageRock");
+                equip.EquipPickAxe();
+            }
+
             carryObject.SetActive(false);
         }
     }

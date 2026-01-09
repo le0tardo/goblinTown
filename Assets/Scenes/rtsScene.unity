@@ -1190,7 +1190,7 @@ MonoBehaviour:
   node: {fileID: 11400000, guid: 2975301f166ffc140bbd19d30723ca6e, type: 2}
   resource: {fileID: 11400000, guid: 0c6331f87e7530947b692dcf6305516c, type: 2}
   isDepleted: 0
-  resourceAmount: 2
+  resourceAmount: 10
   resourceCount: 10
   interactionRange: 1
   anim: {fileID: 121964378}
@@ -1775,6 +1775,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &249267783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 249267784}
+  m_Layer: 3
+  m_Name: detailChunks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &249267784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249267783}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2113915692}
+  - {fileID: 812404866}
+  - {fileID: 524773955}
+  - {fileID: 902417928}
+  - {fileID: 1045604097}
+  - {fileID: 1917054399}
+  m_Father: {fileID: 1851772357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &263221060
 GameObject:
   m_ObjectHideFlags: 0
@@ -3140,6 +3177,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522049813}
   m_CullTransparentMesh: 1
+--- !u!1 &524773954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 524773955}
+  - component: {fileID: 524773956}
+  m_Layer: 3
+  m_Name: GrassChunk (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &524773955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524773954}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.6, y: 0, z: 0.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 249267784}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &524773956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524773954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf20d346c0348b4b9b5622ea0d4f70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassMeshes:
+  - {fileID: 3284317394355905387, guid: 7626817a2f165c0408d28bffafb11696, type: 3}
+  - {fileID: 1529260590574202774, guid: 3602034451eb9d44f91225e6a4e3f47c, type: 3}
+  - {fileID: 1486484728803586241, guid: 835d6ac79ca99844b81b909f06401800, type: 3}
+  - {fileID: -8085974789787604652, guid: 26320f51e634ffb41a853f463653f25a, type: 3}
+  - {fileID: 4097690937511054269, guid: d49b0a1de6e77c945a766bfd0b1d664b, type: 3}
+  - {fileID: 8059148161947889491, guid: deb471986244ed548a4567268d7fd12f, type: 3}
+  - {fileID: 7394151757318884772, guid: 197d0d4aa4bc5db41aedb2b1224e5fda, type: 3}
+  - {fileID: 7508315268775965047, guid: dcc4d5e6a0191a6429f54b0417f3719e, type: 3}
+  grassMaterial: {fileID: 2100000, guid: 47bdd9eff92a6c84a828a42c837cb88c, type: 2}
+  instancesPerChunk: 300
+  chunkSize: {x: 25, y: 25}
+  scaleRange: {x: 0.33, y: 1}
 --- !u!1001 &531435643
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4518,6 +4612,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790720026}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &812404865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 812404866}
+  - component: {fileID: 812404867}
+  m_Layer: 3
+  m_Name: GrassChunk (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &812404866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812404865}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.100000024, y: 0, z: -2.4700003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 249267784}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &812404867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812404865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf20d346c0348b4b9b5622ea0d4f70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassMeshes:
+  - {fileID: 3284317394355905387, guid: 7626817a2f165c0408d28bffafb11696, type: 3}
+  - {fileID: 1529260590574202774, guid: 3602034451eb9d44f91225e6a4e3f47c, type: 3}
+  - {fileID: 1486484728803586241, guid: 835d6ac79ca99844b81b909f06401800, type: 3}
+  - {fileID: -8085974789787604652, guid: 26320f51e634ffb41a853f463653f25a, type: 3}
+  - {fileID: 4097690937511054269, guid: d49b0a1de6e77c945a766bfd0b1d664b, type: 3}
+  - {fileID: 8059148161947889491, guid: deb471986244ed548a4567268d7fd12f, type: 3}
+  - {fileID: 7394151757318884772, guid: 197d0d4aa4bc5db41aedb2b1224e5fda, type: 3}
+  - {fileID: 7508315268775965047, guid: dcc4d5e6a0191a6429f54b0417f3719e, type: 3}
+  grassMaterial: {fileID: 2100000, guid: 47bdd9eff92a6c84a828a42c837cb88c, type: 2}
+  instancesPerChunk: 300
+  chunkSize: {x: 25, y: 25}
+  scaleRange: {x: 0.33, y: 1}
 --- !u!1 &815840859
 GameObject:
   m_ObjectHideFlags: 0
@@ -5282,6 +5433,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902064139}
   m_CullTransparentMesh: 1
+--- !u!1 &902417927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 902417928}
+  - component: {fileID: 902417929}
+  m_Layer: 3
+  m_Name: GrassChunk (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &902417928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902417927}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.100000024, y: 0, z: 0.029999733}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 249267784}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &902417929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902417927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf20d346c0348b4b9b5622ea0d4f70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassMeshes:
+  - {fileID: 3284317394355905387, guid: 7626817a2f165c0408d28bffafb11696, type: 3}
+  - {fileID: 1529260590574202774, guid: 3602034451eb9d44f91225e6a4e3f47c, type: 3}
+  - {fileID: 1486484728803586241, guid: 835d6ac79ca99844b81b909f06401800, type: 3}
+  - {fileID: -8085974789787604652, guid: 26320f51e634ffb41a853f463653f25a, type: 3}
+  - {fileID: 4097690937511054269, guid: d49b0a1de6e77c945a766bfd0b1d664b, type: 3}
+  - {fileID: 8059148161947889491, guid: deb471986244ed548a4567268d7fd12f, type: 3}
+  - {fileID: 7394151757318884772, guid: 197d0d4aa4bc5db41aedb2b1224e5fda, type: 3}
+  - {fileID: 7508315268775965047, guid: dcc4d5e6a0191a6429f54b0417f3719e, type: 3}
+  grassMaterial: {fileID: 2100000, guid: 47bdd9eff92a6c84a828a42c837cb88c, type: 2}
+  instancesPerChunk: 300
+  chunkSize: {x: 25, y: 25}
+  scaleRange: {x: 0.33, y: 1}
 --- !u!1 &906118857
 GameObject:
   m_ObjectHideFlags: 0
@@ -11509,6 +11717,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042483697}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1045604096
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1045604097}
+  - component: {fileID: 1045604098}
+  m_Layer: 3
+  m_Name: RockChunk (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1045604097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045604096}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.6, y: 0, z: 0.029999733}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 249267784}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1045604098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045604096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf20d346c0348b4b9b5622ea0d4f70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassMeshes:
+  - {fileID: -6001795952332105237, guid: d4692bb3ab6feb54f9ae9851f5e37e78, type: 3}
+  - {fileID: 4884485262343501198, guid: d4692bb3ab6feb54f9ae9851f5e37e78, type: 3}
+  - {fileID: -7575750262596928017, guid: d4692bb3ab6feb54f9ae9851f5e37e78, type: 3}
+  - {fileID: 2794124247822523328, guid: d4692bb3ab6feb54f9ae9851f5e37e78, type: 3}
+  grassMaterial: {fileID: 2100000, guid: 0734aaf87fd2804469deb98116311f20, type: 2}
+  instancesPerChunk: 100
+  chunkSize: {x: 25, y: 25}
+  scaleRange: {x: 0.25, y: 0.5}
 --- !u!1 &1048889397
 GameObject:
   m_ObjectHideFlags: 0
@@ -12293,12 +12554,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d893464f53f814bacd3dc5fff9a807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomSpeed: 5
-  minFOV: 25
-  maxFOV: 45
+  zoomSpeed: 2
+  zoomSmooth: 10
+  maxZoomDistance: 15
+  currentZoom: 0
   panSpeed: 10
-  edgeSize: 10
+  edgeSize: 66
   worldHalfSize: 25
+  edgePanEnabled: 1
 --- !u!1001 &1169954297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17909,7 +18172,7 @@ Transform:
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2113915692}
+  - {fileID: 249267784}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1851772358
@@ -18443,6 +18706,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906183054}
   m_CullTransparentMesh: 1
+--- !u!1 &1917054398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1917054399}
+  - component: {fileID: 1917054400}
+  m_Layer: 3
+  m_Name: RockChunk
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1917054399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917054398}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.6, y: 0, z: -2.4700003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 249267784}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1917054400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917054398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf20d346c0348b4b9b5622ea0d4f70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassMeshes:
+  - {fileID: -6001795952332105237, guid: d4692bb3ab6feb54f9ae9851f5e37e78, type: 3}
+  - {fileID: 4884485262343501198, guid: d4692bb3ab6feb54f9ae9851f5e37e78, type: 3}
+  - {fileID: -7575750262596928017, guid: d4692bb3ab6feb54f9ae9851f5e37e78, type: 3}
+  - {fileID: 2794124247822523328, guid: d4692bb3ab6feb54f9ae9851f5e37e78, type: 3}
+  grassMaterial: {fileID: 2100000, guid: 0734aaf87fd2804469deb98116311f20, type: 2}
+  instancesPerChunk: 100
+  chunkSize: {x: 25, y: 25}
+  scaleRange: {x: 0.25, y: 0.5}
 --- !u!1001 &1922167848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19168,12 +19484,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2113915691}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.6, y: 0, z: -2.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1851772357}
+  m_Father: {fileID: 249267784}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2113915693
 MonoBehaviour:
@@ -19198,8 +19514,8 @@ MonoBehaviour:
   - {fileID: 7508315268775965047, guid: dcc4d5e6a0191a6429f54b0417f3719e, type: 3}
   grassMaterial: {fileID: 2100000, guid: 47bdd9eff92a6c84a828a42c837cb88c, type: 2}
   instancesPerChunk: 300
-  chunkSize: {x: 10, y: 10}
-  scaleRange: {x: 0.8, y: 1.2}
+  chunkSize: {x: 25, y: 25}
+  scaleRange: {x: 0.33, y: 1}
 --- !u!1 &2123683058
 GameObject:
   m_ObjectHideFlags: 0
@@ -19353,23 +19669,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6654576564403546869, guid: f2bf5a6d0f8230f4e8d17701de44b4ef, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.997012
+      value: 0.7598593
       objectReference: {fileID: 0}
     - target: {fileID: -6654576564403546869, guid: f2bf5a6d0f8230f4e8d17701de44b4ef, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000000029802319
+      value: -0.05001094
       objectReference: {fileID: 0}
     - target: {fileID: -6654576564403546869, guid: f2bf5a6d0f8230f4e8d17701de44b4ef, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.64548177
       objectReference: {fileID: 0}
     - target: {fileID: -6654576564403546869, guid: f2bf5a6d0f8230f4e8d17701de44b4ef, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.07724687
+      value: -0.058872603
+      objectReference: {fileID: 0}
+    - target: {fileID: -6654576564403546869, guid: f2bf5a6d0f8230f4e8d17701de44b4ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -8.743
+      objectReference: {fileID: 0}
+    - target: {fileID: -6654576564403546869, guid: f2bf5a6d0f8230f4e8d17701de44b4ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -80.584
       objectReference: {fileID: 0}
     - target: {fileID: -6654576564403546869, guid: f2bf5a6d0f8230f4e8d17701de44b4ef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -8.861
+      value: -1.444
       objectReference: {fileID: 0}
     - target: {fileID: -3993514761017240380, guid: f2bf5a6d0f8230f4e8d17701de44b4ef, type: 3}
       propertyPath: m_IsActive

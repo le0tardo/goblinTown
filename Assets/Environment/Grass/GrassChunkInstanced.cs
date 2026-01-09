@@ -78,4 +78,15 @@ public class GrassChunkInstanced : MonoBehaviour
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(mainCam);
         return GeometryUtility.TestPlanesAABB(planes, chunkBounds);
     }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+
+        Vector3 center = transform.position + new Vector3(chunkSize.x * 0.5f, 0, chunkSize.y * 0.5f);
+        Vector3 size = new Vector3(chunkSize.x, 0.1f, chunkSize.y);
+
+        Gizmos.DrawWireCube(center, size);
+    }
+
 }
