@@ -22,6 +22,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         None,
         Forage,
         Deposit,
+        Pickup
         //Build
         //attack,
         //fetch
@@ -37,6 +38,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     Coroutine forageRoutine;
 
     public IDepositable depositTarget;
+    public IPickupable pickupTarget;
 
     [Header("Slot")]
     public ISlotProvider currentSlotProvider;
@@ -62,20 +64,6 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
             state = UnitState.Idle;
             //find closest dropOff-point?
         }
-
-
-        //switch agent and obstacle
-        /*
-        if (state == UnitState.Moving)
-        {
-            agent.enabled = true;
-        }
-        else
-        {
-            agent.enabled=false;
-        }
-        obs.enabled=!agent.enabled;
-        */
     }
     public void SetSelected(bool selected)
     {
@@ -104,7 +92,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
             break;
 
             case EndAction.Forage:
-                if (forageTarget != null && !forageTarget.IsDepleted)
+                if (forageTarget != null && !forageTarget.IsDepleted && carriedAmount<carryCapacity)
                 {
                     state = UnitState.Foraging;
                     FacePosition(forageTarget.Position);
@@ -121,6 +109,37 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
                 }
                 else{ ClearEndAction();}
             break;  
+            case EndAction.Pickup:
+                if(carriedResource!=null && carriedResource != pickupTarget.Resource)
+                {
+                    Debug.Log("trying to pickup anohter kind of resource, not allowed");
+                    ClearEndAction();
+                    break;
+                }
+                if (carriedAmount >= carryCapacity)
+                {
+                    Debug.Log("unit already full");
+                    ClearEndAction();
+                    break;
+                }
+
+                if (pickupTarget == null)
+                {
+                    ClearEndAction();
+                    break;
+                }
+
+                if (pickupTarget.TryPickup(this))
+                {
+                    pickupTarget = null;
+                    ClearEndAction();
+                }
+                else //some other unit got to it firts
+                {
+                    pickupTarget = null;
+                    ClearEndAction();
+                }
+                break;
 
             //case EndAction.Build: break;
         }
@@ -130,6 +149,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         endAction = EndAction.None;
         forageTarget = null;
         depositTarget = null;
+        pickupTarget = null;
         //state = UnitState.Idle; //this is ugly sometimes? looks better without...
         anim.ApplyState(state);
     }
