@@ -48,7 +48,7 @@ public class UnitAnimation : MonoBehaviour
        if(state==Unit.UnitState.Moving) anim.SetTrigger("moving"); carryObject.SetActive(carrying); equip.UneqipTools();
         if (state == Unit.UnitState.Foraging)
         {
-            if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Food)
+            if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Food) //do elif here, else defaults ot foraging
             {
                anim.SetTrigger("foraging");
             }
@@ -57,7 +57,8 @@ public class UnitAnimation : MonoBehaviour
                 anim.SetTrigger("forageTree");
                 equip.EquipAxe();
             }
-            if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Stone)
+            if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Stone
+                ||unit.carriedResource.villageResource.resource==VillageResource.Resource.Clay)
             {
                 anim.SetTrigger("forageRock");
                 equip.EquipPickAxe();
