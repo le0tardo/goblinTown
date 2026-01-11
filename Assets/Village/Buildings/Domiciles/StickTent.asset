@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Stick Tent
   buildingIcon: {fileID: 21300000, guid: ef89529ec4b26124a91c958516135759, type: 3}
-  buildingType: 0
+  buildingType: 1
   costs:
   - resource: {fileID: 11400000, guid: 10472c2fa2e85e94d8a447da2647383a, type: 2}
     amount: 5

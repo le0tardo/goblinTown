@@ -53,7 +53,12 @@ public class VillageResourceManager : MonoBehaviour
 
         gui.UpdateResource(data, villageResources[data]);
     }
+    public void RemoveResource(VillageResource data, int amount)
+    {
+        villageResources[data] -= amount;
 
+        gui.UpdateResource(data, villageResources[data]);
+    }
     public void ChangeCap(int changeAmount) // chatGpt wrote this
     {
         if (changeAmount == 0)

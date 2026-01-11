@@ -1,6 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+using UnityEngine.UIElements;
 
 public class BuildingGUI : MonoBehaviour
 {
@@ -11,12 +12,19 @@ public class BuildingGUI : MonoBehaviour
     Camera cam;
     BuildingBehaviour lastBuilding;
 
+    [SerializeField] GameObject storageUI;
+    [SerializeField] GameObject domicileUI;
+    [SerializeField] GameObject factoryUI;
+
     void Awake()
     {
         cam = Camera.main;
         selectedBuildingPanel.SetActive(false);
     }
-
+    private void Start()
+    {
+        HideTypeUI();
+    }
     void LateUpdate()
     {
         var building = BuildingManager.inst.selectedBuilding;
@@ -30,19 +38,57 @@ public class BuildingGUI : MonoBehaviour
             return;
         }
 
-        // New selection?
+        // New selection
         if (building != lastBuilding)
         {
-            selectedBuildingPanel.SetActive(true);
+            NewBuilding(building);
+        }
+    }
+    void NewBuilding(BuildingBehaviour building)
+    {
+        selectedBuildingPanel.SetActive(true);
 
-            buildingName.text =building.building.buildingName;
+        buildingName.text = building.building.buildingName;
 
-            lastBuilding = building;
+        Debug.Log("selected building type is" + building.building.buildingType);
+
+        switch (building.building.buildingType)
+        {
+            case BuildingType.Deposit:
+                HideTypeUI();
+                storageUI.SetActive(true);
+                break;
+            case BuildingType.Domicile:
+                HideTypeUI();
+                domicileUI.SetActive(true);
+                break;
+            case BuildingType.Factory:
+                HideTypeUI();
+                factoryUI.SetActive(true);
+                break;
         }
 
+        lastBuilding = building;
         // Follow building in screen space
         Transform t = ((MonoBehaviour)building).transform;
         Vector3 screenPos = cam.WorldToScreenPoint(t.position);
         transform.position = screenPos + screenOffset;
+    }
+
+    void HideTypeUI()
+    {
+        storageUI.SetActive(false);
+        domicileUI.SetActive(false);
+        factoryUI.SetActive(false);
+    }
+
+    public void ClickFactory()
+    {
+        FactoryBehaviour factory=BuildingManager.inst.selectedBuilding.gameObject.GetComponent<FactoryBehaviour>();
+        if (factory == null)
+        {
+            return;
+        }
+        factory.ToggleWork();
     }
 }

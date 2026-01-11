@@ -96,7 +96,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8240265386556974680}
-  - component: {fileID: 5928362490434381901}
+  - component: {fileID: 1066417753409033843}
   - component: {fileID: 6776147087716517472}
   - component: {fileID: 1274407046270668044}
   - component: {fileID: 5729489224761685134}
@@ -127,7 +127,7 @@ Transform:
   - {fileID: 3232434150518165111}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5928362490434381901
+--- !u!114 &1066417753409033843
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,11 +136,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3442198578379246081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9e1a234dfc429c4b9d85d2a8c85001b, type: 3}
+  m_Script: {fileID: 11500000, guid: 98f09027c4e980846801cdec6e37b798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
-  resourceCapBoost: 10
+  input:
+  - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
+    amount: 5
+  output:
+    resource: {fileID: 11400000, guid: cad05b9a286418b44b3329bd30269806, type: 2}
+    amount: 1
+  productionTime: 5
+  maxProductionTime: 5
+  working: 0
+  workingVisuals: {fileID: 7954771415381329057}
 --- !u!114 &6776147087716517472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +276,7 @@ GameObject:
   - component: {fileID: 5772310785420703223}
   - component: {fileID: 8216569164321243773}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -282,12 +290,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4476966309907329135}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.70710677, y: -0, z: -0, w: 0.70710677}
   m_LocalPosition: {x: 0, y: 2.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 724188546729489730}
+  m_Father: {fileID: 8789077166784778877}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &5772310785420703223
 ParticleSystem:
@@ -5089,6 +5097,39 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &7954771415381329057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8789077166784778877}
+  m_Layer: 0
+  m_Name: workVisuals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8789077166784778877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954771415381329057}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8337970401579836492}
+  - {fileID: 3691102044858749945}
+  m_Father: {fileID: 724188546729489730}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8804400327446062393
 GameObject:
   m_ObjectHideFlags: 0
@@ -5101,7 +5142,7 @@ GameObject:
   - component: {fileID: 6616069982181346934}
   - component: {fileID: 3000235056966367711}
   m_Layer: 0
-  m_Name: Point Light
+  m_Name: glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5115,12 +5156,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8804400327446062393}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.652, z: 0.575}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.652, z: 0.5750003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 724188546729489730}
+  m_Father: {fileID: 8789077166784778877}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &6616069982181346934
 Light:
@@ -5271,10 +5312,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 42d581247f074364f892442f6418a339, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8337970401579836492}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 42d581247f074364f892442f6418a339, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3691102044858749945}
+      addedObject: {fileID: 8789077166784778877}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 42d581247f074364f892442f6418a339, type: 3}
       insertIndex: -1
