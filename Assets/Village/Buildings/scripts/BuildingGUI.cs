@@ -43,14 +43,20 @@ public class BuildingGUI : MonoBehaviour
         {
             NewBuilding(building);
         }
+
+        if (building != null)
+        {
+            Transform t = ((MonoBehaviour)building).transform;
+            Vector3 screenPos = cam.WorldToScreenPoint(t.position);
+            transform.position = screenPos + screenOffset;
+        }
     }
+
     void NewBuilding(BuildingBehaviour building)
     {
         selectedBuildingPanel.SetActive(true);
 
         buildingName.text = building.building.buildingName;
-
-        Debug.Log("selected building type is" + building.building.buildingType);
 
         switch (building.building.buildingType)
         {

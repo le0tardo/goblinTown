@@ -4,17 +4,33 @@ using TMPro;
 public class FactoryGUI : MonoBehaviour
 {
     [SerializeField] Image productionProgress;
+    [SerializeField] Button produceButton;
     [SerializeField] TextMeshProUGUI produceText;
 
+    [SerializeField] ProductionCostGUI productionCostGUI;
 
-    private void Update()
+    private void OnEnable()
     {
         if (BuildingManager.inst.selectedBuilding.building.buildingType == BuildingType.Factory)
         {
             FactoryBehaviour factory = BuildingManager.inst.selectedBuilding.gameObject.GetComponent<FactoryBehaviour>();
             if (factory != null)
             {
-                productionProgress.fillAmount = factory.productionTime/factory.maxProductionTime;
+                productionCostGUI.SetFactory(factory);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if(BuildingManager.inst.selectedBuilding==null)return;
+
+        if (BuildingManager.inst.selectedBuilding.building.buildingType == BuildingType.Factory)
+        {
+            FactoryBehaviour factory = BuildingManager.inst.selectedBuilding.gameObject.GetComponent<FactoryBehaviour>();
+            if (factory != null)
+            {
+                productionProgress.fillAmount = factory.productionTime / factory.maxProductionTime;
 
                 if (factory.working)
                 {
@@ -24,6 +40,8 @@ public class FactoryGUI : MonoBehaviour
                 {
                     produceText.text = "Produce";
                 }
+
+                produceButton.interactable = factory.AffordProduction();
             }
         }
     }

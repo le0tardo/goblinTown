@@ -21,13 +21,18 @@ public class FactoryBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (!working) return;
+        if (!working)
+            return;
 
-        if (productionTime > 0)
+        if (!AffordProduction())
         {
-            productionTime-=Time.deltaTime;
+            StopWorking();
+            return;
         }
-        if (productionTime <= 0)
+
+        productionTime -= Time.deltaTime;
+
+        if (productionTime <= 0f)
         {
             Produce();
         }
@@ -41,25 +46,31 @@ public class FactoryBehaviour : MonoBehaviour
 
     void Produce()
     {
-        if (!AffordProduction())
-        {
-            working = false;
-            productionTime = maxProductionTime;
-            ToggleWork();
-            return;
-        }
-
         for (int i = 0; i < input.Length; i++)
         {
-            VillageResourceManager.inst.RemoveResource(input[i].resource, input[i].amount);
+            VillageResourceManager.inst.RemoveResource(
+                input[i].resource,
+                input[i].amount
+            );
         }
 
-        VillageResourceManager.inst.AddResource(output.resource, output.amount);
+        VillageResourceManager.inst.AddResource(
+            output.resource,
+            output.amount
+        );
 
         productionTime = maxProductionTime;
     }
 
-    bool AffordProduction()
+
+    void StopWorking()
+    {
+        working = false;
+        productionTime = maxProductionTime;
+        workingVisuals.SetActive(false);
+    }
+
+    public bool AffordProduction()
     {
         var village = VillageResourceManager.inst;
 
