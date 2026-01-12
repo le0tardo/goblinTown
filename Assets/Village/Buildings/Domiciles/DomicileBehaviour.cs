@@ -13,4 +13,6 @@ public class DomicileBehaviour : MonoBehaviour
     {
         UnitManager.inst.maxUnits -= goblinCapIncrease;
     }
+
+
 }
