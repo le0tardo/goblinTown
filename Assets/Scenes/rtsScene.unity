@@ -11439,7 +11439,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1543001508}
         m_TargetAssemblyTypeName: DomicileGUI, Assembly-CSharp
-        m_MethodName: StartSpawn
+        m_MethodName: ClickDomicile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29872,17 +29872,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a3e70d36e5c2c42ba58892dd6cb06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resource: {fileID: 11400000, guid: 10472c2fa2e85e94d8a447da2647383a, type: 2}
-  unit: {fileID: 8076199387289777282, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
-  required: 10
-  available: 0
   unitCount: {fileID: 344673562}
   unitCost: {fileID: 1185657837}
   costResource: {fileID: 632712177}
   spawnProgression: {fileID: 1753035170}
   spawnButton: {fileID: 700466043}
-  spawnTime: 3
-  maxSpawnTime: 3
 --- !u!1 &1545246538
 GameObject:
   m_ObjectHideFlags: 0
