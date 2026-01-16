@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
@@ -5,6 +7,8 @@ public class BuildingManager : MonoBehaviour
     public static BuildingManager inst;
     [SerializeField] public BuildingObject currentBuilding; //building to place!
     [SerializeField] public BuildingBehaviour selectedBuilding;
+
+    [SerializeField] public List <BuildingBehaviour>buildings=new List<BuildingBehaviour>();
 
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask nonBlockingLayers;
