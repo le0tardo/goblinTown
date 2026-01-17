@@ -30,9 +30,14 @@ public class BuildingBehaviour : MonoBehaviour, IBuilding
     {
         if(anim!=null)anim.enabled = false;
     }
+
+    public void DestroyFX()
+    {
+        Instantiate(destroyFX, transform.position, Quaternion.identity);
+    }
     private void OnDestroy()
     {
-        Instantiate(destroyFX,transform.position,Quaternion.identity);
+        //Instantiate(destroyFX,transform.position,Quaternion.identity);
         BuildingManager.inst.buildings.Remove(this);
     }
 }

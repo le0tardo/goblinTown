@@ -125,7 +125,7 @@ public class BuildingManager : MonoBehaviour
     {
         if (selectedBuilding != null)
         {
-            //instantiate some destory vfx here
+            selectedBuilding.DestroyFX();
             Destroy(selectedBuilding.gameObject);
         }
     }

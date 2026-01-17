@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class DomicileBehaviour : MonoBehaviour
+public class DomicileBehaviour : MonoBehaviour, IProducer
 {
     public int goblinCapIncrease = 1;
     public int level = 1;
@@ -16,6 +16,10 @@ public class DomicileBehaviour : MonoBehaviour
     public bool canSpawn=false;
     Vector3 spawnPosition;
 
+    //sync to interface
+    public bool IsProducing => spawning;
+    public float Progress01 => spawning && maxSpawnTime > 0? 1f - (spawnTime / maxSpawnTime): 0f;
+    public Transform WorldTransform => transform;
     private void Start()
     {
         UnitManager.inst.maxUnits += goblinCapIncrease;
@@ -51,6 +55,17 @@ public class DomicileBehaviour : MonoBehaviour
             {
                 SpawnUnit();
             }
+        }
+
+        //GUI sync
+        if (!spawning)
+        {
+            MiniProductionBarManager.inst.Hide(this);
+            return;
+        }
+        else
+        {
+            MiniProductionBarManager.inst.Show(this);
         }
     }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class FactoryBehaviour : MonoBehaviour
+public class FactoryBehaviour : MonoBehaviour, IProducer
 {
     [System.Serializable]
     public struct FactoryIO
@@ -19,6 +19,11 @@ public class FactoryBehaviour : MonoBehaviour
     public bool working;
     [SerializeField] GameObject workingVisuals;
 
+    //sync to interface
+    public bool IsProducing => working;
+    public float Progress01 => working && maxProductionTime > 0 ? 1f - (productionTime / maxProductionTime) : 0f;
+    public Transform WorldTransform => transform;
+
     private void Update()
     {
         if (!working)
@@ -35,6 +40,17 @@ public class FactoryBehaviour : MonoBehaviour
         if (productionTime <= 0f)
         {
             Produce();
+        }
+
+        //GUI sync
+        if (!working)
+        {
+            MiniProductionBarManager.inst.Hide(this);
+            return;
+        }
+        else
+        {
+            MiniProductionBarManager.inst.Show(this);
         }
     }
 
