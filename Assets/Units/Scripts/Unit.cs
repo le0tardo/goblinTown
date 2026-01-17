@@ -13,8 +13,6 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         Idle,
         Moving,
         Foraging,
-        //Building,
-        //Dead
     }
     public UnitState state;
     public enum EndAction
@@ -22,10 +20,8 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         None,
         Forage,
         Deposit,
-        Pickup
-        //Build
-        //attack,
-        //fetch
+        Pickup,
+        Attack
     }
     public EndAction endAction;
 

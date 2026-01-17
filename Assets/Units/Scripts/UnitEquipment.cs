@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum ToolTier //set this in on spawn depending on unitManager
 {
-    Wood,
+    None,
     Stone,
     Iron,
     Steel
