@@ -270,4 +270,18 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
             ClearEndAction();
         }
     }
+
+    public void Die()
+    {
+        UnitManager.inst.DeselectUnit(this);
+        agent.isStopped = true;
+        agent.enabled = false;
+
+        Invoke("Kill", 1.0f);
+    }
+
+    void Kill()
+    {
+        Destroy(this.gameObject);
+    }
 }

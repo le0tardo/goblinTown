@@ -1,10 +1,23 @@
 using UnityEngine;
 
+public enum ToolTier //set this in on spawn depending on unitManager
+{
+    Wood,
+    Stone,
+    Iron,
+    Steel
+}
 public class UnitEquipment : MonoBehaviour
 {
-    [SerializeField] GameObject axe;
+    public bool hasTools;
+    public ToolTier toolTier=ToolTier.Stone;
+
+    public int clothesTier=0; //0 = naked, 1= loin cloth, etc. 
+
+    [SerializeField] GameObject axe; //[] axes [0=woodAxe, [1]=stone axe etc.]
     [SerializeField] GameObject pickAxe;
     Unit unit;
+
 
     private void Start()
     {

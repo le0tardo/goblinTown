@@ -71,4 +71,9 @@ public class UnitAnimation : MonoBehaviour
     {
         get { return unit.carriedAmount > 0; }
     }
+
+    public void DeathAnimation()
+    {
+        anim.SetTrigger("die");
+    }
 }

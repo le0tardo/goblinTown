@@ -6193,9 +6193,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartingResources:
   - resource: {fileID: 11400000, guid: 10472c2fa2e85e94d8a447da2647383a, type: 2}
-    amount: 100
+    amount: 30
   - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
-    amount: 99
+    amount: 30
   gui: {fileID: 568638429}
   villageResourceList:
   - {fileID: 11400000, guid: 10472c2fa2e85e94d8a447da2647383a, type: 2}
@@ -12156,6 +12156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e902bd4dfb6ec8439c4dcba75bbbabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTools: 0
+  toolTier: 0
+  clothesTier: 0
   axe: {fileID: 1206215814}
   pickAxe: {fileID: 1206215813}
 --- !u!114 &587834454
@@ -12172,6 +12175,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   maxHp: 0
+  isDead: 0
+  hungry: 0
+  cold: 0
   unitName: Goblin
 --- !u!95 &587834455
 Animator:
@@ -33346,6 +33352,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e902bd4dfb6ec8439c4dcba75bbbabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTools: 0
+  toolTier: 0
+  clothesTier: 0
   axe: {fileID: 1592793591}
   pickAxe: {fileID: 1592793590}
 --- !u!114 &1365424477
@@ -33362,6 +33371,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   maxHp: 0
+  isDead: 0
+  hungry: 0
+  cold: 0
   unitName: Goblin
 --- !u!95 &1365424478
 Animator:
@@ -35840,6 +35852,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e902bd4dfb6ec8439c4dcba75bbbabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTools: 0
+  toolTier: 0
+  clothesTier: 0
   axe: {fileID: 107910228}
   pickAxe: {fileID: 107910227}
 --- !u!114 &1506795332
@@ -35856,6 +35871,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   maxHp: 0
+  isDead: 0
+  hungry: 0
+  cold: 0
   unitName: Goblin
 --- !u!95 &1506795333
 Animator:
@@ -54228,6 +54246,10 @@ PrefabInstance:
     - target: {fileID: 3175238167928687783, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877582933786813550, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
+      propertyPath: maxHp
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8076199387289777282, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
       propertyPath: m_Name
