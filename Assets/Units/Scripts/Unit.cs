@@ -50,6 +50,8 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     }
     void Update()
     {
+        if (agent == null) return;
+
         if (state==UnitState.Moving && HasReachedDestination())
         {
             DoEndAction();

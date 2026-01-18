@@ -43,6 +43,11 @@ public class UnitStatus : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        hp-=damage;
+    }
+
     void SetName()
     {
         int syllableCount = 2;// Random.Range(2, 4); // 2–3 syllables

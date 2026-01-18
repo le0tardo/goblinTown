@@ -2,5 +2,8 @@ using UnityEngine;
 
 public interface IAttackable
 {
-    //idk really
+    bool IsAlive { get; }
+    Vector3 Position { get; }
+
+    void TakeDamage(int amount);
 }

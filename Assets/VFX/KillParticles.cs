@@ -13,7 +13,6 @@ public class KillParticles : MonoBehaviour
         if (ps.isStopped)
         {
             Destroy(this.gameObject);
-            Debug.Log("destroyed: "+this.gameObject.name);
         }
     }
 }
