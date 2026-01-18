@@ -16,6 +16,7 @@ public class UnitEquipment : MonoBehaviour
 
     [SerializeField] GameObject axe; //[] axes [0=woodAxe, [1]=stone axe etc.]
     [SerializeField] GameObject pickAxe;
+    [SerializeField] GameObject fishingRod;
     Unit unit;
 
 
@@ -29,6 +30,7 @@ public class UnitEquipment : MonoBehaviour
     {
         if (axe.activeSelf) axe.SetActive(false);
         if (pickAxe.activeSelf) pickAxe.SetActive(false);
+        if(fishingRod.activeSelf)fishingRod.SetActive(false);
     }
     public void EquipAxe()
     {
@@ -37,6 +39,10 @@ public class UnitEquipment : MonoBehaviour
     public void EquipPickAxe()
     {
         if (!pickAxe.activeSelf) pickAxe.SetActive(true);
+    }
+    public void EquipFishingRod()
+    {
+        if (!fishingRod.activeSelf) fishingRod.SetActive(true);
     }
 
 }

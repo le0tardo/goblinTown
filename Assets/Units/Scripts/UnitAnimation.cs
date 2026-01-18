@@ -48,9 +48,19 @@ public class UnitAnimation : MonoBehaviour
        if(state==Unit.UnitState.Moving) anim.SetTrigger("moving"); carryObject.SetActive(carrying); equip.UneqipTools();
         if (state == Unit.UnitState.Foraging)
         {
-            if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Food) //do elif here, else defaults ot foraging
+            if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Food) 
             {
-               anim.SetTrigger("foraging");
+                if (unit.carriedResource.resourceName == "Fish") //string ref...
+                {
+                    //fish anim
+                    anim.SetTrigger("fish");
+                    equip.EquipFishingRod();
+                }
+                //elif here if needed
+                else
+                {
+                    anim.SetTrigger("foraging");
+                }
             }
             if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Wood)
             {
