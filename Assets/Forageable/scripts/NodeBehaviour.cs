@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NodeBehaviour : MonoBehaviour,IForageable
 {
-    [SerializeField] private ForageableNodeData node; //what node this is
+    [SerializeField] public ForageableNodeData node; //what node this is
     [SerializeField] public ForagedResourceData resource; //what resource it drops
     public bool isDepleted=false;
     public bool IsDepleted => isDepleted;

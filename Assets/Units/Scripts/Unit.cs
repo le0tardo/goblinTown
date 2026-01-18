@@ -70,6 +70,9 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     {
         agent.SetDestination(destination);
         state=UnitState.Moving;
+
+        if (carriedAmount <= 0) carriedResource = null;
+        if (forageRoutine != null) forageRoutine = null;
     }
     public void ReleaseSlot()
     {
@@ -88,19 +91,33 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
             break;
 
             case EndAction.Forage:
-                if (forageTarget != null && !forageTarget.IsDepleted && carriedAmount<carryCapacity)
+                if (
+                    forageTarget != null &&
+                    !forageTarget.IsDepleted &&
+                    carriedAmount < carryCapacity &&
+                    (carriedResource == null || carriedResource == forageTarget.Resource)
+                )
                 {
+
                     state = UnitState.Foraging;
                     FacePosition(forageTarget.Position);
+
+                    if (carriedResource == null)
+                        carriedResource = forageTarget.Resource;
+
                     StartForaging();
                 }
-                else { ClearEndAction();}
-                    break;
+                else
+                {
+                    ClearEndAction();
+                    state = UnitState.Idle;
+                }
+                break;
+
 
             case EndAction.Deposit:
                 if (depositTarget != null && carriedResource != null && carriedAmount > 0)
                 {
-                    //OmniStorage storage = depositTarget.GetComponent<>(OmniStorage);
                     DepositAtStorage(depositTarget.Storage);
                 }
                 else{ ClearEndAction();}
@@ -108,13 +125,13 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
             case EndAction.Pickup:
                 if(carriedResource!=null && carriedResource != pickupTarget.Resource)
                 {
-                    Debug.Log("trying to pickup anohter kind of resource, not allowed");
+                    //Debug.Log("trying to pickup anohter kind of resource, not allowed");
                     ClearEndAction();
                     break;
                 }
                 if (carriedAmount >= carryCapacity)
                 {
-                    Debug.Log("unit already full");
+                    //Debug.Log("unit already full");
                     ClearEndAction();
                     break;
                 }
@@ -186,21 +203,30 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     //forage loop routine
     void StartForaging()
     {
-        if (carriedResource != null && carriedResource != forageTarget.Resource)
+        if (carriedResource != null)
         {
-            forageTarget = null;
-            state = UnitState.Idle; 
-            return; 
+            if (carriedResource != forageTarget.Resource)
+            {
+                StopForaging();
+                Debug.Log("trying to farm different resource than you carry, not allowed");
+                return;
+            }
+            else
+            {
+                //Debug.Log("farmingng the same resource you are carrying, allowed.");
+            }
         }
+
         if (forageRoutine != null)
         {
-            //Debug.Log("duplicate routine!");
+            //Debug.Log("double routine");
             return;
         }
 
-        StopForaging();
+        state = UnitState.Foraging;
         forageRoutine = StartCoroutine(ForageLoop());
     }
+
     void StopForaging()
     {
         if (forageRoutine != null)
@@ -208,29 +234,36 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
             StopCoroutine(forageRoutine);
             forageRoutine = null;
         }
+        ClearEndAction();
+        forageTarget = null;
+        state = UnitState.Idle;
     }
 
     IEnumerator ForageLoop()
     {
-        while (
-            state == UnitState.Foraging &&
-            forageTarget != null
-        )
+        while (state == UnitState.Foraging && forageTarget != null)
         {
+            // Wait for harvest time BEFORE gaining resource
+            yield return new WaitForSeconds(forageTarget.NodeData.harvestDuration);
+
+            // Re-check after waiting (node might be gone)
+            if (state != UnitState.Foraging || forageTarget == null)
+                yield break;
+
             forageTarget.Forage(this);
 
+            // Stop if full
             if (carriedAmount >= carryCapacity)
             {
+                forageRoutine = null;
                 StopForaging();
-                //GoToNearestDropOff();
                 yield break;
             }
-
-            yield return new WaitForSeconds(1f);
         }
-
+        forageRoutine = null;
         StopForaging();
     }
+
 
     public void DepositAtStorage(OmniStorage storage)
     {
