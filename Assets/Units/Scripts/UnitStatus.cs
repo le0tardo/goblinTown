@@ -45,6 +45,7 @@ public class UnitStatus : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        anim.HurtAnim();
         hp-=damage;
     }
 
