@@ -1,9 +1,11 @@
 using UnityEngine;
 
-public class SeasonListener : MonoBehaviour
+public class SeasonFoliage : MonoBehaviour
 {
     static readonly int SeasonID = Shader.PropertyToID("_seasonFloat");
     static readonly int WinterID = Shader.PropertyToID("_winterFloat");
+
+    [SerializeField] bool everGreen;
 
     Renderer rend;
     MaterialPropertyBlock mpb;
@@ -23,7 +25,7 @@ public class SeasonListener : MonoBehaviour
         winter= SeasonManager.inst.winterT;
 
         mpb.SetFloat(SeasonID, season);
-        mpb.SetFloat(WinterID, winter);
+       if(!everGreen)mpb.SetFloat(WinterID, winter);
         rend.SetPropertyBlock(mpb);
     }
     public void SetSeason(float season)

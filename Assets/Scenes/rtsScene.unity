@@ -2024,8 +2024,54 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 932902929726940381, guid: d7febd1a227b6e1439cc1adf4c134155, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 145904301}
+    - targetCorrespondingSourceObject: {fileID: -197504213684140070, guid: d7febd1a227b6e1439cc1adf4c134155, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 145904300}
   m_SourcePrefab: {fileID: 100100000, guid: d7febd1a227b6e1439cc1adf4c134155, type: 3}
+--- !u!1 &145904298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -197504213684140070, guid: d7febd1a227b6e1439cc1adf4c134155, type: 3}
+  m_PrefabInstance: {fileID: 145904297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &145904299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 932902929726940381, guid: d7febd1a227b6e1439cc1adf4c134155, type: 3}
+  m_PrefabInstance: {fileID: 145904297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &145904300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145904298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5491b82ccf180445ba48a60be3a02dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  everGreen: 1
+  season: 0
+  winter: 0
+--- !u!114 &145904301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145904299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5491b82ccf180445ba48a60be3a02dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  everGreen: 1
+  season: 0
+  winter: 0
 --- !u!1 &163650762
 GameObject:
   m_ObjectHideFlags: 0
@@ -6624,7 +6670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 55d08158cfd082d42ab1474ce8d5f3a9, type: 3}
       propertyPath: m_Name
-      value: pineTrunk1
+      value: pine1_gfx
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9510,13 +9556,59 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -5923818952343562360, guid: 298f1aa27b1c2e542b64cb6ab9303205, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 697253410}
+    - targetCorrespondingSourceObject: {fileID: 2546534578718765582, guid: 298f1aa27b1c2e542b64cb6ab9303205, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 697253409}
   m_SourcePrefab: {fileID: 100100000, guid: 298f1aa27b1c2e542b64cb6ab9303205, type: 3}
 --- !u!4 &697253406 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 298f1aa27b1c2e542b64cb6ab9303205, type: 3}
   m_PrefabInstance: {fileID: 697253405}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &697253407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2546534578718765582, guid: 298f1aa27b1c2e542b64cb6ab9303205, type: 3}
+  m_PrefabInstance: {fileID: 697253405}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &697253408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5923818952343562360, guid: 298f1aa27b1c2e542b64cb6ab9303205, type: 3}
+  m_PrefabInstance: {fileID: 697253405}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &697253409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697253407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5491b82ccf180445ba48a60be3a02dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  everGreen: 1
+  season: 0
+  winter: 0
+--- !u!114 &697253410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697253408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5491b82ccf180445ba48a60be3a02dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  everGreen: 1
+  season: 0
+  winter: 0
 --- !u!1 &700466041
 GameObject:
   m_ObjectHideFlags: 0
@@ -10090,7 +10182,7 @@ MonoBehaviour:
   seasonT: 0
   currentSeason: 0
   elapsedYears: 0
-  yearDuration: 240
+  yearDuration: 60
   winterStart: 0.85
   winterEnd: 0.15
   winterT: 0
@@ -24264,10 +24356,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1357316535}
+  - component: {fileID: 1357316536}
   - component: {fileID: 1357316534}
   - component: {fileID: 1357316533}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24350,8 +24443,8 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
+  m_ColorTemperature: 6000
+  m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
@@ -24376,6 +24469,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 106760272}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1357316536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357316532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb87eb65fc6f444f8a43c808e0d4804, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sun: {fileID: 1357316534}
+  springTemp: 6500
+  summerTemp: 5500
+  fallTemp: 4500
+  winterTemp: 8500
 --- !u!1 &1360501388
 GameObject:
   m_ObjectHideFlags: 0
@@ -31417,7 +31527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4b9f356110aedca49a378b73947a1762, type: 3}
       propertyPath: m_Name
-      value: pineTrunk2
+      value: pine2_gfx
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34937,6 +35047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5491b82ccf180445ba48a60be3a02dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  everGreen: 0
   season: 0
   winter: 0
 --- !u!1 &1747947811
@@ -41308,6 +41419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5491b82ccf180445ba48a60be3a02dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  everGreen: 0
   season: 0
   winter: 0
 --- !u!1 &1851772353
@@ -41471,7 +41583,7 @@ MonoBehaviour:
   spring: {r: 0.47058824, g: 0.62352943, b: 0.41568628, a: 1}
   summer: {r: 0.34509805, g: 0.5372549, b: 0.3529412, a: 1}
   fall: {r: 0.6156863, g: 0.61960787, b: 0.37254903, a: 1}
-  winter: {r: 0.76094687, g: 0.8490566, b: 0.82149297, a: 0}
+  winter: {r: 0.6918041, g: 0.836478, b: 0.76728314, a: 0}
   currentColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1865331365
 GameObject:
@@ -48401,6 +48513,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1779377244}
+  - {fileID: 106760272}
   - {fileID: 1729243191}
   - {fileID: 1612564000}
   - {fileID: 1339982418}
@@ -48411,7 +48524,6 @@ SceneRoots:
   - {fileID: 1851772357}
   - {fileID: 2127733079}
   - {fileID: 1467120723}
-  - {fileID: 106760272}
   - {fileID: 1694442563}
   - {fileID: 310406148}
   - {fileID: 522474216}
