@@ -46,7 +46,7 @@ public class SeasonTerrainListener : MonoBehaviour
             float t = Mathf.InverseLerp(0.25f, 0.5f, seasonT);
             return Color.Lerp(spring, summer, t);
         }
-        else if (seasonT < 0.75f)
+        else if (seasonT < 0.8f) //was 75
         {
             // Summer → Fall
             float t = Mathf.InverseLerp(0.5f, 0.75f, seasonT);
