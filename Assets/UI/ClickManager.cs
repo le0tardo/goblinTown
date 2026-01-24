@@ -239,8 +239,49 @@ public class ClickManager : MonoBehaviour
             }
         }
 
-        // 5. Ground, walk to position here
-        if (((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
+        //4c. animals
+        IHuntable animal = hit.collider.GetComponentInParent<IHuntable>();
+        if (animal != null)
+        {
+            Debug.Log("you clicked an animal");
+            if (UnitManager.inst.selectedUnits.Count > 0)
+            {
+                float radius = 3f; // spacing from center
+                int count = UnitManager.inst.selectedUnits.Count;
+
+                for (int i = 0; i < count; i++)
+                {
+                    Unit unit = UnitManager.inst.selectedUnits[i];
+
+                    float angle = (2 * Mathf.PI / count) * i;
+
+                    Vector3 offset = new Vector3(
+                        Mathf.Cos(angle),
+                        0,
+                        Mathf.Sin(angle)
+                    ) * radius;
+
+                    Vector3 destination = hit.point + offset;
+
+                    unit.MoveTo(destination);
+                    unit.endAction = Unit.EndAction.Hunt; //hunt
+                    unit.huntTarget = animal;
+                    unit.ReleaseSlot();
+                }
+                foreach (Unit unit in UnitManager.inst.selectedUnits) //needed now? resets in Unit...
+                {
+                    unit.forageTarget = null;
+                    unit.depositTarget = null;
+                    unit.currentSlotProvider = null;
+                    unit.ReleaseSlot();
+                }
+
+            }
+            return;
+        }
+
+            // 5. Ground, walk to position here
+            if (((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
         {
 
             if (UnitManager.inst.selectedUnits.Count > 0)

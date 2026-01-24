@@ -13,6 +13,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         Idle,
         Moving,
         Foraging,
+        Hunting
     }
     public UnitState state;
     public enum EndAction
@@ -21,7 +22,8 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         Forage,
         Deposit,
         Pickup,
-        Attack
+        Attack,
+        Hunt
     }
     public EndAction endAction;
 
@@ -35,6 +37,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
 
     public IDepositable depositTarget;
     public IPickupable pickupTarget;
+    public IHuntable huntTarget;
 
     [Header("Slot")]
     public ISlotProvider currentSlotProvider;
@@ -155,7 +158,20 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
                     ClearEndAction();
                 }
                 break;
+            case EndAction.Hunt:
+                if (huntTarget == null)
+                {
+                    ClearEndAction();
+                    break;
+                }
+                Debug.Log(this.gameObject.name+"is hunting..");
+                state = UnitState.Hunting;
+                HuntAnimal(huntTarget);
+                FacePosition(huntTarget.Position);
+                //ivoke later
 
+                ClearEndAction();
+            break;
             //case EndAction.Build: break;
         }
     }
@@ -302,6 +318,10 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         }
     }
 
+    void HuntAnimal(IHuntable animalTarget)
+    {
+        animalTarget.OnHit(1,this); //dmg = 1+toolLevel
+    }
     public void Die()
     {
         UnitManager.inst.DeselectUnit(this);

@@ -76,6 +76,11 @@ public class UnitAnimation : MonoBehaviour
 
             carryObject.SetActive(false);
         }
+        if (state == Unit.UnitState.Hunting)
+        {
+            anim.SetTrigger("hunt");
+            equip.EquipSpear();
+        }
     }
     bool carrying
     {
