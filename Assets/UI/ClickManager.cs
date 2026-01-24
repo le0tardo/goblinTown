@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 public class ClickManager : MonoBehaviour
@@ -241,47 +242,36 @@ public class ClickManager : MonoBehaviour
 
         //4c. animals
         IHuntable animal = hit.collider.GetComponentInParent<IHuntable>();
-        if (animal != null)
+        if (animal != null && UnitManager.inst.selectedUnits.Count > 0)
         {
-            Debug.Log("you clicked an animal");
-            if (UnitManager.inst.selectedUnits.Count > 0)
+            foreach (Unit unit in UnitManager.inst.selectedUnits)
             {
-                float radius = 3f; // spacing from center
-                int count = UnitManager.inst.selectedUnits.Count;
+                Vector3 unitPos = unit.transform.position;
+                Vector3 animalPos = animal.Position;
 
-                for (int i = 0; i < count; i++)
-                {
-                    Unit unit = UnitManager.inst.selectedUnits[i];
+                Vector3 dir = (animalPos - unitPos).normalized;
+                float spearRange = 4f;
 
-                    float angle = (2 * Mathf.PI / count) * i;
+                Vector3 destination = animalPos - dir * spearRange;
 
-                    Vector3 offset = new Vector3(
-                        Mathf.Cos(angle),
-                        0,
-                        Mathf.Sin(angle)
-                    ) * radius;
-
-                    Vector3 destination = hit.point + offset;
-
+                if (NavMesh.SamplePosition(destination, out NavMeshHit navHit, 1.5f, NavMesh.AllAreas))
+                    unit.MoveTo(navHit.position);
+                else
                     unit.MoveTo(destination);
-                    unit.endAction = Unit.EndAction.Hunt; //hunt
-                    unit.huntTarget = animal;
-                    unit.ReleaseSlot();
-                }
-                foreach (Unit unit in UnitManager.inst.selectedUnits) //needed now? resets in Unit...
-                {
-                    unit.forageTarget = null;
-                    unit.depositTarget = null;
-                    unit.currentSlotProvider = null;
-                    unit.ReleaseSlot();
-                }
 
+                unit.endAction = Unit.EndAction.Hunt;
+                unit.huntTarget = animal;
+
+                unit.ReleaseSlot();
+                unit.forageTarget = null;
+                unit.depositTarget = null;
             }
             return;
         }
 
-            // 5. Ground, walk to position here
-            if (((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
+
+        // 5. Ground, walk to position here
+        if (((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
         {
 
             if (UnitManager.inst.selectedUnits.Count > 0)
@@ -323,6 +313,7 @@ public class ClickManager : MonoBehaviour
                     unit.forageTarget = null;
                     unit.depositTarget = null;
                     unit.currentSlotProvider = null;
+                    unit.huntTarget = null;
                     unit.ReleaseSlot();
                 }
 

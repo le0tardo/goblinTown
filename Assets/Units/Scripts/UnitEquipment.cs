@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum ToolTier //set this in on spawn depending on unitManager
@@ -18,6 +19,7 @@ public class UnitEquipment : MonoBehaviour
     [SerializeField] GameObject pickAxe;
     [SerializeField] GameObject fishingRod;
     [SerializeField] GameObject spear;
+    [SerializeField] GameObject thrownSpear;
     Unit unit;
 
 
@@ -49,5 +51,37 @@ public class UnitEquipment : MonoBehaviour
     public void EquipSpear()
     {
         if(!spear.activeSelf)spear.SetActive(true);
+    }
+
+    public void TryThrowSpear() //call from animation event
+    {
+        if (unit.huntTarget != null)
+        {
+            ThrowSpear(unit.huntTarget.Position);
+        }
+
+    }
+    void ThrowSpear(Vector3 targetPosition)
+    {
+        if(spear.activeInHierarchy)spear.SetActive(false);
+        thrownSpear.SetActive(true);
+        StartCoroutine(AnimateSpear(targetPosition));
+    }
+
+    private IEnumerator AnimateSpear(Vector3 targetPosition)
+    {
+        Vector3 start = thrownSpear.transform.position;
+        float duration = 0.25f;
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+            thrownSpear.transform.position = Vector3.Lerp(start, targetPosition, t);
+            yield return null;
+        }
+
+        thrownSpear.transform.position=start;
+        thrownSpear.SetActive(false);
     }
 }

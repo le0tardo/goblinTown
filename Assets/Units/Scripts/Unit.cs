@@ -65,6 +65,25 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
             state = UnitState.Idle;
             //find closest dropOff-point?
         }
+
+        if(state==UnitState.Hunting)
+        {
+            if (huntTarget == null)
+            {
+                state = UnitState.Idle;
+                ClearEndAction();
+                return;
+            }
+            float dist = Vector3.Distance(transform.position, huntTarget.Position);
+            if (dist > 5)
+            {
+                huntTarget=null;
+                state = UnitState.Idle;
+                ClearEndAction();
+                return;
+            }
+            FacePosition(huntTarget.Position);
+        }
     }
     public void SetSelected(bool selected)
     {
@@ -75,6 +94,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     {
         agent.SetDestination(destination);
         state=UnitState.Moving;
+        agent.avoidancePriority = 20;
 
         if (carriedAmount <= 0) carriedResource = null;
         if (forageRoutine != null) forageRoutine = null;
@@ -89,6 +109,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     }
     void DoEndAction()
     {
+        agent.avoidancePriority = 60;
         switch (endAction)
         {
             case EndAction.None:
@@ -168,7 +189,6 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
                 state = UnitState.Hunting;
                 HuntAnimal(huntTarget);
                 FacePosition(huntTarget.Position);
-                //ivoke later
 
                 ClearEndAction();
             break;
@@ -317,7 +337,6 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
             ClearEndAction();
         }
     }
-
     void HuntAnimal(IHuntable animalTarget)
     {
         animalTarget.OnHit(1,this); //dmg = 1+toolLevel
