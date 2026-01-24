@@ -136,17 +136,17 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _gradientBlendValue: 0.25
-    - _seasonFloat: 0.25
+    - _seasonFloat: 0
     - _winterFloat: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _col_bot: {r: 0.43081754, g: 0.65681654, b: 1, a: 0}
-    - _col_fall: {r: 0.8805031, g: 0.3913465, b: 0.17997698, a: 0}
-    - _col_spring: {r: 0.83284074, g: 0.9056604, b: 0.53826976, a: 0}
+    - _col_bot: {r: 0.21057312, g: 0.3962264, b: 0.30339977, a: 1}
+    - _col_fall: {r: 0.7735849, g: 0.3468332, b: 0.19704513, a: 1}
+    - _col_spring: {r: 0.6583173, g: 0.8980392, b: 0.43137255, a: 0}
     - _col_summer: {r: 0.39540884, g: 0.67295593, b: 0.37033734, a: 1}
-    - _col_winter: {r: 0.44025147, g: 0.27879804, b: 0.20905018, a: 1}
+    - _col_winter: {r: 0.49056602, g: 0.37258103, b: 0.25453892, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
