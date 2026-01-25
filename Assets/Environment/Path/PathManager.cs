@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class PathPlacer : MonoBehaviour
+public class PathManager : MonoBehaviour
 {
     public bool placePath=false;
     public bool erasePath=false;
@@ -13,6 +14,7 @@ public class PathPlacer : MonoBehaviour
     Camera cam;
 
     List<GameObject> paths = new List<GameObject>();
+
 
     private void Start()
     {
@@ -26,19 +28,19 @@ public class PathPlacer : MonoBehaviour
         {
             if (!erasePath)
             {
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
                     StartDraw();
                 }
 
-                if (Input.GetMouseButtonUp(0))
+                if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
                     placePath = false;
                 }
             }
             else
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
                     StartErase();
                 }
@@ -46,7 +48,7 @@ public class PathPlacer : MonoBehaviour
                 {
                     Erase();
                 }
-                if (Input.GetMouseButtonUp(0))
+                if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
                     EndErase();
                     erasePath = false;
@@ -102,7 +104,6 @@ public class PathPlacer : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, 1000f, mask))
         {
             GameObject pathObj = hit.collider.gameObject;
-            Debug.Log("erasing path: " + pathObj.name);
 
             // remove from your list if you keep track
             paths.Remove(pathObj);
@@ -121,6 +122,16 @@ public class PathPlacer : MonoBehaviour
             BoxCollider box = path.GetComponent<BoxCollider>();
             box.enabled = false;
         }
+    }
+
+    public void ClickDraw()
+    {
+        placePath = true;
+    }
+    public void ClickErase()
+    {
+        placePath = true;
+        erasePath = true;
     }
     bool RayToGround(out Vector3 pos)
     {
