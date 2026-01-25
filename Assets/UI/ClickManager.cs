@@ -10,6 +10,17 @@ public class ClickManager : MonoBehaviour
     Vector2 dragCurrentPos;
     bool isDragging;
     float dragThreshold = 10f;
+
+    public static ClickManager inst;
+    private void Awake()
+    {
+        if (inst != null && inst != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        inst = this;
+    }
     void Update()
     {
         if (Input.GetMouseButtonDown(0))

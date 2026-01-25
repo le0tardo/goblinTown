@@ -26,6 +26,7 @@ public class AnimalBehaviour : MonoBehaviour, IHuntable
     [SerializeField] float runSpeed;
 
     bool isDead = false;
+    bool isDeadSoon = false;
 
     public bool IsDead => isDead;
 
@@ -81,10 +82,10 @@ public class AnimalBehaviour : MonoBehaviour, IHuntable
 
         if (hp <= 0)
         {
-            if (!isDead)
+            if (!isDeadSoon)
             {
                 Invoke("Die",1f);
-                isDead = true;
+                isDeadSoon = true;
             }
             //Die(); //ivoke 1 sec here too?? crazy if it works..
         }
@@ -157,10 +158,11 @@ public class AnimalBehaviour : MonoBehaviour, IHuntable
     }
     void Die()
     {
+        isDead = true;
         StopAllCoroutines();
         agent.isStopped = true;
         anim.Die();
-        Invoke("DestroyAndCreate",1f);
+        Invoke("DestroyAndCreate",0.5f);
     }
 
     void SpookHerd()
