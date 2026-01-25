@@ -12,6 +12,7 @@ public enum AnimalState
 public class AnimalBehaviour : MonoBehaviour, IHuntable
 {
     [SerializeField] public AnimalObject animalObject;
+    [SerializeField] GameObject node;
     NavMeshAgent agent;
     public AnimalState animalState;
 
@@ -102,6 +103,8 @@ public class AnimalBehaviour : MonoBehaviour, IHuntable
     {
         yield return new WaitForSeconds(delay);
         Flee(attacker);
+        SpookHerd();
+        anim.Hurt();
         anim.Flee();
         fleeRoutine = null; // clear the reference
     }
@@ -154,14 +157,39 @@ public class AnimalBehaviour : MonoBehaviour, IHuntable
     }
     void Die()
     {
+        StopAllCoroutines();
+        agent.isStopped = true;
         anim.Die();
         Invoke("DestroyAndCreate",1f);
     }
 
+    void SpookHerd()
+    {
+        const float spookRadius = 8f;
+
+        Collider[] hits = Physics.OverlapSphere(
+            transform.position,
+            spookRadius
+        );
+
+        foreach (Collider hit in hits)
+        {
+            // Look for AnimalBehaviour on this collider or parent
+            AnimalBehaviour other = hit.GetComponent<AnimalBehaviour>();
+
+            if (other == null) continue;
+            if (other == this) continue; // don't spook self
+            if (other.IsDead) continue;
+
+            other.Flee(transform);
+        }
+    }
+
+
     void DestroyAndCreate()
     {
-        //instantiate node prefab
-        //destroy game object
+        Quaternion yRot = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
+        Instantiate(node, transform.position, yRot);
         Destroy(this.gameObject);
     }
 

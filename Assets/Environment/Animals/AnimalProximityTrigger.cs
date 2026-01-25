@@ -13,7 +13,6 @@ public class AnimalProximityTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Unit"))
         {
-            Debug.Log("a unit has spooked me!");
             animal.Flee(other.transform);
         }
     }

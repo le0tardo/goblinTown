@@ -21,11 +21,13 @@ public class NodeBehaviour : MonoBehaviour,IForageable
     public bool renewableResource = true;
     [SerializeField] float respawnTime=10f; //set from scriptable object class?
 
+    [SerializeField] bool randomRotationSpawn = true;
+
     private void Start()
     {
         if (anim != null) anim.enabled = false;
         float r = Random.Range(0,360);
-        transform.rotation = new Quaternion(0,r,0,0);
+        if(randomRotationSpawn)transform.rotation = new Quaternion(0,r,0,0);
     }
     public void Forage(Unit unit)
     {
@@ -65,7 +67,7 @@ public class NodeBehaviour : MonoBehaviour,IForageable
                 }
                 else
                 {
-                    Invoke("DestoryNode",1f);
+                    Invoke("DestroyNode",1f);
                 }
 
             }
@@ -97,7 +99,7 @@ public class NodeBehaviour : MonoBehaviour,IForageable
         }
     }
 
-    void DestoryNode()
+    void DestroyNode()
     {
         Destroy(gameObject);
     }

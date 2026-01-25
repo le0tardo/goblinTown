@@ -11,6 +11,15 @@ public class AnimalAnimation : MonoBehaviour
         anim.Play("idle",0,r);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Debug.Log("debug hurt anim");
+            Hurt();
+        }
+    }
+
     public void Flee()
     {
         anim.SetTrigger("run");
