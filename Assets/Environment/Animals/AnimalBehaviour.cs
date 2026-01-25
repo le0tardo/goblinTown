@@ -29,9 +29,12 @@ public class AnimalBehaviour : MonoBehaviour, IHuntable
     public bool IsDead => isDead;
 
     Coroutine fleeRoutine;
+
+    AnimalAnimation anim;
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim=GetComponent<AnimalAnimation>();
         animalState=AnimalState.Idle;
     }
 
@@ -66,7 +69,7 @@ public class AnimalBehaviour : MonoBehaviour, IHuntable
             {
                 agent.ResetPath();
                 animalState = AnimalState.Idle;
-                Debug.Log("I have stopped running");
+                anim.Graze();
             }
         }
     }
@@ -99,6 +102,7 @@ public class AnimalBehaviour : MonoBehaviour, IHuntable
     {
         yield return new WaitForSeconds(delay);
         Flee(attacker);
+        anim.Flee();
         fleeRoutine = null; // clear the reference
     }
 
@@ -150,15 +154,15 @@ public class AnimalBehaviour : MonoBehaviour, IHuntable
     }
     void Die()
     {
-        //dead
-        //mainly for animation, invoke destroyandcreate
-        Destroy(gameObject);
+        anim.Die();
+        Invoke("DestroyAndCreate",1f);
     }
 
     void DestroyAndCreate()
     {
         //instantiate node prefab
         //destroy game object
+        Destroy(this.gameObject);
     }
 
 }

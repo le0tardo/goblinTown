@@ -59,7 +59,11 @@ public class UnitEquipment : MonoBehaviour
         {
             ThrowSpear(unit.huntTarget.Position);
         }
-
+        else
+        {
+            Vector3 targetPos = unit.transform.position + unit.transform.forward * 5f;
+            ThrowSpear(targetPos);
+        }
     }
     void ThrowSpear(Vector3 targetPosition)
     {
@@ -70,6 +74,7 @@ public class UnitEquipment : MonoBehaviour
 
     private IEnumerator AnimateSpear(Vector3 targetPosition)
     {
+        if(!thrownSpear.activeInHierarchy)thrownSpear.SetActive(true);
         Vector3 start = thrownSpear.transform.position;
         float duration = 0.25f;
         float t = 0f;
