@@ -26,6 +26,8 @@ public class AnimalBehaviour : MonoBehaviour, IHuntable
 
     bool isDead = false;
 
+    public bool IsDead => isDead;
+
     Coroutine fleeRoutine;
     private void Start()
     {
@@ -71,7 +73,6 @@ public class AnimalBehaviour : MonoBehaviour, IHuntable
 
    public void OnHit(int damage, Unit attacker)
     {
-        Debug.Log(animalObject.title+ ": "+ attacker.name +" hit me!");
         hp-=damage;
 
         if (hp <= 0)

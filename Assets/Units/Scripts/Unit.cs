@@ -68,21 +68,24 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
 
         if(state==UnitState.Hunting)
         {
-            if (huntTarget == null)
+            if (huntTarget.IsDead)
             {
+                huntTarget = null;
                 state = UnitState.Idle;
                 ClearEndAction();
                 return;
             }
-            float dist = Vector3.Distance(transform.position, huntTarget.Position);
-            if (dist > 5)
+            else
             {
-                huntTarget=null;
-                state = UnitState.Idle;
-                ClearEndAction();
-                return;
+                float dist = Vector3.Distance(transform.position, huntTarget.Position);
+                if (dist > 5)
+                {
+                    huntTarget = null;
+                    state = UnitState.Idle;
+                    ClearEndAction();
+                }
+                if(huntTarget!=null)FacePosition(huntTarget.Position);
             }
-            FacePosition(huntTarget.Position);
         }
     }
     public void SetSelected(bool selected)
@@ -185,7 +188,6 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
                     ClearEndAction();
                     break;
                 }
-                Debug.Log(this.gameObject.name+"is hunting..");
                 state = UnitState.Hunting;
                 HuntAnimal(huntTarget);
                 FacePosition(huntTarget.Position);

@@ -82,6 +82,14 @@ public class UnitAnimation : MonoBehaviour
             equip.EquipSpear();
         }
     }
+
+    public void CheckHunting()
+    {
+        if(unit.huntTarget==null || unit.huntTarget.IsDead)
+        {
+            ApplyState(unit.state);
+        }
+    }
     bool carrying
     {
         get { return unit.carriedAmount > 0; }
