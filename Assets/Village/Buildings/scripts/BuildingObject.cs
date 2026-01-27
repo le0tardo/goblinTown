@@ -11,7 +11,8 @@ public enum BuildingType
 {
     Deposit,
     Domicile,
-    Factory
+    Factory,
+    Workhouse
 }
 
 [CreateAssetMenu(

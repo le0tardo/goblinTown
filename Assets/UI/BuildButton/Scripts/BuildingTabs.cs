@@ -34,6 +34,9 @@ public class BuildingTabs : MonoBehaviour
             ico.color = unselectedColor;
             RectTransform icoRt=ico.GetComponent<RectTransform>();
             icoRt.sizeDelta = new Vector2(45, 45);
+
+            TabMenuToggler menu=tab.GetComponent<TabMenuToggler>();
+            if (menu != null)menu.menu.SetActive(false);
         }
 
         currentTab = tabs[0];
@@ -47,16 +50,11 @@ public class BuildingTabs : MonoBehaviour
         currIco.color = Color.white;
         RectTransform currIcoRt=currIco.GetComponent<RectTransform>();
         currIcoRt.sizeDelta = new Vector2(55, 55);
+
+        TabMenuToggler currMenu = currentTab.GetComponent<TabMenuToggler>();
+        if (currMenu != null) currMenu.menu.SetActive(true);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            ToggleTabs(!shown);
-            shown = !shown;
-        }
-    }
     public void SwapTab(int n)
     {
         if (n > tabs.Length) return;
@@ -87,6 +85,9 @@ public class BuildingTabs : MonoBehaviour
             ico.color = unselectedColor;
             RectTransform icoRt = ico.GetComponent<RectTransform>();
             icoRt.sizeDelta = new Vector2(45, 45);
+
+            TabMenuToggler menu = tab.GetComponent<TabMenuToggler>();
+            if (menu != null) menu.menu.SetActive(false);
         }
 
         currentTab = tabs[n];
@@ -99,6 +100,9 @@ public class BuildingTabs : MonoBehaviour
         currIco.color = Color.white;
         RectTransform currIcoRt = currIco.GetComponent<RectTransform>();
         currIcoRt.sizeDelta = new Vector2(55, 55);
+
+        TabMenuToggler currMenu = currentTab.GetComponent<TabMenuToggler>();
+        if (currMenu != null) currMenu.menu.SetActive(true);
     }
     public void ToggleTabs(bool show)
     {
@@ -132,5 +136,19 @@ public class BuildingTabs : MonoBehaviour
             tabsRect.anchoredPosition.x,
             targetY
         );
+        if (!shown)
+        {
+            HideAll();
+        }
+    }
+
+    void HideAll()
+    {
+        foreach (var tab in tabs)
+        {
+            TabMenuToggler tabTog = tab.GetComponent<TabMenuToggler>();
+            if(tabTog!=null)tabTog.menu.SetActive(false);
+
+        }
     }
 }
