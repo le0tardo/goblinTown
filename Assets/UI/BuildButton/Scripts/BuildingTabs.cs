@@ -9,6 +9,7 @@ public class BuildingTabs : MonoBehaviour
 
     [SerializeField] Sprite selected;
     [SerializeField] Sprite unselected;
+    [SerializeField] Color unselectedColor;
 
     [SerializeField]float show_y;
     [SerializeField]float hide_y;
@@ -27,14 +28,25 @@ public class BuildingTabs : MonoBehaviour
             Image img=tab.GetComponent<Image>();
             img.sprite=unselected;
             RectTransform rt=tab.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(100,100);
+            rt.sizeDelta = new Vector2(110,110);
+
+            Image ico = tab.transform.GetChild(0).GetComponent<Image>();
+            ico.color = unselectedColor;
+            RectTransform icoRt=ico.GetComponent<RectTransform>();
+            icoRt.sizeDelta = new Vector2(45, 45);
         }
 
         currentTab = tabs[0];
+
         Image curImg = currentTab.GetComponent<Image>();
         curImg.sprite=selected;
         RectTransform rtc = currentTab.GetComponent<RectTransform>();
-        rtc.sizeDelta = new Vector2(110, 110);
+        rtc.sizeDelta = new Vector2(125, 125);
+       
+        Image currIco = currentTab.transform.GetChild(0).GetComponent<Image>();
+        currIco.color = Color.white;
+        RectTransform currIcoRt=currIco.GetComponent<RectTransform>();
+        currIcoRt.sizeDelta = new Vector2(55, 55);
     }
 
     private void Update()
@@ -69,14 +81,24 @@ public class BuildingTabs : MonoBehaviour
             Image img = tab.GetComponent<Image>();
             img.sprite = unselected;
             RectTransform rt = tab.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(100, 100);
+            rt.sizeDelta = new Vector2(110, 110);
+
+            Image ico = tab.transform.GetChild(0).GetComponent<Image>();
+            ico.color = unselectedColor;
+            RectTransform icoRt = ico.GetComponent<RectTransform>();
+            icoRt.sizeDelta = new Vector2(45, 45);
         }
 
         currentTab = tabs[n];
         Image curImg = currentTab.GetComponent<Image>();
         curImg.sprite = selected;
         RectTransform rtc = currentTab.GetComponent<RectTransform>();
-        rtc.sizeDelta = new Vector2(110, 110);
+        rtc.sizeDelta = new Vector2(125, 125);
+
+        Image currIco = currentTab.transform.GetChild(0).GetComponent<Image>();
+        currIco.color = Color.white;
+        RectTransform currIcoRt = currIco.GetComponent<RectTransform>();
+        currIcoRt.sizeDelta = new Vector2(55, 55);
     }
     public void ToggleTabs(bool show)
     {
