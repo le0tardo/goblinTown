@@ -5,8 +5,8 @@ using UnityEngine.AI;
 public class Unit : MonoBehaviour, ISelectable, IMovable
 {
     NavMeshAgent agent;
-    NavMeshObstacle obs;
     UnitAnimation anim;
+    UnitEquipment equip;
     [SerializeField] GameObject selectionMarker;
     public enum UnitState
     {
@@ -49,8 +49,9 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         //UnitManager.inst.units.Add(this);
         UnitManager.inst.AddUnit(this);
         agent = GetComponent<NavMeshAgent>();
-        obs = GetComponent<NavMeshObstacle>();
         anim=GetComponent<UnitAnimation>();
+        equip=GetComponent<UnitEquipment>();
+
         state=UnitState.Idle;
     }
     void Update()

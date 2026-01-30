@@ -5,6 +5,7 @@ public enum ToolTier //set this in on spawn depending on unitManager
 {
     None,
     Stone,
+    Bronze,
     Iron,
     Steel
 }
@@ -13,7 +14,9 @@ public class UnitEquipment : MonoBehaviour
     public bool hasTools;
     public ToolTier toolTier=ToolTier.Stone;
 
-    public int clothesTier=0; //0 = naked, 1= loin cloth, etc. 
+    [SerializeField] public int toolLevel;
+    [SerializeField] public int weaponLevel;
+    [SerializeField] public int clothesLevel;
 
     [SerializeField] GameObject axe; //[] axes [0=woodAxe, [1]=stone axe etc.]
     [SerializeField] GameObject pickAxe;
@@ -26,7 +29,13 @@ public class UnitEquipment : MonoBehaviour
     private void Start()
     {
         unit = GetComponent<Unit>();
+
+        toolLevel=EquipmentManager.inst.toolLevel;
+        weaponLevel=EquipmentManager.inst.weaponLevel;
+        clothesLevel=EquipmentManager.inst.clothesLevel;
+
         UneqipTools();
+
     }
 
     public void UneqipTools()

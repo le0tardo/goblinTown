@@ -1,3 +1,4 @@
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,6 +19,7 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
     [SerializeField] GameObject workerGfx;
     public int toolLevel;
     public int weaponLevel;
+    public int clothesLevel;
 
     public Unit currentWorker;
 
@@ -25,6 +27,8 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
     {
         if(workerGfx!=null && needsWorker)workerGfx.SetActive(false);
         position= transform.position;
+        SetEquipmentLevels();
+
     }
     public void AssignWorker(Unit unitWorker)
     {
@@ -94,5 +98,31 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
 
         Debug.LogWarning("No valid NavMesh point found near building");
         return center;
+    }
+
+    void SetEquipmentLevels()
+    {
+        if (toolLevel > 0)
+        {
+            if (EquipmentManager.inst.toolLevel < toolLevel)
+            {
+                EquipmentManager.inst.toolLevel = toolLevel;
+            }
+        }
+        if (weaponLevel > 0)
+        {
+            if (EquipmentManager.inst.weaponLevel < weaponLevel)
+            {
+                EquipmentManager.inst.weaponLevel = weaponLevel;
+            }
+        }
+
+        if (clothesLevel > 0)
+        {
+            if (EquipmentManager.inst.clothesLevel < clothesLevel)
+            {
+                EquipmentManager.inst.clothesLevel = clothesLevel;
+            }
+        }
     }
 }
