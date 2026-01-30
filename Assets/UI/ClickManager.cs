@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 
 public class ClickManager : MonoBehaviour
 {
@@ -114,10 +115,48 @@ public class ClickManager : MonoBehaviour
             return;
         }
 
+        //b4 buildings, is workable?
+       /* IWorkable workable = hit.collider.GetComponentInParent<IWorkable>();
+        if (workable != null)
+        {
+            Debug.Log("clicked a work house");
+            if (UnitManager.inst.selectedUnits.Count > 0)
+            {
+                for (int i=0;i<UnitManager.inst.selectedUnits.Count;i++)
+                {
+                    Unit unit = UnitManager.inst.selectedUnits[i].GetComponent<Unit>();
+                    unit.endAction=Unit.EndAction.Work;
+                    unit.workTarget = workable;
+                    //unit.MoveTo(workable.Position);
+                    unit.MoveTo(hit.point);
+                }
+            }
+            return;
+        }*/
+
         //2b buildings
         IBuilding building=hit.collider.GetComponentInParent<IBuilding>();
         if (building != null)
         {
+
+            IWorkable work=building.Bbh.GetComponent<IWorkable>();
+            if (work != null)
+            {
+                //Debug.Log("this is a work house!");
+            }
+            
+            IProducer factory= building.Bbh.GetComponent<IProducer>();
+            if (factory != null)
+            {
+                //Debug.Log("this is a factory!");
+            }
+
+            IDepositable storage = building.Bbh.GetComponent<IDepositable>();
+            if (storage != null)
+            {
+               // Debug.Log("this is a storage");
+            }
+
             if (UnitManager.inst.selectedUnits.Count <= 0)
             {
                 if (BuildingManager.inst.selectedBuilding == null)
@@ -156,7 +195,15 @@ public class ClickManager : MonoBehaviour
 
                     unit.MoveTo(destination);
                     unit.endAction = Unit.EndAction.None;
+
+                    if (work != null)
+                    {
+                        unit.workTarget=work;
+                        unit.endAction = Unit.EndAction.Work;
+                    }
+
                     unit.ReleaseSlot();
+
                 }
             }
         }

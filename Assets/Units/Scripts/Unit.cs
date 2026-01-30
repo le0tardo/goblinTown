@@ -23,7 +23,8 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         Deposit,
         Pickup,
         Attack,
-        Hunt
+        Hunt,
+        Work
     }
     public EndAction endAction;
 
@@ -38,6 +39,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     public IDepositable depositTarget;
     public IPickupable pickupTarget;
     public IHuntable huntTarget;
+    public IWorkable workTarget;
 
     [Header("Slot")]
     public ISlotProvider currentSlotProvider;
@@ -194,10 +196,23 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
 
                 ClearEndAction();
             break;
+            case EndAction.Work:
+                if (workTarget == null) { print("no work target"); return; }
+                if (workTarget.NeedsWorker)
+                {
+                    workTarget.AssignWorker(this);
+                }
+                else
+                {
+                    workTarget = null;
+                    state=UnitState.Idle;
+                    ClearEndAction();
+                }
+                break;
             //case EndAction.Build: break;
         }
     }
-    void ClearEndAction()
+    public void ClearEndAction()
     {
         endAction = EndAction.None;
         forageTarget = null;

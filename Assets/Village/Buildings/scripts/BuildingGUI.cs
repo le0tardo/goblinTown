@@ -15,6 +15,7 @@ public class BuildingGUI : MonoBehaviour
     [SerializeField] GameObject storageUI;
     [SerializeField] GameObject domicileUI;
     [SerializeField] GameObject factoryUI;
+    [SerializeField] GameObject workhouseUI;
 
     void Awake()
     {
@@ -72,6 +73,10 @@ public class BuildingGUI : MonoBehaviour
                 HideTypeUI();
                 factoryUI.SetActive(true);
                 break;
+            case BuildingType.Workhouse:
+                HideTypeUI();
+                workhouseUI.SetActive(true);
+                break;
         }
 
         lastBuilding = building;
@@ -86,6 +91,7 @@ public class BuildingGUI : MonoBehaviour
         storageUI.SetActive(false);
         domicileUI.SetActive(false);
         factoryUI.SetActive(false);
+        workhouseUI.SetActive(false);
     }
 
     public void ClickFactory()
