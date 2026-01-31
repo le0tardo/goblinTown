@@ -32,6 +32,10 @@ public class UnitEquipment : MonoBehaviour
     [SerializeField] GameObject thrownSpear;
     Unit unit;
 
+    [SerializeField] GameObject[] axes;
+    [SerializeField] GameObject[] pickAxes;
+    [SerializeField] GameObject[] spears;
+
 
     private void Start()
     {
