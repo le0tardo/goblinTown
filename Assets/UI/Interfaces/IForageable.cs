@@ -7,4 +7,5 @@ public interface IForageable
     void Forage(Unit unit);
 
     bool IsDepleted { get; }
+    bool NeedsTool {  get; }
 }

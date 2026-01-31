@@ -5,8 +5,9 @@ public class NodeBehaviour : MonoBehaviour,IForageable
     [SerializeField] public ForageableNodeData node; //what node this is
     [SerializeField] public ForagedResourceData resource; //what resource it drops
     public bool isDepleted=false;
+    public bool needsTool=false;
     public bool IsDepleted => isDepleted;
-   
+    public bool NeedsTool => needsTool;
     public ForageableNodeData NodeData => node;
     public ForagedResourceData Resource => resource;
 

@@ -9,6 +9,13 @@ public enum ToolTier //set this in on spawn depending on unitManager
     Iron,
     Steel
 }
+public enum ClothesTier
+{
+    None,
+    Skin,
+    Hide,
+    Cloth
+}
 public class UnitEquipment : MonoBehaviour
 {
     public bool hasTools;

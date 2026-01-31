@@ -127,10 +127,10 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
                     forageTarget != null &&
                     !forageTarget.IsDepleted &&
                     carriedAmount < carryCapacity &&
-                    (carriedResource == null || carriedResource == forageTarget.Resource)
+                    (carriedResource == null || carriedResource == forageTarget.Resource) &&
+                    (!forageTarget.NeedsTool || equip.toolLevel > 0)
                 )
                 {
-
                     state = UnitState.Foraging;
                     FacePosition(forageTarget.Position);
 
@@ -300,7 +300,9 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         while (state == UnitState.Foraging && forageTarget != null)
         {
             // Wait for harvest time BEFORE gaining resource
-            yield return new WaitForSeconds(forageTarget.NodeData.harvestDuration);
+            float waitTime = (forageTarget.NodeData.harvestDuration-equip.toolLevel);
+            if (waitTime <1){waitTime = 1f;}
+            yield return new WaitForSeconds(waitTime);
 
             // Re-check after waiting (node might be gone)
             if (state != UnitState.Foraging || forageTarget == null)

@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class UnitStatus : MonoBehaviour
 {
+    public enum CauseOfDeath
+    {
+        None,
+        Cold,
+        Hunger,
+        Enemy,
+        Animal
+        //eeeh, falling tree?
+    }
+
+    private CauseOfDeath causeOfDeath;
+
     public int hp=10;
     public int maxHp=10;
     public bool isDead=false;
@@ -47,6 +59,13 @@ public class UnitStatus : MonoBehaviour
     {
         anim.HurtAnim();
         hp-=damage;
+    }
+
+    public void TakeDamageFromSource(int damage, CauseOfDeath cause)
+    {
+        //build string from damange type:
+        //switch cause
+        //case Cold: "froze to death"
     }
 
     void SetName()

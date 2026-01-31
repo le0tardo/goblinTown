@@ -107,6 +107,12 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
             if (EquipmentManager.inst.toolLevel < toolLevel)
             {
                 EquipmentManager.inst.toolLevel = toolLevel;
+
+                foreach(Unit unit in UnitManager.inst.units)
+                {
+                    UnitEquipment eq=unit.GetComponent<UnitEquipment>();
+                    eq.toolLevel = EquipmentManager.inst.toolLevel;
+                }
             }
         }
         if (weaponLevel > 0)
