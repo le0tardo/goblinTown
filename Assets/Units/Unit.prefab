@@ -1251,12 +1251,12 @@ GameObject:
   - component: {fileID: 3052494214271236000}
   - component: {fileID: 5420458797199884425}
   m_Layer: 0
-  m_Name: trownSpear
+  m_Name: trownSpear_stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3506751874539652822
 Transform:
   m_ObjectHideFlags: 0
@@ -1265,12 +1265,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361682711019896246}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.276, y: 0.644, z: 0.248}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 2, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7278368095050901249}
+  m_Father: {fileID: 7437598220735639735}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
 --- !u!33 &3052494214271236000
 MeshFilter:
@@ -2360,6 +2360,39 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3251368107397704198}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2488952475781538765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7437598220735639735}
+  m_Layer: 0
+  m_Name: ThrownSpearObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7437598220735639735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488952475781538765}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0.276, y: 0.644, z: 0.248}
+  m_LocalScale: {x: 0.1, y: 0.5, z: 0.1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3506751874539652822}
+  - {fileID: 1200946878656777520}
+  m_Father: {fileID: 7278368095050901249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2621636990247181657
 GameObject:
@@ -5261,6 +5294,92 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00086595025, y: 0.006219731, z: -0.0014162004}
     m_Extent: {x: 0.0061788624, y: 0.0068150447, z: 0.004415713}
   m_DirtyAABB: 0
+--- !u!1 &7568525709232253479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1200946878656777520}
+  - component: {fileID: 8044664478769028729}
+  - component: {fileID: 6242937833404056331}
+  m_Layer: 0
+  m_Name: trownSpear_bronze
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1200946878656777520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7568525709232253479}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.04000008, y: -0.29530412, z: -0.08000016}
+  m_LocalScale: {x: 10, y: 2, z: 10}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7437598220735639735}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
+--- !u!33 &8044664478769028729
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7568525709232253479}
+  m_Mesh: {fileID: -1213624209875795880, guid: c97bd78cde35b6e479bab4f5fab4f4fc, type: 3}
+--- !u!23 &6242937833404056331
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7568525709232253479}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e6d76ca806066be47953b32ae54483b6, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7568621654679470979
 GameObject:
   m_ObjectHideFlags: 0
@@ -5607,7 +5726,7 @@ Transform:
   - {fileID: 8263509647511494541}
   - {fileID: 2552291422391440839}
   - {fileID: 8001088258022649708}
-  - {fileID: 3506751874539652822}
+  - {fileID: 7437598220735639735}
   m_Father: {fileID: 3175238167928687783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!205 &824143131362742669
@@ -5728,12 +5847,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3175238167928687783}
   - component: {fileID: 4000802558067003564}
+  - component: {fileID: 6877582933786813550}
+  - component: {fileID: 2903076563246008349}
+  - component: {fileID: 4933510542722774010}
   - component: {fileID: 1406674777058616930}
   - component: {fileID: 6570464463284722407}
-  - component: {fileID: 2903076563246008349}
   - component: {fileID: 6943601782198890758}
-  - component: {fileID: 6877582933786813550}
-  - component: {fileID: 4933510542722774010}
   m_Layer: 6
   m_Name: Unit
   m_TagString: Unit
@@ -5779,6 +5898,68 @@ MonoBehaviour:
   carryCapacity: 5
   forageSpeed: 2
   slotProviderName: ' '
+--- !u!114 &6877582933786813550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076199387289777282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a341b27dd945847478eef5543f4a68ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
+  maxHp: 0
+  isDead: 0
+  hungry: 1
+  cold: 1
+  unitName: Goblin
+--- !u!114 &2903076563246008349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076199387289777282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c438291401d3644a842cdb1b5ce88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carryObject: {fileID: 1964414950666472794}
+--- !u!114 &4933510542722774010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076199387289777282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e902bd4dfb6ec8439c4dcba75bbbabd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTools: 0
+  toolTier: 1
+  toolLevel: 0
+  weaponLevel: 0
+  clothesLevel: 0
+  fishingRod: {fileID: 3577742010695254794}
+  thrownSpear: {fileID: 2488952475781538765}
+  axes:
+  - {fileID: 4068215473135658809}
+  - {fileID: 5492211559339613098}
+  pickAxes:
+  - {fileID: 2727084470966608004}
+  - {fileID: 4437445285091425974}
+  spears:
+  - {fileID: 1470534091216901669}
+  - {fileID: 7436863966789443469}
+  thrownSpears:
+  - {fileID: 1361682711019896246}
+  - {fileID: 7568525709232253479}
 --- !u!136 &1406674777058616930
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5824,19 +6005,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
---- !u!114 &2903076563246008349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8076199387289777282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c438291401d3644a842cdb1b5ce88a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carryObject: {fileID: 1964414950666472794}
 --- !u!95 &6943601782198890758
 Animator:
   serializedVersion: 7
@@ -5859,55 +6027,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6877582933786813550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8076199387289777282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a341b27dd945847478eef5543f4a68ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 10
-  maxHp: 0
-  isDead: 0
-  hungry: 1
-  cold: 1
-  unitName: Goblin
---- !u!114 &4933510542722774010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8076199387289777282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e902bd4dfb6ec8439c4dcba75bbbabd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasTools: 0
-  toolTier: 1
-  toolLevel: 0
-  weaponLevel: 0
-  clothesLevel: 0
-  axe: {fileID: 4068215473135658809}
-  pickAxe: {fileID: 2727084470966608004}
-  fishingRod: {fileID: 3577742010695254794}
-  spear: {fileID: 1470534091216901669}
-  thrownSpear: {fileID: 1361682711019896246}
-  axes:
-  - {fileID: 4068215473135658809}
-  - {fileID: 5492211559339613098}
-  pickAxes:
-  - {fileID: 2727084470966608004}
-  - {fileID: 4437445285091425974}
-  spears:
-  - {fileID: 1470534091216901669}
-  - {fileID: 7436863966789443469}
 --- !u!1 &8081460286528064339
 GameObject:
   m_ObjectHideFlags: 0

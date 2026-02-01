@@ -22,19 +22,16 @@ public class UnitEquipment : MonoBehaviour
     public ToolTier toolTier=ToolTier.Stone;
 
     [SerializeField] public int toolLevel;
-    [SerializeField] public int weaponLevel;
     [SerializeField] public int clothesLevel;
 
-    [SerializeField] GameObject axe; //[] axes [0=woodAxe, [1]=stone axe etc.]
-    [SerializeField] GameObject pickAxe;
     [SerializeField] GameObject fishingRod;
-    [SerializeField] GameObject spear;
     [SerializeField] GameObject thrownSpear;
     Unit unit;
 
     [SerializeField] GameObject[] axes;
     [SerializeField] GameObject[] pickAxes;
     [SerializeField] GameObject[] spears;
+    [SerializeField] GameObject[] thrownSpears;
 
 
     private void Start()
@@ -42,7 +39,6 @@ public class UnitEquipment : MonoBehaviour
         unit = GetComponent<Unit>();
 
         toolLevel=EquipmentManager.inst.toolLevel;
-        weaponLevel=EquipmentManager.inst.weaponLevel;
         clothesLevel=EquipmentManager.inst.clothesLevel;
 
         UneqipTools();
@@ -51,18 +47,32 @@ public class UnitEquipment : MonoBehaviour
 
     public void UneqipTools()
     {
-        if (axe.activeSelf) axe.SetActive(false);
-        if (pickAxe.activeSelf) pickAxe.SetActive(false);
+        foreach (GameObject axe in axes)
+        {
+            axe.SetActive(false);
+        }
+
+        foreach(GameObject paxe in pickAxes)
+        {
+            paxe.SetActive(false);
+        }
+
         if(fishingRod.activeSelf)fishingRod.SetActive(false);
-        if(spear.activeSelf)spear.SetActive(false);
+       if(thrownSpear.activeSelf)thrownSpear.SetActive(false);
+        foreach(GameObject spear in spears)
+        {
+            spear.SetActive(false);
+        }
     }
     public void EquipAxe()
     {
-        if(!axe.activeSelf)axe.SetActive(true);
+        int toolTier = toolLevel - 1;
+        if (!axes[toolTier].activeSelf) axes[toolTier].SetActive(true);
     }
     public void EquipPickAxe()
     {
-        if (!pickAxe.activeSelf) pickAxe.SetActive(true);
+        int toolTier = toolLevel - 1;
+        if (!pickAxes[toolTier].activeSelf) pickAxes[toolTier].SetActive(true);
     }
     public void EquipFishingRod()
     {
@@ -70,7 +80,8 @@ public class UnitEquipment : MonoBehaviour
     }
     public void EquipSpear()
     {
-        if(!spear.activeSelf)spear.SetActive(true);
+        int toolTier = toolLevel - 1;
+        if (!spears[toolTier].activeSelf) spears[toolTier].SetActive(true);
     }
 
     public void TryThrowSpear() //call from animation event
@@ -87,7 +98,8 @@ public class UnitEquipment : MonoBehaviour
     }
     void ThrowSpear(Vector3 targetPosition)
     {
-        if(spear.activeInHierarchy)spear.SetActive(false);
+        if (spears[toolLevel - 1].activeInHierarchy) spears[toolLevel-1].SetActive(false);
+
         thrownSpear.SetActive(true);
         StartCoroutine(AnimateSpear(targetPosition));
     }
@@ -95,7 +107,10 @@ public class UnitEquipment : MonoBehaviour
     private IEnumerator AnimateSpear(Vector3 targetPosition)
     {
         if(!thrownSpear.activeInHierarchy)thrownSpear.SetActive(true);
-        Vector3 start = thrownSpear.transform.position;
+
+        if (!thrownSpears[toolLevel-1].activeInHierarchy)thrownSpears[toolLevel-1].SetActive(true);
+
+        Vector3 start = thrownSpear.transform.position; // make empty transform to move!
         float duration = 0.25f;
         float t = 0f;
 

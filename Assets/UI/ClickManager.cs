@@ -304,6 +304,13 @@ public class ClickManager : MonoBehaviour
         {
             foreach (Unit unit in UnitManager.inst.selectedUnits)
             {
+                UnitEquipment eq=unit.GetComponent<UnitEquipment>();
+                if (eq.toolLevel < 1)
+                {
+                    Debug.Log("no tools, skip this");
+                    return;
+                }
+
                 Vector3 unitPos = unit.transform.position;
                 Vector3 animalPos = animal.Position;
 

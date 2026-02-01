@@ -27,7 +27,6 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
     {
         if(workerGfx!=null && needsWorker)workerGfx.SetActive(false);
         position= transform.position;
-        SetEquipmentLevels();
 
     }
     public void AssignWorker(Unit unitWorker)
@@ -47,9 +46,7 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
         currentWorker.gameObject.SetActive(false);
         needsWorker = false;
 
-        //toolManager.inst.toolLevel=toolLevel;
-        //toolManager.inst.weaponLevel=weaponLevel; if > etc...
-        //equipmentManager, set clothes from this obj too...
+        SetEquipmentLevels();
     }
 
     public void FireWorker()
@@ -113,13 +110,6 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
                     UnitEquipment eq=unit.GetComponent<UnitEquipment>();
                     eq.toolLevel = EquipmentManager.inst.toolLevel;
                 }
-            }
-        }
-        if (weaponLevel > 0)
-        {
-            if (EquipmentManager.inst.weaponLevel < weaponLevel)
-            {
-                EquipmentManager.inst.weaponLevel = weaponLevel;
             }
         }
 
