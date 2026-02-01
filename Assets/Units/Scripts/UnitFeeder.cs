@@ -1,15 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnitFeeder : MonoBehaviour
 {
     [SerializeField] float feedingTime;
     private float feedingTimer;
 
+    [SerializeField] Image feedFill;
+
     [SerializeField] VillageResource food;
 
     private void Start()
     {
         if(feedingTime==0)feedingTime=30f;
+        feedingTimer = feedingTime;
     }
     private void Update()
     {
@@ -22,6 +26,9 @@ public class UnitFeeder : MonoBehaviour
         {
             feedingTimer-= Time.deltaTime;
         }
+
+        feedFill.fillAmount = 1- (feedingTimer/feedingTime);
+
     }
     public void FeedUnits()
     {
@@ -29,6 +36,27 @@ public class UnitFeeder : MonoBehaviour
 
         Debug.Log("Units consumed "+n+" food!");
 
-        VillageResourceManager.inst.RemoveResource(food,n);
+        int remainingFood; 
+        bool hasFood=VillageResourceManager.inst.villageResources.TryGetValue(food, out remainingFood);
+        Debug.Log("remaining food: " + remainingFood);
+
+        if (n > remainingFood)
+        {
+            /*int hungyUnits=n-remainingFood;
+            
+            for(int i = 0; i < hungyUnits; i++)
+            {
+                //TODO: deal hunger damage to ONLY untis that dont get food this rounf
+            }*/
+
+            foreach (Unit unit in UnitManager.inst.units)
+            {
+                UnitStatus status = unit.GetComponent<UnitStatus>();
+                status.TakeDamageFromSource(1, UnitStatus.CauseOfDeath.Hunger);
+            }
+        }
+
+        VillageResourceManager.inst.RemoveResource(food,n); //auto caps
+
     }
 }

@@ -45,16 +45,6 @@ public class UnitStatus : MonoBehaviour
         unit=GetComponent<Unit>();
     }
 
-    private void Update()
-    {
-        if (hp <= 0 && !isDead)
-        {
-            anim.DeathAnimation();
-            unit.Die();
-            isDead = true;
-        }
-    }
-
     public void TakeDamage(int damage)
     {
         anim.HurtAnim();
@@ -63,9 +53,17 @@ public class UnitStatus : MonoBehaviour
 
     public void TakeDamageFromSource(int damage, CauseOfDeath cause)
     {
-        //build string from damange type:
-        //switch cause
-        //case Cold: "froze to death"
+        anim.HurtAnim();
+        hp-=damage;
+        
+        if (hp <= 0 && !isDead)
+        {
+            anim.DeathAnimation();
+            unit.Die();
+            isDead = true;
+            print(unitName + " has died of "+ cause);
+        }
+
     }
 
     void SetName()

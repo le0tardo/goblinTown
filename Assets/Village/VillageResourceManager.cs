@@ -56,6 +56,7 @@ public class VillageResourceManager : MonoBehaviour
     public void RemoveResource(VillageResource data, int amount)
     {
         villageResources[data] -= amount;
+        if (villageResources[data] < 0) { villageResources[data] = 0;}
 
         gui.UpdateResource(data, villageResources[data]);
     }
