@@ -118,7 +118,15 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
             if (EquipmentManager.inst.clothesLevel < clothesLevel)
             {
                 EquipmentManager.inst.clothesLevel = clothesLevel;
+               
+                foreach (Unit unit in UnitManager.inst.units)
+                {
+                    UnitEquipment eq = unit.GetComponent<UnitEquipment>();
+                    eq.clothesLevel = EquipmentManager.inst.clothesLevel;
+                    eq.EquipClothes();
+                }
             }
         }
     }
+
 }

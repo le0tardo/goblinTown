@@ -21,9 +21,11 @@ public class UnitEquipment : MonoBehaviour
     public bool hasTools;
     public ToolTier toolTier=ToolTier.Stone;
 
+
     [SerializeField] public int toolLevel;
     [SerializeField] public int clothesLevel;
 
+    [Header("Tools")]
     [SerializeField] GameObject fishingRod;
     [SerializeField] GameObject thrownSpear;
     Unit unit;
@@ -32,6 +34,9 @@ public class UnitEquipment : MonoBehaviour
     [SerializeField] GameObject[] pickAxes;
     [SerializeField] GameObject[] spears;
     [SerializeField] GameObject[] thrownSpears;
+
+    [Header("Clothes")]
+    [SerializeField] GameObject[] clothes;
 
 
     private void Start()
@@ -123,5 +128,18 @@ public class UnitEquipment : MonoBehaviour
 
         thrownSpear.transform.position=start;
         thrownSpear.SetActive(false);
+    }
+
+    public void EquipClothes()
+    {
+
+        for (int i = 0; i < clothes.Length; i++)
+        {
+            clothes[i].gameObject.SetActive(false);
+        }
+        if (clothesLevel > 0)
+        {
+            clothes[clothesLevel - 1].SetActive(true);
+        }
     }
 }

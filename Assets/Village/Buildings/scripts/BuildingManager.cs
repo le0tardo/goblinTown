@@ -125,6 +125,9 @@ public class BuildingManager : MonoBehaviour
     {
         if (selectedBuilding != null)
         {
+            WorkHouseBehaviour work=selectedBuilding.GetComponent<WorkHouseBehaviour>();
+            if (work != null) work.FireWorker();
+
             selectedBuilding.DestroyFX();
             Destroy(selectedBuilding.gameObject);
         }

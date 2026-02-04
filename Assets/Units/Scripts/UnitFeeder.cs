@@ -34,11 +34,8 @@ public class UnitFeeder : MonoBehaviour
     {
         int n=UnitManager.inst.units.Count;
 
-        Debug.Log("Units consumed "+n+" food!");
-
         int remainingFood; 
         bool hasFood=VillageResourceManager.inst.villageResources.TryGetValue(food, out remainingFood);
-        Debug.Log("remaining food: " + remainingFood);
 
         if (n > remainingFood)
         {
