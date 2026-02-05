@@ -22,4 +22,4 @@ MonoBehaviour:
     amount: 10
   footprintSize: {x: 0, y: 0}
   previewMesh: {fileID: 6393921314623249713, guid: 8cb6f66c38e7acc4bacea398cc8f156d, type: 3}
-  buildingPrefab: {fileID: 0}
+  buildingPrefab: {fileID: 5587518643479460695, guid: 352a6ab74d100ff41b17b3bca296479d, type: 3}
