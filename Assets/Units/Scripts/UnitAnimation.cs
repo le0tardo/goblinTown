@@ -44,38 +44,53 @@ public class UnitAnimation : MonoBehaviour
     }
     public void ApplyState(Unit.UnitState state)
     {
-       if(state==Unit.UnitState.Idle) anim.SetTrigger("idle"); anim.SetBool("carrying", carrying);carryObject.SetActive(carrying);equip.UneqipTools();
-       if(state==Unit.UnitState.Moving) anim.SetTrigger("moving"); carryObject.SetActive(carrying); equip.UneqipTools();
+        if(state==Unit.UnitState.Idle) anim.SetTrigger("idle"); anim.SetBool("carrying", carrying);carryObject.SetActive(carrying);equip.UneqipTools();
+        if(state==Unit.UnitState.Moving) anim.SetTrigger("moving"); carryObject.SetActive(carrying); equip.UneqipTools();
+
         if (state == Unit.UnitState.Foraging)
         {
-            if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Food) 
+            var resType = unit.carriedResource.villageResource.resource;
+
+            switch (resType)
             {
-                if (unit.carriedResource.resourceName == "Fish") //string ref...
-                {
-                    //fish anim
-                    anim.SetTrigger("fish");
-                    equip.EquipFishingRod();
-                }
-                //elif here if needed
-                else
-                {
+                case VillageResource.Resource.Food:
+
+                    // Special case: Fish
+                    if (unit.carriedResource.resourceName == "Fish")
+                    {
+                        anim.SetTrigger("fish");
+                        equip.EquipFishingRod();
+                    }
+                    else
+                    {
+                        anim.SetTrigger("foraging");
+                    }
+                    break;
+
+                case VillageResource.Resource.Wood:
+
+                    anim.SetTrigger("forageTree");
+                    equip.EquipAxe();
+                    break;
+
+                case VillageResource.Resource.Stone:
+                case VillageResource.Resource.Clay:
+
+                    anim.SetTrigger("forageRock");
+                    equip.EquipPickAxe();
+                    break;
+
+                default:
+
                     anim.SetTrigger("foraging");
-                }
-            }
-            if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Wood)
-            {
-                anim.SetTrigger("forageTree");
-                equip.EquipAxe();
-            }
-            if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Stone
-                ||unit.carriedResource.villageResource.resource==VillageResource.Resource.Clay)
-            {
-                anim.SetTrigger("forageRock");
-                equip.EquipPickAxe();
+                    break;
             }
 
             carryObject.SetActive(false);
         }
+
+
+        //hunt
         if (state == Unit.UnitState.Hunting)
         {
             anim.SetTrigger("hunt");

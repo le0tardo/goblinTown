@@ -4,6 +4,7 @@ public class NodeBehaviour : MonoBehaviour,IForageable
 {
     [SerializeField] public ForageableNodeData node; //what node this is
     [SerializeField] public ForagedResourceData resource; //what resource it drops
+    [SerializeField] GameObject childNode;
     public bool isDepleted=false;
     public bool needsTool=false;
     public bool IsDepleted => isDepleted;
@@ -102,6 +103,7 @@ public class NodeBehaviour : MonoBehaviour,IForageable
 
     void DestroyNode()
     {
+        if (childNode != null) { Instantiate(childNode,transform.position,Quaternion.identity);}
         Destroy(gameObject);
     }
 }
