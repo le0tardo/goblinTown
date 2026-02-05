@@ -42,6 +42,7 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
 
         currentWorker.state = Unit.UnitState.Idle;
         currentWorker.ClearEndAction();
+        currentWorker.ReleaseSlot();
 
         currentWorker.gameObject.SetActive(false);
         needsWorker = false;

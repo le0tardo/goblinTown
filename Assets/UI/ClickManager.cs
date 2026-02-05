@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
@@ -56,7 +57,7 @@ public class ClickManager : MonoBehaviour
         }
     }
 
-
+    #region RectTransforms
     Rect GetScreenRect(Vector2 start, Vector2 end)
     {
         Vector2 bottomLeft = Vector2.Min(start, end);
@@ -75,28 +76,91 @@ public class ClickManager : MonoBehaviour
             topRight.y - bottomLeft.y
         );
     }
+    #endregion
     void HandleClick()
     {
-        // Ignore clicks while placing buildings
+        // Ignore while placing buildings
         if (BuildingManager.inst != null && BuildingManager.inst.isPlacingBuilding)
             return;
 
-        // 0. UI
+        // Ignore UI clicks
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
 
-        // 1. Raycast
-        if (!Physics.Raycast(ray, out hit))
+        if (!Physics.Raycast(ray, out RaycastHit hit))
             return;
 
-        // 2. Selectable objects
+        // Slot management before anything else!
+        ISlotProvider clickedSlotProvider =hit.collider.GetComponentInParent<ISlotProvider>();
+        if (clickedSlotProvider == null)
+        {
+            foreach (Unit unit in UnitManager.inst.selectedUnits)
+            {
+                unit.ReleaseSlot();
+            }
+        }
+
+            // Local helpers (only inside this method)
+
+            void CommandUnit(Unit unit, Vector3 destination, Unit.EndAction action)
+            {
+                unit.endAction = action;
+                unit.MoveTo(destination);
+            }
+
+        void ClearTargets(Unit unit)
+        {
+            unit.forageTarget = null;
+            unit.depositTarget = null;
+            unit.huntTarget = null;
+        }
+
+        Vector3 GetSlotOrPosition(Unit unit, ISlotProvider provider, Vector3 fallback)
+        {
+            if (provider == null)
+                return fallback;
+
+            if (unit.currentSlotProvider != provider)
+            {
+                unit.ReleaseSlot();
+                unit.currentSlotProvider = provider;
+            }
+
+            return provider.RequestSlot(unit);
+        }
+
+
+
+        List<Vector3> GetGroupPositions(Vector3 center, float radius = 1.5f)
+        {
+            int count = UnitManager.inst.selectedUnits.Count;
+            List<Vector3> positions = new();
+
+            for (int i = 0; i < count; i++)
+            {
+                float angle = (2 * Mathf.PI / count) * i;
+
+                Vector3 offset = new Vector3(
+                    Mathf.Cos(angle),
+                    0,
+                    Mathf.Sin(angle)
+                ) * radius;
+
+                positions.Add(center + offset);
+            }
+
+            return positions;
+        }
+
+        // 1. Unit selection
+
         ISelectable selectable = hit.collider.GetComponentInParent<ISelectable>();
         if (selectable != null)
         {
             Unit unit = selectable as Unit;
+
             if (unit != null)
             {
                 if (UnitManager.inst.IsSelected(unit))
@@ -109,283 +173,189 @@ public class ClickManager : MonoBehaviour
                     UnitManager.inst.ClearSelection();
                     UnitManager.inst.SelectUnit(unit);
                 }
+
                 BuildingManager.inst.DeselectBuilding();
             }
 
             return;
         }
 
-        //b4 buildings, is workable?
-       /* IWorkable workable = hit.collider.GetComponentInParent<IWorkable>();
-        if (workable != null)
-        {
-            Debug.Log("clicked a work house");
-            if (UnitManager.inst.selectedUnits.Count > 0)
-            {
-                for (int i=0;i<UnitManager.inst.selectedUnits.Count;i++)
-                {
-                    Unit unit = UnitManager.inst.selectedUnits[i].GetComponent<Unit>();
-                    unit.endAction=Unit.EndAction.Work;
-                    unit.workTarget = workable;
-                    //unit.MoveTo(workable.Position);
-                    unit.MoveTo(hit.point);
-                }
-            }
-            return;
-        }*/
+        // 2. Buildings
 
-        //2b buildings
-        IBuilding building=hit.collider.GetComponentInParent<IBuilding>();
+        IBuilding building = hit.collider.GetComponentInParent<IBuilding>();
         if (building != null)
         {
+            IWorkable workTarget = building.Bbh.GetComponent<IWorkable>();
+            IDepositable depositTarget = building.Bbh.GetComponent<IDepositable>();
+            ISlotProvider slotProvider = building.Bbh.GetComponent<ISlotProvider>();
 
-            IWorkable work=building.Bbh.GetComponent<IWorkable>();
-            if (work != null)
+            // No units selected = select building
+            if (UnitManager.inst.selectedUnits.Count == 0)
             {
-                //Debug.Log("this is a work house!");
-            }
-            
-            IProducer factory= building.Bbh.GetComponent<IProducer>();
-            if (factory != null)
-            {
-                //Debug.Log("this is a factory!");
-            }
-
-            IDepositable storage = building.Bbh.GetComponent<IDepositable>();
-            if (storage != null)
-            {
-               // Debug.Log("this is a storage");
-            }
-
-            if (UnitManager.inst.selectedUnits.Count <= 0)
-            {
-                if (BuildingManager.inst.selectedBuilding == null)
-                {
-                    BuildingManager.inst.SelectBuilding(building.Bbh);
-                }
-                else if (BuildingManager.inst.selectedBuilding == building.Bbh)
-                {
+                if (BuildingManager.inst.selectedBuilding == building.Bbh)
                     BuildingManager.inst.DeselectBuilding();
-                }
                 else
                 {
                     BuildingManager.inst.DeselectBuilding();
                     BuildingManager.inst.SelectBuilding(building.Bbh);
                 }
+
+                return;
             }
-            else
+            // Units selected = command
+            BuildingManager.inst.DeselectBuilding();
+
+            var units = UnitManager.inst.selectedUnits;
+            var positions = GetGroupPositions(hit.point);
+
+            for (int i = 0; i < units.Count; i++)
             {
-                BuildingManager.inst.DeselectBuilding();
-                float radius = 1.5f; // spacing from center
-                int count = UnitManager.inst.selectedUnits.Count;
+                Unit unit = units[i];
 
-                for (int i = 0; i < count; i++)
+                ClearTargets(unit);
+
+                // Default movement
+                Vector3 dest = positions[i];
+
+                // If building has slots, use slot instead
+                if (slotProvider != null)
+                    dest = GetSlotOrPosition(unit, slotProvider, dest);
+
+                CommandUnit(unit, dest, Unit.EndAction.None);
+
+                // Assign Work
+                if (workTarget != null)
                 {
-                    Unit unit = UnitManager.inst.selectedUnits[i];
-
-                    float angle = (2 * Mathf.PI / count) * i;
-
-                    Vector3 offset = new Vector3(
-                        Mathf.Cos(angle),
-                        0,
-                        Mathf.Sin(angle)
-                    ) * radius;
-
-                    Vector3 destination = hit.point + offset;
-
-                    unit.MoveTo(destination);
-                    unit.endAction = Unit.EndAction.None;
-
-                    if (work != null)
-                    {
-                        unit.workTarget=work;
-                        unit.endAction = Unit.EndAction.Work;
-                    }
-
-                    unit.ReleaseSlot();
-
+                    unit.workTarget = workTarget;
+                    unit.endAction = Unit.EndAction.Work;
+                }
+                // Assign Deposit
+                if (depositTarget != null)
+                {
+                    unit.depositTarget = depositTarget;
+                    unit.endAction = Unit.EndAction.Deposit;
                 }
             }
-        }
-        else
-        {
-            BuildingManager.inst.DeselectBuilding();
+
+            return;
         }
 
-        //3 forageable objects
+        // 3. Forageable nodes
+
         IForageable forageable = hit.collider.GetComponentInParent<IForageable>();
         if (forageable != null)
         {
             ISlotProvider slotProvider = hit.collider.GetComponentInParent<ISlotProvider>();
+
             foreach (Unit unit in UnitManager.inst.selectedUnits)
             {
-                unit.forageTarget = forageable;
-                unit.endAction = Unit.EndAction.Forage;
+                ClearTargets(unit);
 
-                if (slotProvider != null)
-                {
-                    unit.ReleaseSlot();
-                    Vector3 slot = slotProvider.RequestSlot(unit);
-                    unit.currentSlotProvider = slotProvider;
-                    unit.slotProviderName = slotProvider.ToString(); // debug only
-                    unit.MoveTo(slot);
-                }
-                else
-                {
-                    unit.MoveTo(forageable.Position);
-                }
+                unit.forageTarget = forageable;
+
+                Vector3 dest = GetSlotOrPosition(unit, slotProvider, forageable.Position);
+                CommandUnit(unit, dest, Unit.EndAction.Forage);
             }
 
             return;
         }
 
-        // 4 drop off points
+        // 4. Deposits
+
         IDepositable deposit = hit.collider.GetComponentInParent<IDepositable>();
         if (deposit != null)
         {
             ISlotProvider slotProvider = hit.collider.GetComponentInParent<ISlotProvider>();
+
             foreach (Unit unit in UnitManager.inst.selectedUnits)
             {
-                unit.depositTarget = deposit;
-                unit.endAction = Unit.EndAction.Deposit;
+                ClearTargets(unit);
 
-                if (slotProvider != null)
-                {
-                    unit.ReleaseSlot();
-                    Vector3 slot = slotProvider.RequestSlot(unit);
-                    unit.currentSlotProvider = slotProvider;
-                    unit.slotProviderName = slotProvider.ToString(); // debug only
-                    unit.MoveTo(slot);
-                }
-                else
-                {
-                    unit.MoveTo(deposit.Position);
-                }
+                unit.depositTarget = deposit;
+
+                Vector3 dest = GetSlotOrPosition(unit, slotProvider, deposit.Position);
+                CommandUnit(unit, dest, Unit.EndAction.Deposit);
             }
-         return;
+
+            return;
         }
 
-        //4b pickubable
-        IPickupable pickup=hit.collider.GetComponentInParent<IPickupable>();
+        // 5. Pickups
+
+        IPickupable pickup = hit.collider.GetComponentInParent<IPickupable>();
         if (pickup != null)
         {
-            float radius = 1.5f; // spacing from center
-            int count = UnitManager.inst.selectedUnits.Count;
-            for (int i = 0; i < count; i++)
+            var units = UnitManager.inst.selectedUnits;
+            var positions = GetGroupPositions(hit.point);
+
+            for (int i = 0; i < units.Count; i++)
             {
-                Unit unit = UnitManager.inst.selectedUnits[i];
+                Unit unit = units[i];
 
-                float angle = (2 * Mathf.PI / count) * i;
+                ClearTargets(unit);
 
-                Vector3 offset = new Vector3(
-                    Mathf.Cos(angle),
-                    0,
-                    Mathf.Sin(angle)
-                ) * radius;
-
-                Vector3 destination = hit.point;
-
-                if (count > 1)
-                {
-                     destination = hit.point + offset;
-                }
-
-
-                unit.MoveTo(destination);
                 unit.pickupTarget = pickup;
-                unit.endAction = Unit.EndAction.Pickup;
-                unit.ReleaseSlot();
+                CommandUnit(unit, positions[i], Unit.EndAction.Pickup);
             }
+
+            return;
         }
 
-        //4c. animals
+        // 6. animals (hunt)
         IHuntable animal = hit.collider.GetComponentInParent<IHuntable>();
         if (animal != null && UnitManager.inst.selectedUnits.Count > 0)
         {
             foreach (Unit unit in UnitManager.inst.selectedUnits)
             {
-                UnitEquipment eq=unit.GetComponent<UnitEquipment>();
+                UnitEquipment eq = unit.GetComponent<UnitEquipment>();
                 if (eq.toolLevel < 1)
                 {
-                    Debug.Log("no tools, skip this");
-                    return;
+                    Debug.Log("no tools, skip hunt");
+                    //TODO: clean this random up..
+                    float r=Random.Range(-3f, 3f);
+                    Vector3 offPos = new Vector3(hit.point.x + r,transform.position.y,hit.point.z+r);
+                    CommandUnit(unit,offPos,Unit.EndAction.None);
+                    continue;
                 }
 
-                Vector3 unitPos = unit.transform.position;
-                Vector3 animalPos = animal.Position;
+                ClearTargets(unit);
 
-                Vector3 dir = (animalPos - unitPos).normalized;
+                Vector3 dir = (animal.Position - unit.transform.position).normalized;
                 float spearRange = 4f;
 
-                Vector3 destination = animalPos - dir * spearRange;
+                Vector3 rawDest = animal.Position - dir * spearRange;
 
-                if (NavMesh.SamplePosition(destination, out NavMeshHit navHit, 1.5f, NavMesh.AllAreas))
-                    unit.MoveTo(navHit.position);
-                else
-                    unit.MoveTo(destination);
+                if (NavMesh.SamplePosition(rawDest, out NavMeshHit navHit, 1.5f, NavMesh.AllAreas))
+                    rawDest = navHit.position;
 
-                unit.endAction = Unit.EndAction.Hunt;
                 unit.huntTarget = animal;
-
-                unit.ReleaseSlot();
-                unit.forageTarget = null;
-                unit.depositTarget = null;
+                CommandUnit(unit, rawDest, Unit.EndAction.Hunt);
             }
+
             return;
         }
 
+        // 7. Nothing (ground click)
 
-        // 5. Ground, walk to position here
         if (((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
         {
+            var units = UnitManager.inst.selectedUnits;
+            if (units.Count == 0) return;
 
-            if (UnitManager.inst.selectedUnits.Count > 0)
+            var positions = GetGroupPositions(hit.point);
+
+            for (int i = 0; i < units.Count; i++)
             {
-                if (UnitManager.inst.selectedUnits.Count < 2)
-                {
-                    //UnitManager.inst.selectedUnits[0].MoveTo(hit.point); //move one unit to the click point
-                    Unit unit=UnitManager.inst.selectedUnits[0];
-                    unit.endAction=Unit.EndAction.None;
-                    unit.MoveTo(hit.point);
-                    unit.ReleaseSlot();
-                }
-                else
-                {
-                    float radius = 1.5f; // spacing from center
-                    int count = UnitManager.inst.selectedUnits.Count;
+                Unit unit = units[i];
 
-                    for (int i = 0; i < count; i++)
-                    {
-                        Unit unit = UnitManager.inst.selectedUnits[i];
-
-                        float angle = (2 * Mathf.PI / count) * i;
-
-                        Vector3 offset = new Vector3(
-                            Mathf.Cos(angle),
-                            0,
-                            Mathf.Sin(angle)
-                        ) * radius;
-
-                        Vector3 destination = hit.point + offset;
-
-                        unit.MoveTo(destination);
-                        unit.endAction = Unit.EndAction.None;
-                        unit.ReleaseSlot();
-                    }
-                }
-                foreach (Unit unit in UnitManager.inst.selectedUnits) //needed now? resets in Unit...
-                {
-                    unit.forageTarget = null;
-                    unit.depositTarget = null;
-                    unit.currentSlotProvider = null;
-                    unit.huntTarget = null;
-                    unit.ReleaseSlot();
-                }
-
+                ClearTargets(unit);
+                CommandUnit(unit, positions[i], Unit.EndAction.None);
             }
+
             return;
         }
     }
+
     void HandleBoxSelection(Vector2 start, Vector2 end)
     {
         Rect selectionRect = GetScreenRect(start, end);
@@ -426,6 +396,5 @@ public class ClickManager : MonoBehaviour
 
         GUI.color = Color.white;
     }
-
 }
 
