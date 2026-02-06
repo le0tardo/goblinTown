@@ -106,6 +106,8 @@ public class ClickManager : MonoBehaviour
 
             void CommandUnit(Unit unit, Vector3 destination, Unit.EndAction action)
             {
+                //if (UnitManager.inst.selectedUnits.Count < 2) { destination=hit.point; }
+                
                 unit.endAction = action;
                 unit.MoveTo(destination);
             }
@@ -133,10 +135,12 @@ public class ClickManager : MonoBehaviour
 
 
 
-        List<Vector3> GetGroupPositions(Vector3 center, float radius = 1.5f)
+        List<Vector3> GetGroupPositions(Vector3 center, float radius = 0.25f)
         {
             int count = UnitManager.inst.selectedUnits.Count;
             List<Vector3> positions = new();
+
+            radius = radius + (0.125f * count);
 
             for (int i = 0; i < count; i++)
             {

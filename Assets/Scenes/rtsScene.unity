@@ -2518,7 +2518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024dee9d52dbf6346a073c38c462fbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.5
+  radius: 1.66
   maxSlots: 8
   slotRadius: 0.3
   freeSlots: 0
@@ -6029,7 +6029,7 @@ MonoBehaviour:
   - resource: {fileID: 11400000, guid: 10472c2fa2e85e94d8a447da2647383a, type: 2}
     amount: 25
   - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
-    amount: 25
+    amount: 30
   - resource: {fileID: 11400000, guid: 1ee6286c1cce41a48a6703a3bfba8e71, type: 2}
     amount: 10
   gui: {fileID: 568638429}
@@ -10900,6 +10900,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unit (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8076199387289777282, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8263509647511494541, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.2815541
@@ -12183,6 +12187,10 @@ PrefabInstance:
     - target: {fileID: 8076199387289777282, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
       propertyPath: m_Name
       value: Unit (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8076199387289777282, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8263509647511494541, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16256,6 +16264,10 @@ PrefabInstance:
     - target: {fileID: 8076199387289777282, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
       propertyPath: m_Name
       value: Unit (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8076199387289777282, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8263509647511494541, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22841,7 +22853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024dee9d52dbf6346a073c38c462fbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.5
+  radius: 1
   maxSlots: 8
   slotRadius: 0.3
   freeSlots: 0
@@ -26033,6 +26045,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unit (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8076199387289777282, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8263509647511494541, guid: f2e29fbaf7dc14f40953c96915aa9be4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.2815541
@@ -26324,7 +26340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024dee9d52dbf6346a073c38c462fbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.5
+  radius: 1.66
   maxSlots: 8
   slotRadius: 0.3
   freeSlots: 0
@@ -30101,7 +30117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024dee9d52dbf6346a073c38c462fbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.5
+  radius: 1
   maxSlots: 8
   slotRadius: 0.3
   freeSlots: 0
@@ -32880,7 +32896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024dee9d52dbf6346a073c38c462fbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.5
+  radius: 1
   maxSlots: 8
   slotRadius: 0.3
   freeSlots: 0
@@ -44843,7 +44859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024dee9d52dbf6346a073c38c462fbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.5
+  radius: 1
   maxSlots: 8
   slotRadius: 0.3
   freeSlots: 0
@@ -50206,7 +50222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024dee9d52dbf6346a073c38c462fbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.5
+  radius: 1
   maxSlots: 8
   slotRadius: 0.3
   freeSlots: 0
@@ -50930,7 +50946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024dee9d52dbf6346a073c38c462fbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.5
+  radius: 1
   maxSlots: 8
   slotRadius: 0.3
   freeSlots: 0
@@ -54694,7 +54710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024dee9d52dbf6346a073c38c462fbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.5
+  radius: 1
   maxSlots: 8
   slotRadius: 0.3
   freeSlots: 0
@@ -56411,7 +56427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024dee9d52dbf6346a073c38c462fbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.5
+  radius: 1
   maxSlots: 8
   slotRadius: 0.3
   freeSlots: 0

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,25 +25,50 @@ public class SlotProvider : MonoBehaviour, ISlotProvider
     }
     public Vector3 RequestSlot(Unit unit)
     {
-        if (occupiedSlots.TryGetValue(unit, out var pos))
-            return pos;
+        // If this unit already has a reserved slot, return it
+        if (occupiedSlots.TryGetValue(unit, out var reserved))
+            return reserved;
 
+        Vector3 bestSlot = Vector3.zero;
+        float bestDist = float.MaxValue;
+        bool found = false;
+
+        // Search all slots
         for (int i = 0; i < maxSlots; i++)
         {
             Vector3 candidate = GetSlotWorldPosition(i);
 
-            if (IsSlotFree(candidate))
+            // Skip if already taken
+            if (!IsSlotFree(candidate))
+                continue;
+
+            // Snap candidate onto NavMesh
+            if (!NavMesh.SamplePosition(candidate, out var hit, 1f, NavMesh.AllAreas))
+                continue;
+
+            // Distance from unit → this slot
+            float dist = Vector3.Distance(unit.transform.position, hit.position);
+
+            // Keep the closest one
+            if (dist < bestDist)
             {
-                if (NavMesh.SamplePosition(candidate, out var hit, 1f, NavMesh.AllAreas))
-                {
-                    occupiedSlots[unit] = hit.position;
-                    return hit.position;
-                }
+                bestDist = dist;
+                bestSlot = hit.position;
+                found = true;
             }
         }
 
+        // Reserve the best slot if we found one
+        if (found)
+        {
+            occupiedSlots[unit] = bestSlot;
+            return bestSlot;
+        }
+
+        // Fallback if no slots were free
         return transform.position;
     }
+
 
     public void ReleaseSlot(Unit unit)
     {
