@@ -311,16 +311,15 @@ public class ClickManager : MonoBehaviour
         {
             foreach (Unit unit in UnitManager.inst.selectedUnits)
             {
-                UnitEquipment eq = unit.GetComponent<UnitEquipment>();
+                //Spears and Fishing rod can be wood!?
+               /* UnitEquipment eq = unit.GetComponent<UnitEquipment>();
                 if (eq.toolLevel < 1)
                 {
-                    Debug.Log("no tools, skip hunt");
-                    //TODO: clean this random up..
-                    float r=Random.Range(-3f, 3f);
-                    Vector3 offPos = new Vector3(hit.point.x + r,transform.position.y,hit.point.z+r);
-                    CommandUnit(unit,offPos,Unit.EndAction.None);
+                    int r=Random.Range(0, UnitManager.inst.selectedUnits.Count);
+                    var positions = GetGroupPositions(hit.point);
+                    CommandUnit(unit, positions[r],Unit.EndAction.None);
                     continue;
-                }
+                }*/
 
                 ClearTargets(unit);
 

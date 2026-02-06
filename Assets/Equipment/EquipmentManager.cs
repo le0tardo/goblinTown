@@ -12,18 +12,9 @@ public class EquipmentManager : MonoBehaviour
         inst = this;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            print("pressed c");
-            SetUnitClothes();
-        }
-    }
 
     public void SetUnitClothes()
     {
-        print("setting clothes..");
         foreach(Unit unit in UnitManager.inst.units)
         {
             UnitEquipment eq=unit.GetComponent<UnitEquipment>();
