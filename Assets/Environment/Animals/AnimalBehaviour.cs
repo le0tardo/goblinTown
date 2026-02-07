@@ -112,6 +112,8 @@ public class AnimalBehaviour : MonoBehaviour, IHuntable
 
     public void Flee(Transform attacker)
     {
+        anim.Flee();
+
         if (agent == null) return;
         if (animalState == AnimalState.Fleeing) return;
         if (attacker == null) return;
