@@ -61,7 +61,8 @@ public class UnitStatus : MonoBehaviour
             anim.DeathAnimation();
             unit.Die();
             isDead = true;
-            print(unitName + " has died of "+ cause);
+            //print(unitName + " has died of "+ cause);
+            EventLogManager.inst.AddToLog(unitName + " has died of " + cause+".");
         }
 
     }
