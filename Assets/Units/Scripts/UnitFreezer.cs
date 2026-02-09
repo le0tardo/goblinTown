@@ -37,6 +37,7 @@ public class UnitFreezer : MonoBehaviour
     }
     void FreezeUnitsByChance()
     {
+        int frozenUnits = 0;
         foreach (Unit unit in UnitManager.inst.units)
         {
             UnitEquipment eq = unit.GetComponent<UnitEquipment>();
@@ -48,10 +49,11 @@ public class UnitFreezer : MonoBehaviour
             {
                 UnitStatus status = unit.GetComponent<UnitStatus>();
                 status.TakeDamageFromSource(1,UnitStatus.CauseOfDeath.Cold);
+                frozenUnits++;
             }
         }
 
-        EventLogManager.inst.AddToLog("Your villagers are freezing!");
+        if(frozenUnits>0)EventLogManager.inst.AddToLog("Your villagers are freezing!");
     }
 
 }

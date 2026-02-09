@@ -7,6 +7,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     NavMeshAgent agent;
     UnitAnimation anim;
     UnitEquipment equip;
+    UnitStatus status;
     [SerializeField] GameObject selectionMarker;
     public enum UnitState
     {
@@ -51,6 +52,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         agent = GetComponent<NavMeshAgent>();
         anim=GetComponent<UnitAnimation>();
         equip=GetComponent<UnitEquipment>();
+        status=GetComponent<UnitStatus>();
 
         state=UnitState.Idle;
     }
@@ -141,8 +143,13 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
                 }
                 else
                 {
-                    ClearEndAction();
+                    if (equip.toolLevel < 1) {
+                        EventLogManager.inst.AddToLog(
+                        status.unitName + " needs tools!"
+                        );
+                    }
                     state = UnitState.Idle;
+                    ClearEndAction();
                 }
                 break;
 

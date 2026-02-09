@@ -44,8 +44,9 @@ public class UnitAnimation : MonoBehaviour
     }
     public void ApplyState(Unit.UnitState state)
     {
-        if(state==Unit.UnitState.Idle) anim.SetTrigger("idle"); anim.SetBool("carrying", carrying);carryObject.SetActive(carrying);equip.UneqipTools();
-        if(state==Unit.UnitState.Moving) anim.SetTrigger("moving"); carryObject.SetActive(carrying); equip.UneqipTools();
+        if (state == Unit.UnitState.Idle) { anim.SetTrigger("idle"); anim.SetBool("carrying", carrying); carryObject.SetActive(carrying); equip.UneqipTools();}
+
+        if (state == Unit.UnitState.Moving){ anim.SetTrigger("moving"); carryObject.SetActive(carrying); equip.UneqipTools();}
 
         if (state == Unit.UnitState.Foraging)
         {
