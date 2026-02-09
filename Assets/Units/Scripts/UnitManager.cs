@@ -35,6 +35,7 @@ public class UnitManager : MonoBehaviour
         {
             selectedUnits.Add(unit);
             unit.SetSelected(true);
+
         }
     }
     public bool IsSelected(Unit unit)

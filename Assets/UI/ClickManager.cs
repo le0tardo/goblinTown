@@ -176,6 +176,8 @@ public class ClickManager : MonoBehaviour
                 {
                     UnitManager.inst.ClearSelection();
                     UnitManager.inst.SelectUnit(unit);
+
+                    AudioManager.inst.SelectUnit(); //audio <-
                 }
 
                 BuildingManager.inst.DeselectBuilding();
@@ -378,6 +380,8 @@ public class ClickManager : MonoBehaviour
                 UnitManager.inst.SelectUnit(unit);
             }
         }
+
+        //play multiselect from audiomanager here... if unitmanager.selectedUnits>0
     }
     void OnGUI()
     {

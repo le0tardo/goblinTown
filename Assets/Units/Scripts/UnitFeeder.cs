@@ -51,6 +51,8 @@ public class UnitFeeder : MonoBehaviour
                 UnitStatus status = unit.GetComponent<UnitStatus>();
                 status.TakeDamageFromSource(1, UnitStatus.CauseOfDeath.Hunger);
             }
+
+            EventLogManager.inst.AddToLog("Your village is out of food!");
         }
 
         VillageResourceManager.inst.RemoveResource(food,n); //auto caps

@@ -50,6 +50,8 @@ public class UnitFreezer : MonoBehaviour
                 status.TakeDamageFromSource(1,UnitStatus.CauseOfDeath.Cold);
             }
         }
+
+        EventLogManager.inst.AddToLog("Your villagers are freezing!");
     }
 
 }

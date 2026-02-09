@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb043fc87bc49474588a01066b192508, type: 3}
-  m_Name: OmniStorage
+  m_Name: OmniStorage_lvl2
   m_EditorClassIdentifier: 
   buildingName: Storage Hut
   buildingIcon: {fileID: 21300000, guid: af39105107d4a3b418cc6154ec923a5d, type: 3}
