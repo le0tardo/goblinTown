@@ -15,7 +15,7 @@ public class SeasonLight : MonoBehaviour
 
     UniversalAdditionalLightData cookie;
     Vector2 cookieSpeed = new Vector2(1f,1f);
-    float cloudSpeed = 1f;
+    float cloudSpeed = 1.5f;
     float cloudMax = 64f;
     Vector2 maxOff = new Vector2(128f, 128f);
     private void Start()
