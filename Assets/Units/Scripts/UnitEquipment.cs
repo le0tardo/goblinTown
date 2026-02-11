@@ -85,7 +85,7 @@ public class UnitEquipment : MonoBehaviour
     }
     public void EquipSpear()
     {
-        int toolTier = toolLevel - 1;
+        int toolTier = toolLevel;
         if (!spears[toolTier].activeSelf) spears[toolTier].SetActive(true);
     }
 
@@ -103,7 +103,7 @@ public class UnitEquipment : MonoBehaviour
     }
     void ThrowSpear(Vector3 targetPosition)
     {
-        if (spears[toolLevel - 1].activeInHierarchy) spears[toolLevel-1].SetActive(false);
+        if (spears[toolLevel].activeInHierarchy) spears[toolLevel].SetActive(false);
 
         thrownSpear.SetActive(true);
         StartCoroutine(AnimateSpear(targetPosition));
@@ -113,7 +113,7 @@ public class UnitEquipment : MonoBehaviour
     {
         if(!thrownSpear.activeInHierarchy)thrownSpear.SetActive(true);
 
-        if (!thrownSpears[toolLevel-1].activeInHierarchy)thrownSpears[toolLevel-1].SetActive(true);
+        if (!thrownSpears[toolLevel].activeInHierarchy)thrownSpears[toolLevel].SetActive(true);
 
         Vector3 start = thrownSpear.transform.position; // make empty transform to move!
         float duration = 0.25f;

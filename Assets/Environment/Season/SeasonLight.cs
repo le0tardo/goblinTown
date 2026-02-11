@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class SeasonLight : MonoBehaviour
 {
@@ -12,9 +13,16 @@ public class SeasonLight : MonoBehaviour
     float targetTemp;
     float lerpSpeed = 1f;
 
+    UniversalAdditionalLightData cookie;
+    Vector2 cookieSpeed = new Vector2(1f,1f);
+    float cloudSpeed = 1f;
+    float cloudMax = 64f;
+    Vector2 maxOff = new Vector2(128f, 128f);
     private void Start()
     {
         sun.useColorTemperature = true;
+        cookie=GetComponent<UniversalAdditionalLightData>();
+        cookie.lightCookieOffset =Vector2.zero;
     }
 
     private void Update()
@@ -40,5 +48,32 @@ public class SeasonLight : MonoBehaviour
             targetTemp,
             lerpSpeed * Time.deltaTime
         );
+
+        MoveCloudsX();
+        //MoveCloudsXY();
     }
+
+    void MoveCloudsX()
+    {
+        Vector2 offset = cookie.lightCookieOffset;
+
+        offset.x += Time.deltaTime * cloudSpeed;
+
+        if (offset.x >= cloudMax)
+            offset.x = 0f;
+
+        cookie.lightCookieOffset = offset;
+    }
+
+    void MoveCloudsXY()
+    {
+        cookie.lightCookieOffset += Time.deltaTime * cookieSpeed;
+
+        if (cookie.lightCookieOffset.x >= maxOff.x &&
+            cookie.lightCookieOffset.y >= maxOff.y)
+        {
+            cookie.lightCookieOffset = Vector2.zero;
+        }
+    }
+
 }

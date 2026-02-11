@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   node: {fileID: 11400000, guid: f2be2623882a7d24eb4f0b521f1a7c84, type: 2}
   resource: {fileID: 11400000, guid: 311c1c3e61661eb46a8a5b01d12d425e, type: 2}
+  childNode: {fileID: 0}
   isDepleted: 0
   needsTool: 0
   resourceAmount: 10
@@ -163,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b422917344402642be58a30960fffd4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b422917344402642be58a30960fffd4, type: 3}
       propertyPath: m_LocalPosition.z

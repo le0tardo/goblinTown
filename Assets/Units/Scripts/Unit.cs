@@ -145,7 +145,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
                 {
                     if (equip.toolLevel < 1) {
                         EventLogManager.inst.AddToLog(
-                        status.unitName + " needs tools!"
+                        status.unitName + " needs better tools!"
                         );
                     }
                     state = UnitState.Idle;
@@ -366,7 +366,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     }
     void HuntAnimal(IHuntable animalTarget)
     {
-        animalTarget.OnHit(1,this); //dmg = 1+toolLevel
+        animalTarget.OnHit(1+equip.toolLevel,this); //wood spear = 1+0=1; etc.
     }
     public void Die()
     {
