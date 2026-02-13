@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] AudioClip[] pops;
+    [SerializeField] AudioClip multiPop;
     private void Awake()
     {
         inst = this;
@@ -24,5 +25,9 @@ public class AudioManager : MonoBehaviour
         source.PlayOneShot(pops[r]);
     }
 
+    public void SelectUnits()
+    {
+        source.PlayOneShot(multiPop);
+    }
 
 }

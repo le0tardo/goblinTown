@@ -177,7 +177,7 @@ public class ClickManager : MonoBehaviour
                     UnitManager.inst.ClearSelection();
                     UnitManager.inst.SelectUnit(unit);
 
-                    AudioManager.inst.SelectUnit(); //audio <-
+                    AudioManager.inst.SelectUnit();
                 }
 
                 BuildingManager.inst.DeselectBuilding();
@@ -363,6 +363,7 @@ public class ClickManager : MonoBehaviour
 
     void HandleBoxSelection(Vector2 start, Vector2 end)
     {
+        float n = 0;
         Rect selectionRect = GetScreenRect(start, end);
 
         UnitManager.inst.ClearSelection();
@@ -378,10 +379,20 @@ public class ClickManager : MonoBehaviour
             if (selectionRect.Contains(screenPos))
             {
                 UnitManager.inst.SelectUnit(unit);
+                n++;
             }
         }
-
-        //play multiselect from audiomanager here... if unitmanager.selectedUnits>0
+        if (n > 0) 
+        {
+            if (n > 1)
+            {
+                AudioManager.inst.SelectUnits();
+            }
+            else
+            {
+                AudioManager.inst.SelectUnit();
+            }
+        }
     }
     void OnGUI()
     {

@@ -242,6 +242,12 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
 
         return true;
     }
+
+    public void TryFaceTarget()
+    {
+        if (forageTarget != null) FacePosition(forageTarget.Position);
+        //if (huntTarget != null) FacePosition(huntTarget.Position);
+    }
     public void FacePosition(Vector3 targetPosition)
     {
         Vector3 direction = targetPosition - transform.position;

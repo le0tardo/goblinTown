@@ -4772,10 +4772,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1613132825}
-  - {fileID: 6834566610798563997}
-  - {fileID: 1759378757993512638}
   - {fileID: 3203412015835954710}
+  - {fileID: 1613132825}
+  - {fileID: 1759378757993512638}
+  - {fileID: 6834566610798563997}
   - {fileID: 7397091020733573362}
   - {fileID: 657326115}
   - {fileID: 213852310}
@@ -17241,33 +17241,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 643652850}
   m_CullTransparentMesh: 1
---- !u!1 &646499272 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5943378665191321280, guid: b4a060f5dda95c94fa8c77d21616a4c6, type: 3}
-  m_PrefabInstance: {fileID: 8186773412160699540}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &646499275
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 646499272}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 06818cbaddcba894fafe9e207982a14a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &647725600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 829849274304827695, guid: b68a16597cce83f4aba28b3116b3965a, type: 3}
@@ -54155,10 +54128,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 1647268413}
   pops:
-  - {fileID: 8300000, guid: 52d9b29b98bcb0b498a72c9b8d46ab82, type: 3}
-  - {fileID: 8300000, guid: 6143c0f38bc923648956e851163f14ed, type: 3}
-  - {fileID: 8300000, guid: 6b867998ff37dd24ca1bed17beb84e9d, type: 3}
-  - {fileID: 8300000, guid: 96a2a2539159b4549b226630d9fabeec, type: 3}
+  - {fileID: 8300000, guid: d4c66223d0119c74cb06de9efad995df, type: 3}
+  - {fileID: 8300000, guid: 97f2084b82e523849a66075944fda7d3, type: 3}
+  - {fileID: 8300000, guid: dfb2cac69b2dcea448233b22af70b1be, type: 3}
+  - {fileID: 8300000, guid: 0de74e45533d75d478b004e080453fa1, type: 3}
+  multiPop: {fileID: 8300000, guid: 2bfb2be4cfcc6d446ba4684f657e1bac, type: 3}
 --- !u!1 &1647461813
 GameObject:
   m_ObjectHideFlags: 0
@@ -74700,10 +74674,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: OmniStorage_lvl2
       objectReference: {fileID: 0}
-    - target: {fileID: 2670088052604193542, guid: a24fa8387216d6e4daa3b9c157661127, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -76573,30 +76543,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PotteryOven
       objectReference: {fileID: 0}
-    - target: {fileID: 4888833041045392016, guid: 2bbcee1187004684cbc4c8ffe14467cb, type: 3}
-      propertyPath: output.amount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4888833041045392016, guid: 2bbcee1187004684cbc4c8ffe14467cb, type: 3}
-      propertyPath: output.resource
-      value: 
-      objectReference: {fileID: 11400000, guid: eb1a2be52701fdb41961315a32b019af, type: 2}
-    - target: {fileID: 4888833041045392016, guid: 2bbcee1187004684cbc4c8ffe14467cb, type: 3}
-      propertyPath: input.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4888833041045392016, guid: 2bbcee1187004684cbc4c8ffe14467cb, type: 3}
-      propertyPath: input.Array.data[1].amount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4888833041045392016, guid: 2bbcee1187004684cbc4c8ffe14467cb, type: 3}
-      propertyPath: input.Array.data[0].resource
-      value: 
-      objectReference: {fileID: 11400000, guid: 92a6941b19240a14e9064539482eb8b3, type: 2}
-    - target: {fileID: 4888833041045392016, guid: 2bbcee1187004684cbc4c8ffe14467cb, type: 3}
-      propertyPath: input.Array.data[1].resource
-      value: 
-      objectReference: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
     - target: {fileID: 5259602133982129576, guid: 2bbcee1187004684cbc4c8ffe14467cb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.98
@@ -76665,10 +76611,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 180319583}
     m_Modifications:
-    - target: {fileID: 175303349314310140, guid: d04f3c5e55cdfb14d85c11690b0ad09a, type: 3}
-      propertyPath: resourceCapBoost
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5206394175533535438, guid: d04f3c5e55cdfb14d85c11690b0ad09a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.35
@@ -76946,10 +76888,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5943378665191321280, guid: b4a060f5dda95c94fa8c77d21616a4c6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 646499275}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4a060f5dda95c94fa8c77d21616a4c6, type: 3}
 --- !u!33 &8219259008978963108
 MeshFilter:
