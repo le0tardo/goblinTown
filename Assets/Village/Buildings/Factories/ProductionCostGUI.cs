@@ -24,8 +24,7 @@ public class ProductionCostGUI : MonoBehaviour
 
     public void ShowCost(FactoryBehaviour factory)
     {
-
-
+        HideSlots();
         for (int i = 0; i < factory.input.Length; i++)
         {
             productionCostSlots[i].SetActive(true);

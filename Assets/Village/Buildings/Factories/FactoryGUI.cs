@@ -4,6 +4,7 @@ using TMPro;
 public class FactoryGUI : MonoBehaviour
 {
     [SerializeField] Image productionProgress;
+    [SerializeField] Image productionIcon;
     [SerializeField] Button produceButton;
     [SerializeField] TextMeshProUGUI produceText;
 
@@ -17,6 +18,7 @@ public class FactoryGUI : MonoBehaviour
             if (factory != null)
             {
                 productionCostGUI.SetFactory(factory);
+                productionIcon.sprite=factory.output.resource.resourceIcon;
             }
         }
     }
