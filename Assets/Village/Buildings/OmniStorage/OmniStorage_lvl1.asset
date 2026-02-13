@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb043fc87bc49474588a01066b192508, type: 3}
   m_Name: OmniStorage_lvl1
   m_EditorClassIdentifier: 
-  buildingName: Storage Teepee
+  buildingName: Storage Hut 1
   buildingIcon: {fileID: 21300000, guid: 9635781b08c2e3c4cb58ebe3251d95af, type: 3}
   buildingType: 0
   costs:
