@@ -22,6 +22,7 @@ public class BuildingManager : MonoBehaviour
     float gridSize = 0.5f;
 
     public bool isPlacingBuilding=false;
+    [SerializeField] AudioClip buildingPlaceSound;
     private void Awake()
     {
         if (inst != null && inst != this){Destroy(gameObject);return;}inst = this;
@@ -119,6 +120,7 @@ public class BuildingManager : MonoBehaviour
 
         ClearPreview();
         DeselectBuilding();
+        AudioManager.inst.PlayGlobalSound(buildingPlaceSound);
     }
 
     public void DestroyBuilding()

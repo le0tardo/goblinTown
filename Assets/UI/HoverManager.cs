@@ -1,12 +1,23 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HoverManager : MonoBehaviour
 {
     IHoverable currentHover;
     public string hoverString;
 
+    [SerializeField] Image cursor;
+    [SerializeField] Sprite cursorDefault;
+    [SerializeField] Sprite cursorWalk;
+
+    void Start()
+    {
+       if(cursor!=null) Cursor.visible = false;
+    }
     void Update()
     {
+        cursor.transform.position=Input.mousePosition;
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 500f))
@@ -25,8 +36,8 @@ public class HoverManager : MonoBehaviour
         }
 
         ClearHover();
+        ChangeCursor();
     }
-
     void ClearHover()
     {
         if (currentHover != null)
@@ -34,5 +45,10 @@ public class HoverManager : MonoBehaviour
             hoverString = "";
             currentHover = null;
         }
+    }
+
+    void ChangeCursor()
+    {
+        //uh...
     }
 }

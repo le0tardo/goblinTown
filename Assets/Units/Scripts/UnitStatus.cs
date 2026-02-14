@@ -10,8 +10,8 @@ public class UnitStatus : MonoBehaviour
         Cold,
         Hunger,
         Enemy,
-        Animal
-        //eeeh, falling tree?
+        Animal,
+        Tree
     }
 
     private CauseOfDeath causeOfDeath;
@@ -20,18 +20,17 @@ public class UnitStatus : MonoBehaviour
     public int maxHp=10;
     public bool isDead=false;
 
-    public float hungry=1f; //0=starving
-    public float cold=1f; //0=freezing
+    public bool warm;
 
 
     public string unitName = "Goblin";
     #region //syllables
     string[] syllables =
 {
-        "ba", "bo", "boo", "bu", "bi","da", "do","doo", "di", "di","fa","no","noo","bi","gu",
-        "fo","foo", "fi", "fe","ga", "go","goo", "gi","la", "li", "lo","ma", "mi", "mo","moo",
-        "na", "ni", "no","pa", "po", "pi","ra", "ri", "ro","roo", "ti","di","ke","too","choo",
-        "ta", "ti", "to","vi", "vo","chu", "bu", "ly", "ni", "fi","ke","ki","koo"
+        "ba", "bo", "boo", "bu", "bi","da", "do", "di", "di","fa","no","bi","gu",
+        "fo","foo", "fi", "fe","ga", "go", "gi","la", "li", "lo","ma", "mi", "mo",
+        "na", "ni", "no","pa", "po", "pi","ra", "ri", "ro", "ti","di","ke","cho",
+        "ta", "ti", "to","vi", "vo","chu", "bu", "ly", "ni", "fi","ke","ki"
     };
     #endregion
 
@@ -43,6 +42,8 @@ public class UnitStatus : MonoBehaviour
         SetName();
         anim=GetComponent<UnitAnimation>();
         unit=GetComponent<Unit>();
+
+        EventLogManager.inst.AddToLog(unitName+" was born!");
     }
 
     public void TakeDamage(int damage)
