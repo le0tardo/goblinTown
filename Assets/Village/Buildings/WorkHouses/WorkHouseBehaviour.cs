@@ -1,8 +1,10 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WorkHouseBehaviour : MonoBehaviour, IWorkable
+public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
 {
     public bool needsWorker=true;
     public bool NeedsWorker
@@ -23,11 +25,36 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
 
     public Unit currentWorker;
 
+    public float workTime = 0;
+    public float workProgress = 0;
+
+    //sync to interface
+    public bool IsProducing => !needsWorker;
+    public float Progress01 =>
+        !needsWorker && workTime > 0f
+            ? Mathf.Clamp01(workProgress / workTime)
+            : 0f;
+    public Transform WorldTransform => transform;
+
     private void Start()
     {
         if(workerGfx!=null && needsWorker)workerGfx.SetActive(false);
         position= transform.position;
 
+    }
+
+    private void Update()
+    {
+        //GUI sync
+        if (workProgress==0)
+        {
+            MiniProductionBarManager.inst.Hide(this);
+            return;
+        }
+        else
+        {
+            MiniProductionBarManager.inst.Show(this);
+        }
     }
     public void AssignWorker(Unit unitWorker)
     {
@@ -47,7 +74,34 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
         currentWorker.gameObject.SetActive(false);
         needsWorker = false;
 
-        SetEquipmentLevels();
+        CountToolsNeeded();
+        //SetEquipmentLevels(); <-delayed this
+    }
+
+    void CountToolsNeeded()
+    {
+        if (toolLevel > 0)
+        {
+            float n = 0;
+            var units = UnitManager.inst.units;
+
+            foreach(Unit unit in units)
+            {
+                UnitEquipment eq=unit.GetComponent<UnitEquipment>();
+                if (eq.toolLevel < toolLevel)
+                {
+                    n++;
+                }
+            }
+            print(n + " units need tools at level " + toolLevel);
+
+            if (n > 0)
+            {
+                workTime = n; workProgress = 0;
+                //multiply n?
+                StartCoroutine(CraftRoutine());
+            }
+        }
     }
 
     public void FireWorker()
@@ -75,6 +129,8 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
         if (workerGfx != null) workerGfx.SetActive(false);
         currentWorker =null;
         needsWorker = true;
+
+        StopAllCoroutines();
     }
 
     Vector3 GetNavMeshPointRadial(Vector3 center, float minRadius, float maxRadius)
@@ -87,6 +143,7 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
 
             // Pick distance away from building
             float distance = Random.Range(minRadius, maxRadius);
+
 
             Vector3 candidate = center + dir * distance;
 
@@ -129,5 +186,28 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable
             }
         }
     }
+
+    IEnumerator CraftRoutine()
+    {
+        // Reset progress
+        workProgress = 0f;
+
+        // Count up until we reach workTime
+        while (workProgress < workTime)
+        {
+            workProgress += Time.deltaTime;
+
+            // Optional: clamp so it never overshoots
+            if (workProgress > workTime)
+                workProgress = workTime;
+
+            yield return null; // wait one frame
+        }
+
+        // Finished crafting
+        workProgress = 0f;
+        SetEquipmentLevels();
+    }
+
 
 }

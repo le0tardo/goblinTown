@@ -6,6 +6,7 @@ public class WorkHouseGUI : MonoBehaviour
     WorkHouseBehaviour whb;
 
     [SerializeField] Button fireWorkerButton;
+    [SerializeField] Image workProgressImage;
     private void Update()
     {
         whb = null;
@@ -16,6 +17,7 @@ public class WorkHouseGUI : MonoBehaviour
             {
                 fireWorkerButton.interactable=!whb.needsWorker;
             }
+            workProgressImage.fillAmount=whb.workProgress/whb.workTime;
         }
     }
 
