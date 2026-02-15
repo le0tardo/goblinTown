@@ -21,6 +21,8 @@ public class BuildingManager : MonoBehaviour
 
     float gridSize = 0.5f;
 
+    float currentRotationY = 30f;
+
     public bool isPlacingBuilding=false;
     [SerializeField] AudioClip buildingPlaceSound;
     private void Awake()
@@ -62,6 +64,12 @@ public class BuildingManager : MonoBehaviour
             PlaceBuilding(previewInstance.transform.position);
             Invoke("DelayBool", 0.25f);
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+            currentRotationY -= 15f;
+
+        if (Input.GetKeyDown(KeyCode.E))
+            currentRotationY += 15f;
     }
 
     void DelayBool()
@@ -91,6 +99,8 @@ public class BuildingManager : MonoBehaviour
             // snap to grid later if you want
             previewInstance.transform.position = pos;
 
+            previewInstance.transform.rotation = Quaternion.Euler(0f, currentRotationY, 0f);
+
             bool valid = IsPlacementValid(pos);
             previewRenderer.material = valid ? validMat : invalidMat;
         }
@@ -112,15 +122,18 @@ public class BuildingManager : MonoBehaviour
     }
     void PlaceBuilding(Vector3 position)
     {
+        Quaternion rot = Quaternion.Euler(0f, currentRotationY, 0f);
+
         Instantiate(
             currentBuilding.buildingPrefab,
             position,
-            Quaternion.identity
+            rot
         );
 
         ClearPreview();
         DeselectBuilding();
         AudioManager.inst.PlayGlobalSound(buildingPlaceSound);
+        currentRotationY = 30f;
     }
 
     public void DestroyBuilding()
