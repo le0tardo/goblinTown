@@ -55,6 +55,7 @@ public class BuildButton : MonoBehaviour
 
             costSlots[i].UpdateColor(available);
         }
+        //CanAffordSpecialCase();
     }
 
     bool CanAffordBuilding(BuildingObject building)
@@ -73,6 +74,22 @@ public class BuildButton : MonoBehaviour
         return true;
     }
 
+    void CanAffordSpecialCase() //maybe later...
+    {
+        var units = UnitManager.inst;
+        if (units.selectedUnits.Count > 0)
+        {
+            for (int i = 0; i < units.selectedUnits.Count; i++)
+            {
+                var unit = units.selectedUnits[i];
+                if (unit.carriedResource == null) return;
+                if (unit.carriedResource.villageResource.resource == VillageResource.Resource.Wood && unit.carriedAmount>=5)
+                {
+                    print("unit has 5 wood, should be able to build first deposit now!");
+                }
+            }
+        }
+    }
     public void ClickBuild()
     {
         UnitManager.inst.ClearSelection();

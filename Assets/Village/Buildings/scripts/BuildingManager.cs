@@ -23,6 +23,8 @@ public class BuildingManager : MonoBehaviour
 
     float currentRotationY = 30f;
 
+    public int depositCount = 0;
+
     public bool isPlacingBuilding=false;
     [SerializeField] AudioClip buildingPlaceSound;
     private void Awake()
@@ -130,6 +132,8 @@ public class BuildingManager : MonoBehaviour
             rot
         );
 
+        if(currentBuilding.buildingType==BuildingType.Deposit)depositCount++;
+
         ClearPreview();
         DeselectBuilding();
         AudioManager.inst.PlayGlobalSound(buildingPlaceSound);
@@ -145,6 +149,8 @@ public class BuildingManager : MonoBehaviour
 
             selectedBuilding.DestroyFX();
             Destroy(selectedBuilding.gameObject);
+
+            if (selectedBuilding.building.buildingType == BuildingType.Deposit) depositCount--;
         }
     }
     bool CanAffordBuilding(BuildingObject building)
@@ -161,6 +167,8 @@ public class BuildingManager : MonoBehaviour
         }
 
         return true;
+
+
     }
 
     bool IsPlacementValid(Vector3 position)
