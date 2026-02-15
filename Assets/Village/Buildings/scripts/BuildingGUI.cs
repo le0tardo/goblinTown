@@ -1,13 +1,13 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class BuildingGUI : MonoBehaviour
 {
     [SerializeField] GameObject selectedBuildingPanel;
     [SerializeField] TextMeshProUGUI buildingName;
     [SerializeField] Vector3 screenOffset = new Vector3(0, 30, 0);
+    [SerializeField] Button destroyButton;
 
     Camera cam;
     BuildingBehaviour lastBuilding;
@@ -16,6 +16,8 @@ public class BuildingGUI : MonoBehaviour
     [SerializeField] GameObject domicileUI;
     [SerializeField] GameObject factoryUI;
     [SerializeField] GameObject workhouseUI;
+
+  
 
     void Awake()
     {
@@ -58,12 +60,15 @@ public class BuildingGUI : MonoBehaviour
         selectedBuildingPanel.SetActive(true);
 
         buildingName.text = building.building.buildingName;
+        
+        destroyButton.interactable = true;
 
         switch (building.building.buildingType)
         {
             case BuildingType.Deposit:
                 HideTypeUI();
                 storageUI.SetActive(true);
+                DontDestroyLastDeposit(building);
                 break;
             case BuildingType.Domicile:
                 HideTypeUI();
@@ -93,7 +98,6 @@ public class BuildingGUI : MonoBehaviour
         factoryUI.SetActive(false);
         workhouseUI.SetActive(false);
     }
-
     public void ClickFactory()
     {
         FactoryBehaviour factory=BuildingManager.inst.selectedBuilding.gameObject.GetComponent<FactoryBehaviour>();
@@ -102,5 +106,13 @@ public class BuildingGUI : MonoBehaviour
             return;
         }
         factory.ToggleWork();
+    }
+
+    void DontDestroyLastDeposit(BuildingBehaviour building)
+    {
+        if(building.building.buildingType==BuildingType.Deposit && BuildingManager.inst.depositCount < 2)
+        {
+            destroyButton.interactable = false;
+        }
     }
 }
