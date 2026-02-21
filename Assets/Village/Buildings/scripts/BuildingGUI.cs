@@ -82,6 +82,9 @@ public class BuildingGUI : MonoBehaviour
                 HideTypeUI();
                 workhouseUI.SetActive(true);
                 break;
+            case BuildingType.Fireplace:
+                HideTypeUI();
+                break;
         }
 
         lastBuilding = building;

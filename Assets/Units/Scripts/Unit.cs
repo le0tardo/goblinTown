@@ -25,7 +25,8 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         Pickup,
         Attack,
         Hunt,
-        Work
+        Work,
+        Sit
     }
     public EndAction endAction;
 
@@ -41,6 +42,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     public IPickupable pickupTarget;
     public IHuntable huntTarget;
     public IWorkable workTarget;
+    public IFireplace fireplaceTarget;
 
     [Header("Slot")]
     public ISlotProvider currentSlotProvider;
@@ -217,7 +219,12 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
                     ClearEndAction();
                 }
                 break;
-            //case EndAction.Build: break;
+            case EndAction.Sit:
+                anim.SitTrigger();
+                state=UnitState.Idle;
+                if(fireplaceTarget!=null)FacePosition(fireplaceTarget.SitPosition);
+                ClearEndAction();
+            break;
         }
     }
     public void ClearEndAction()

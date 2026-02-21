@@ -119,4 +119,9 @@ public class UnitAnimation : MonoBehaviour
     {
         anim.SetTrigger("die");
     }
+
+    public void SitTrigger()
+    {
+        anim.SetTrigger("sit");
+    }
 }

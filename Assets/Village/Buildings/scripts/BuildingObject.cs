@@ -12,7 +12,8 @@ public enum BuildingType
     Deposit,
     Domicile,
     Factory,
-    Workhouse
+    Workhouse,
+    Fireplace
 }
 
 [CreateAssetMenu(

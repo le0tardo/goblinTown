@@ -20,7 +20,7 @@ public class UnitStatus : MonoBehaviour
     public int maxHp=10;
     public bool isDead=false;
 
-    public bool warm;
+    public bool warm=false;
 
 
     public string unitName = "Goblin";

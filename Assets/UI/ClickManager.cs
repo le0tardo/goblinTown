@@ -193,6 +193,7 @@ public class ClickManager : MonoBehaviour
         {
             IWorkable workTarget = building.Bbh.GetComponent<IWorkable>();
             IDepositable depositTarget = building.Bbh.GetComponent<IDepositable>();
+            IFireplace fireplace = building.Bbh.GetComponent<IFireplace>();
             ISlotProvider slotProvider = building.Bbh.GetComponent<ISlotProvider>();
 
             // No units selected = select building
@@ -240,6 +241,12 @@ public class ClickManager : MonoBehaviour
                 {
                     unit.depositTarget = depositTarget;
                     unit.endAction = Unit.EndAction.Deposit;
+                }
+                //sit at fire
+                if (fireplace != null)
+                {
+                    unit.fireplaceTarget= fireplace;
+                    unit.endAction = Unit.EndAction.Sit;
                 }
             }
 

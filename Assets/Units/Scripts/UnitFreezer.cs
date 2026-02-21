@@ -48,8 +48,11 @@ public class UnitFreezer : MonoBehaviour
             if (Random.value < freezeChance)
             {
                 UnitStatus status = unit.GetComponent<UnitStatus>();
-                status.TakeDamageFromSource(1,UnitStatus.CauseOfDeath.Cold);
-                frozenUnits++;
+                if (!status.warm)
+                {
+                    status.TakeDamageFromSource(1, UnitStatus.CauseOfDeath.Cold);
+                    frozenUnits++;
+                }
             }
         }
 
