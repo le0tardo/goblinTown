@@ -46,7 +46,7 @@ public class UnitAnimation : MonoBehaviour
     {
         if (state == Unit.UnitState.Idle) { anim.SetTrigger("idle"); anim.SetBool("carrying", carrying); carryObject.SetActive(carrying); equip.UneqipTools();}
 
-        if (state == Unit.UnitState.Moving){ anim.SetTrigger("moving"); carryObject.SetActive(carrying); equip.UneqipTools();}
+        if (state == Unit.UnitState.Moving){ /*anim.SetTrigger("moving");*/ carryObject.SetActive(carrying); equip.UneqipTools();WalkRandom(); }
 
         if (state == Unit.UnitState.Foraging)
         {
@@ -123,5 +123,19 @@ public class UnitAnimation : MonoBehaviour
     public void SitTrigger()
     {
         anim.SetTrigger("sit");
+    }
+
+    void WalkRandom()
+    {
+        float r = Random.value;
+
+        if (unit.carriedAmount > 0)
+        {
+            anim.Play("unit_walkCarry",0,r);
+        }
+        else
+        {
+            anim.Play("unit_walk", 0, r);
+        }
     }
 }
