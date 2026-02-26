@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 9d85c1b509c10fe48935c1c8e2f2cdfc
+guid: 38f72bbfd91d9524f9310875d1b6ffd0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: potteryOvenM
-    second: {fileID: 2100000, guid: e725e148f107c9b4cb6841948b8c32c8, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

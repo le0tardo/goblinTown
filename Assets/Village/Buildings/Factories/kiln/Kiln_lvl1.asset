@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb043fc87bc49474588a01066b192508, type: 3}
-  m_Name: Pottery Oven
+  m_Name: Kiln_lvl1
   m_EditorClassIdentifier: 
-  buildingName: Pottery Oven
+  buildingName: Kiln 1
   buildingIcon: {fileID: 21300000, guid: 2e54b72bcca64524ab9f23d63ec01444, type: 3}
   buildingType: 2
   costs:
   - resource: {fileID: 11400000, guid: 3e7ce838c868bce49899709c7f9460e0, type: 2}
-    amount: 10
-  - resource: {fileID: 11400000, guid: 92a6941b19240a14e9064539482eb8b3, type: 2}
-    amount: 10
+    amount: 25
   footprintSize: {x: 1, y: 1}
   previewMesh: {fileID: 2239022822219753584, guid: 9d85c1b509c10fe48935c1c8e2f2cdfc, type: 3}
-  buildingPrefab: {fileID: 1363680942850864095, guid: 2bbcee1187004684cbc4c8ffe14467cb, type: 3}
+  buildingPrefab: {fileID: 3442198578379246081, guid: 1b0de890cfcf71e48a06e297155b1753, type: 3}

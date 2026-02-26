@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb043fc87bc49474588a01066b192508, type: 3}
+  m_Name: TanRack1
+  m_EditorClassIdentifier: 
+  buildingName: Tanning Rack
+  buildingIcon: {fileID: 21300000, guid: 5e258e79e6c642248b1af45b0883cf57, type: 3}
+  buildingType: 2
+  costs:
+  - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
+    amount: 5
+  - resource: {fileID: 11400000, guid: 1ee6286c1cce41a48a6703a3bfba8e71, type: 2}
+    amount: 5
+  footprintSize: {x: 1, y: 1}
+  previewMesh: {fileID: -9175834962008301792, guid: 887d8d316447d944aaca342f45062e04, type: 3}
+  buildingPrefab: {fileID: 3020679159677921112, guid: 2237ceb8108786b4ab91a1f04e51053a, type: 3}
