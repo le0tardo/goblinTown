@@ -15,7 +15,8 @@ public class VillageResource : ScriptableObject
         Bricks,
         Coal,
         Skin,
-        Leather
+        Leather,
+        Iron
     }
     public Resource resource;
     public Sprite resourceIcon;

@@ -3,7 +3,12 @@ guid: 38f72bbfd91d9524f9310875d1b6ffd0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kiln4m
+    second: {fileID: 2100000, guid: 06e04d8bc313d4d4290d7db2553960d7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

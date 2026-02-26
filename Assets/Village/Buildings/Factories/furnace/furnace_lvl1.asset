@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb043fc87bc49474588a01066b192508, type: 3}
+  m_Name: furnace_lvl1
+  m_EditorClassIdentifier: 
+  buildingName: Furnace 1
+  buildingIcon: {fileID: 21300000, guid: cbf97ce3e5710b040b89d237d1f91365, type: 3}
+  buildingType: 0
+  costs:
+  - resource: {fileID: 11400000, guid: eb1a2be52701fdb41961315a32b019af, type: 2}
+    amount: 25
+  - resource: {fileID: 11400000, guid: 3e7ce838c868bce49899709c7f9460e0, type: 2}
+    amount: 10
+  footprintSize: {x: 1, y: 1}
+  previewMesh: {fileID: -3458053938149934040, guid: 38f72bbfd91d9524f9310875d1b6ffd0, type: 3}
+  buildingPrefab: {fileID: 1969475357190138768, guid: c34cccc8836953d428637d42ae3d7247, type: 3}
