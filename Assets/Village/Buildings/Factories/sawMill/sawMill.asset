@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb043fc87bc49474588a01066b192508, type: 3}
+  m_Name: sawMill
+  m_EditorClassIdentifier: 
+  buildingName: Saw Mill
+  buildingIcon: {fileID: 21300000, guid: 4137d2af84e9e6c44b47c8850116ec10, type: 3}
+  buildingType: 2
+  costs:
+  - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
+    amount: 20
+  - resource: {fileID: 11400000, guid: 3dffbdb2f71999143b87a0d001e566ba, type: 2}
+    amount: 5
+  footprintSize: {x: 1, y: 1}
+  previewMesh: {fileID: 7906190808282688856, guid: d855a47a266a16147a3f6bd8c409292f, type: 3}
+  buildingPrefab: {fileID: 51953413197766932, guid: 26c2a807286662b42b1162d42f6ac9a9, type: 3}

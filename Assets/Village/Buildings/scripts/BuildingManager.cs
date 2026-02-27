@@ -21,7 +21,7 @@ public class BuildingManager : MonoBehaviour
 
     float gridSize = 0.5f;
 
-    float currentRotationY = 30f;
+    float currentRotationY = 135f;
 
     public int depositCount = 0;
 
@@ -137,7 +137,7 @@ public class BuildingManager : MonoBehaviour
         ClearPreview();
         DeselectBuilding();
         AudioManager.inst.PlayGlobalSound(buildingPlaceSound);
-        currentRotationY = 30f;
+        currentRotationY = 135f;
     }
 
     public void DestroyBuilding()
