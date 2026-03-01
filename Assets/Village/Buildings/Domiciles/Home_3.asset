@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb043fc87bc49474588a01066b192508, type: 3}
-  m_Name: Stone House
+  m_Name: Home_3
   m_EditorClassIdentifier: 
   buildingName: Stone House
   buildingIcon: {fileID: 21300000, guid: aed885d30b213004fa0c68a937c45da9, type: 3}

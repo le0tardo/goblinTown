@@ -8,6 +8,7 @@ public class BuildingGUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI buildingName;
     [SerializeField] Vector3 screenOffset = new Vector3(0, 30, 0);
     [SerializeField] Button destroyButton;
+    [SerializeField] Button paintButton;
 
     Camera cam;
     BuildingBehaviour lastBuilding;
@@ -63,29 +64,32 @@ public class BuildingGUI : MonoBehaviour
         
         destroyButton.interactable = true;
 
-        switch (building.building.buildingType)
-        {
-            case BuildingType.Deposit:
-                HideTypeUI();
-                storageUI.SetActive(true);
-                DontDestroyLastDeposit(building);
-                break;
-            case BuildingType.Domicile:
-                HideTypeUI();
-                domicileUI.SetActive(true);
-                break;
-            case BuildingType.Factory:
-                HideTypeUI();
-                factoryUI.SetActive(true);
-                break;
-            case BuildingType.Workhouse:
-                HideTypeUI();
-                workhouseUI.SetActive(true);
-                break;
-            case BuildingType.Fireplace:
-                HideTypeUI();
-                break;
-        }
+        TextureRandomizer paint=building.gameObject.GetComponentInChildren<TextureRandomizer>();
+        if (paint == null) { paintButton.interactable = false;} else {  paintButton.interactable = true;}
+
+            switch (building.building.buildingType)
+            {
+                case BuildingType.Deposit:
+                    HideTypeUI();
+                    storageUI.SetActive(true);
+                    DontDestroyLastDeposit(building);
+                    break;
+                case BuildingType.Domicile:
+                    HideTypeUI();
+                    domicileUI.SetActive(true);
+                    break;
+                case BuildingType.Factory:
+                    HideTypeUI();
+                    factoryUI.SetActive(true);
+                    break;
+                case BuildingType.Workhouse:
+                    HideTypeUI();
+                    workhouseUI.SetActive(true);
+                    break;
+                case BuildingType.Fireplace:
+                    HideTypeUI();
+                    break;
+            }
 
         lastBuilding = building;
         // Follow building in screen space
@@ -117,5 +121,18 @@ public class BuildingGUI : MonoBehaviour
         {
             destroyButton.interactable = false;
         }
+    }
+
+    public void PaintBuilding()
+    {
+        TextureRandomizer paint = BuildingManager.inst.selectedBuilding.gameObject.GetComponentInChildren<TextureRandomizer>();
+        if (paint == null) { print("null"); return; }
+        else
+        {
+            paint.Paint();
+            print("called paint");
+            BuildingManager.inst.DeselectBuilding();
+        }
+
     }
 }

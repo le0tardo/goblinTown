@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 5019822143082382157}
   - component: {fileID: 9164604791364361775}
   m_Layer: 0
-  m_Name: StickTent
+  m_Name: Home_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

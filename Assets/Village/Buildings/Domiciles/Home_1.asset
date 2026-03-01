@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb043fc87bc49474588a01066b192508, type: 3}
-  m_Name: SkinTent
+  m_Name: Home_1
   m_EditorClassIdentifier: 
-  buildingName: Skin Tent
-  buildingIcon: {fileID: 21300000, guid: c144e02cb8ceb834bb41c10c77eed811, type: 3}
+  buildingName: Stick Tent
+  buildingIcon: {fileID: 21300000, guid: 7c69e94b19f60954cb339afc49e75892, type: 3}
   buildingType: 1
   costs:
   - resource: {fileID: 11400000, guid: 10472c2fa2e85e94d8a447da2647383a, type: 2}
     amount: 5
   - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
-    amount: 10
-  - resource: {fileID: 11400000, guid: 1ee6286c1cce41a48a6703a3bfba8e71, type: 2}
-    amount: 5
+    amount: 20
   footprintSize: {x: 1, y: 1}
-  previewMesh: {fileID: -6634670199637318623, guid: 15a22317d694df142977e835052a424a, type: 3}
-  buildingPrefab: {fileID: 1952111672110791234, guid: b4a060f5dda95c94fa8c77d21616a4c6, type: 3}
+  previewMesh: {fileID: -5869687395913500032, guid: b193e7938d0eda2419891762002ff439, type: 3}
+  buildingPrefab: {fileID: 1982660470945216143, guid: f8ee08c9c871e834884d2aa6798ad6d3, type: 3}
