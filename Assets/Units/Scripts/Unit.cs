@@ -359,6 +359,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         if (currentAmount >= cap)
         {
             ClearEndAction();
+            EventLogManager.inst.AddToLog("Storages are full of "+ carriedResource.villageResource.name+"!");
             return;
         }
 

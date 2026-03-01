@@ -15,13 +15,13 @@ public class TextureRandomizer : MonoBehaviour
     }
     public void Paint()
     {
-        int r;
-       
-        do
-        {
-            r = Random.Range(0, textures.Length);
-        }
-        while (r == p);
+        if (textures.Length <= 1)
+            return;
+
+        int r = Random.Range(0, textures.Length - 1);
+
+        if (r >= p)
+            r++;
 
         p = r;
 

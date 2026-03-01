@@ -72,6 +72,17 @@ public class BuildingManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
             currentRotationY += 15f;
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (isPlacingBuilding)
+            {
+                currentBuilding = null;
+                isPlacingBuilding = false;
+                ClearPreview();
+                print("cancelled building placement");
+            }
+        }
     }
 
     void DelayBool()
