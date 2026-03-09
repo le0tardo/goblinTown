@@ -6041,7 +6041,7 @@ LODGroup:
   m_GameObject: {fileID: 7869637300974882098}
   serializedVersion: 2
   m_LocalReferencePoint: {x: 0.09085095, y: 0.6127773, z: -0.13825521}
-  m_Size: 2
+  m_Size: 2.5
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
@@ -6218,8 +6218,7 @@ MonoBehaviour:
   hp: 10
   maxHp: 10
   isDead: 0
-  hungry: 1
-  cold: 1
+  warm: 0
   unitName: Goblin
 --- !u!114 &2903076563246008349
 MonoBehaviour:
