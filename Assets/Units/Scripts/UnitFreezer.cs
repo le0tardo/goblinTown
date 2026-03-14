@@ -51,7 +51,7 @@ public class UnitFreezer : MonoBehaviour
                 if (!status.warm)
                 {
                     status.TakeDamageFromSource(1, UnitStatus.CauseOfDeath.Cold);
-                    frozenUnits++;
+                    frozenUnits++;               
                 }
             }
         }

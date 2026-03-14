@@ -66,6 +66,11 @@ public class UnitStatus : MonoBehaviour
             EventLogManager.inst.AddToLog(unitName + " has died of " + cause+".");
         }
 
+        if (cause == CauseOfDeath.Cold)
+        {
+            anim.ColdAnim();
+        }
+
     }
 
     void SetName()

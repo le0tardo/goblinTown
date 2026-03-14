@@ -119,10 +119,17 @@ public class UnitAnimation : MonoBehaviour
     {
         anim.SetTrigger("die");
     }
-
     public void SitTrigger()
     {
         anim.SetTrigger("sit");
+    }
+
+    public void ColdAnim()
+    {
+        if (unit.state == Unit.UnitState.Idle&&unit.carriedAmount<1)
+        {
+            anim.SetTrigger("cold");
+        }
     }
 
     void WalkRandom()
