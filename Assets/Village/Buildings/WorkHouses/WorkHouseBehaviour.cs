@@ -74,7 +74,8 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
         currentWorker.gameObject.SetActive(false);
         needsWorker = false;
 
-        CountToolsNeeded();
+        if(toolLevel>0)CountToolsNeeded();
+        if(clothesLevel>0)CountClohtesNeeded();
         //SetEquipmentLevels(); <-delayed this
     }
 
@@ -93,7 +94,31 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
                     n++;
                 }
             }
-            print(n + " units need tools at level " + toolLevel);
+
+            if (n > 0)
+            {
+                workTime = n; workProgress = 0;
+                //multiply n?
+                StartCoroutine(CraftRoutine());
+            }
+        }
+    }
+
+    void CountClohtesNeeded()
+    {
+        if (clothesLevel > 0)
+        {
+            float n = 0;
+            var units = UnitManager.inst.units;
+
+            foreach (Unit unit in units)
+            {
+                UnitEquipment eq = unit.GetComponent<UnitEquipment>();
+                if (eq.clothesLevel < clothesLevel)
+                {
+                    n++;
+                }
+            }
 
             if (n > 0)
             {
