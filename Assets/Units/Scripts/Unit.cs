@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class Unit : MonoBehaviour, ISelectable, IMovable
 {
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     UnitAnimation anim;
     UnitEquipment equip;
     UnitStatus status;

@@ -40,7 +40,6 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
     {
         if(workerGfx!=null && needsWorker)workerGfx.SetActive(false);
         position= transform.position;
-
     }
 
     private void Update()
@@ -55,15 +54,20 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
         {
             MiniProductionBarManager.inst.Show(this);
         }
+
+        if (BuildingManager.inst.selectedBuilding == this)
+        {
+            //no this wont work...
+        }
     }
     public void AssignWorker(Unit unitWorker)
     {
 
         if(!needsWorker)return;
 
-        if (workerGfx != null) workerGfx.SetActive(true);
-
         currentWorker = unitWorker;
+
+        if (workerGfx != null) workerGfx.SetActive(true);
 
         UnitManager.inst.DeselectUnit(unitWorker);
 
@@ -71,7 +75,9 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
         currentWorker.ClearEndAction();
         currentWorker.ReleaseSlot();
 
-        currentWorker.gameObject.SetActive(false);
+        //currentWorker.gameObject.SetActive(false);
+        currentWorker.agent.enabled = false;
+        currentWorker.transform.position += Vector3.down * 5f;
         needsWorker = false;
 
         if(toolLevel>0)CountToolsNeeded();
@@ -132,7 +138,10 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
     public void FireWorker()
     {
         if (currentWorker == null) return;
-        currentWorker.gameObject.SetActive(true);
+        //currentWorker.gameObject.SetActive(true);
+        //agent disable instead of entire game object.
+        currentWorker.transform.position -= Vector3.down * 5f;
+
 
         Vector3 spawnNear = BuildingManager.inst.selectedBuilding.transform.position;
         spawnPosition = GetNavMeshPointRadial(spawnNear, 2f, 3f);
@@ -149,11 +158,13 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
             UnitAnimation ua=currentWorker.GetComponent<UnitAnimation>();
             ua.ApplyState(unitWorker.state);
         }
-
+        currentWorker.agent.enabled = true;
 
         if (workerGfx != null) workerGfx.SetActive(false);
         currentWorker =null;
         needsWorker = true;
+
+        BuildingManager.inst.DeselectBuilding();
 
         StopAllCoroutines();
     }
@@ -233,6 +244,4 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
         workProgress = 0f;
         SetEquipmentLevels();
     }
-
-
 }
