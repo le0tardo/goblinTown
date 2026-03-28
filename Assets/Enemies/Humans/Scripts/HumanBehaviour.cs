@@ -12,6 +12,9 @@ public class HumanBehaviour : MonoBehaviour
     [SerializeField] float despawnTime = 10f;
     [SerializeField] float despawnTimer = 10f;
     [SerializeField] bool doneFighting = false;
+
+    [SerializeField] float distanceToTarget;
+
     bool dead=false;
 
     enum HumanState
@@ -61,11 +64,7 @@ public class HumanBehaviour : MonoBehaviour
 
     void FindTargets()
     {
-        //print("trying to find goblins...");
-
         UnitStatus[] allUnits = FindObjectsByType<UnitStatus>(FindObjectsSortMode.None);
-
-        //print("found " + allUnits.Length + " goblins.");
 
         // --- NO GOBLINS ---
         if (allUnits.Length == 0)
@@ -74,7 +73,7 @@ public class HumanBehaviour : MonoBehaviour
             targets = new UnitStatus[0];
             target = null;
 
-            doneFighting = true; // or go idle / patrol instead
+            doneFighting = true;
             return;
         }
 
@@ -96,8 +95,6 @@ public class HumanBehaviour : MonoBehaviour
                 validTargets.Add(allUnits[i]);
             }
         }
-
-        //print("goblins within cluster: " + validTargets.Count);
 
         // --- RANDOMLY REMOVE UP TO 2 (BUT NEVER BREAK LIST) ---
         int removeCount = Mathf.Min(2, validTargets.Count - 1);
@@ -220,10 +217,36 @@ public class HumanBehaviour : MonoBehaviour
         Animate();
 
         // attack loop
+        float attackRange = agent.stoppingDistance + 0.5f;
+
         while (targ != null)
         {
+            float dist = Vector3.Distance(transform.position, targ.transform.position);
+
+            //Target fled → go back to chasing
+            if (dist > attackRange)
+            {
+                agent.isStopped = false;
+                state = HumanState.Moving;
+                Animate();
+
+                // restart movement toward target
+                while (targ != null && Vector3.Distance(transform.position, targ.transform.position) > attackRange)
+                {
+                    agent.SetDestination(targ.transform.position);
+                    yield return null;
+                }
+
+                if (targ == null) break;
+
+                agent.isStopped = true;
+                state = HumanState.Attacking;
+                Animate();
+            }
+
+            //Attack
             DealDamage();
-            yield return new WaitForSeconds(1f); // attack speed
+            yield return new WaitForSeconds(1f);
         }
 
         target = null;

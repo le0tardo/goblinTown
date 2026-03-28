@@ -132,6 +132,14 @@ public class UnitAnimation : MonoBehaviour
         }
     }
 
+    public void FleeAnim()
+    {
+        if (unit.state == Unit.UnitState.Fleeing)
+        {
+            anim.SetTrigger("flee");
+        }
+    }
+
     void WalkRandom()
     {
         float r = Random.value;

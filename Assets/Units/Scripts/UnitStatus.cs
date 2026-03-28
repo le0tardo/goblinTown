@@ -22,7 +22,6 @@ public class UnitStatus : MonoBehaviour
 
     public bool warm=false;
 
-
     public string unitName = "Goblin";
     #region //syllables
     string[] syllables =
@@ -69,6 +68,13 @@ public class UnitStatus : MonoBehaviour
         if (cause == CauseOfDeath.Cold)
         {
             anim.ColdAnim();
+        }
+        if (cause == CauseOfDeath.Enemy)
+        {
+            if (hp > 0)
+            {
+                unit.FightOrFLight();
+            }
         }
 
     }

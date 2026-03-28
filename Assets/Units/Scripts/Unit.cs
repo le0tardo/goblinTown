@@ -14,7 +14,8 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         Idle,
         Moving,
         Foraging,
-        Hunting
+        Hunting,
+        Fleeing
     }
     public UnitState state;
     public enum EndAction
@@ -29,6 +30,8 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         Sit
     }
     public EndAction endAction;
+
+    [SerializeField] float agentSpeed;
 
     [Header("Foraging")]
     public IForageable forageTarget;
@@ -57,6 +60,8 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         status=GetComponent<UnitStatus>();
 
         state=UnitState.Idle;
+
+        agentSpeed=agent.speed;
     }
     void Update()
     {
@@ -120,6 +125,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     void DoEndAction()
     {
         agent.avoidancePriority = 60;
+        agent.speed = agentSpeed;
         switch (endAction)
         {
             case EndAction.None:
@@ -249,7 +255,6 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
 
         return true;
     }
-
     public void TryFaceTarget()
     {
         if (forageTarget != null) FacePosition(forageTarget.Position);
@@ -314,7 +319,6 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         forageTarget = null;
         state = UnitState.Idle;
     }
-
     IEnumerator ForageLoop()
     {
         while (state == UnitState.Foraging && forageTarget != null)
@@ -341,7 +345,6 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         forageRoutine = null;
         StopForaging();
     }
-
 
     public void DepositAtStorage(OmniStorage storage)
     {
@@ -385,12 +388,79 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     public void Die()
     {
         UnitManager.inst.DeselectUnit(this);
-        agent.isStopped = true;
-        agent.enabled = false;
+        if (agent != null && agent.enabled==true)
+        {
+            agent.isStopped = true;
+            agent.enabled = false;
+        }
+
 
         Invoke("Kill", 1.0f);
     }
 
+    public void FightOrFLight()
+    {
+        if (equip.toolLevel < 2)
+        {
+            Flee();
+            anim.FleeAnim();
+        }
+        else
+        {
+
+        }
+    }
+    void Flee()
+    {
+        if (state == UnitState.Fleeing) return;
+
+        state = UnitState.Fleeing;
+
+        StopAllCoroutines(); // optional but recommended if you use coroutines elsewhere
+
+        StartCoroutine(FleeRoutine());
+    }
+    void FightBack()
+    {
+        //target human etc...
+    }
+
+    IEnumerator FleeRoutine()
+    {
+        float fleeDistance = 10f;
+        float fleeSpeedMultiplier = 2f;
+
+        float originalSpeed = agent.speed;
+
+        // pick random direction
+        Vector3 randomDirection = Random.insideUnitSphere * fleeDistance;
+        randomDirection += transform.position;
+
+        NavMeshHit hit;
+
+        // find valid point on NavMesh
+        if (NavMesh.SamplePosition(randomDirection, out hit, fleeDistance, NavMesh.AllAreas))
+        {
+            agent.speed = originalSpeed * fleeSpeedMultiplier;
+            agent.isStopped = false;
+            agent.SetDestination(hit.position);
+        }
+        else
+        {
+            // fallback: just go opposite direction of attacker (if you have it)
+            agent.SetDestination(transform.position + (transform.forward * -fleeDistance));
+        }
+
+        // wait until reached
+        while (Vector3.Distance(transform.position, agent.destination) > agent.stoppingDistance)
+        {
+            yield return null;
+        }
+
+        // reset state
+        agent.speed = originalSpeed;
+        state = UnitState.Idle;
+    }
     void Kill()
     {
         Destroy(this.gameObject);
