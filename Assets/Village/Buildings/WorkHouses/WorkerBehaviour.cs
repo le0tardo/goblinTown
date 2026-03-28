@@ -35,7 +35,7 @@ public class WorkerBehaviour : MonoBehaviour
     {
         if (myStatus.hp <= 0)
         {
-            myWorkHouse.FireWorker();
+            myWorkHouse.WorkerDied();
         }
     }
 }

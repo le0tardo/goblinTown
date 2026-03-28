@@ -169,6 +169,13 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
         StopAllCoroutines();
     }
 
+    public void WorkerDied()
+    {
+        needsWorker=true;
+        workerGfx.SetActive(false);
+        StopAllCoroutines();
+    }
+
     Vector3 GetNavMeshPointRadial(Vector3 center, float minRadius, float maxRadius)
     {
         for (int i = 0; i < 10; i++)
