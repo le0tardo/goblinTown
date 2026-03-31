@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb043fc87bc49474588a01066b192508, type: 3}
+  m_Name: GuardTower1
+  m_EditorClassIdentifier: 
+  buildingName: Guard Tower 1
+  buildingIcon: {fileID: 21300000, guid: 7788f5e3f56ec2f449a1239d312db8a6, type: 3}
+  buildingType: 3
+  costs:
+  - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
+    amount: 20
+  - resource: {fileID: 11400000, guid: db51f08debc52a34097b77df2779c4f8, type: 2}
+    amount: 1
+  footprintSize: {x: 0, y: 0}
+  previewMesh: {fileID: 4732672570023351244, guid: eae173bf4d2c79c46bf1d4987b2e9f18, type: 3}
+  buildingPrefab: {fileID: 0}

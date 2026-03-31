@@ -15,7 +15,7 @@ public class HumanBehaviour : MonoBehaviour
 
     [SerializeField] float distanceToTarget;
 
-    bool dead=false;
+    public bool dead=false;
 
     enum HumanState
     {
