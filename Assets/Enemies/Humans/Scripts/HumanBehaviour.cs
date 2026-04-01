@@ -270,11 +270,12 @@ public class HumanBehaviour : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        hp -= 1;
+        hp -= damage;
+        if (hp > 0) hp = 0;
 
-        if (hp <= 0)
+        if (hp == 0) //or <1?
         {
             state = HumanState.Dead;
             Animate();

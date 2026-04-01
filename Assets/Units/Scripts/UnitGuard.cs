@@ -3,23 +3,23 @@ using UnityEngine;
 
 public class UnitGuard : MonoBehaviour
 {
-
-    [Header("combat stats")]
-    [SerializeField] int damage;
-    [SerializeField] float range;
-
-    [SerializeField] List<HumanBehaviour> targets = new List<HumanBehaviour>();
-    [SerializeField] HumanBehaviour target;
-
-    [SerializeField]Animator anim;
-
-    SphereCollider trigger;
     enum GuardState
     {
         Idle,
         Attack
     }
-    [SerializeField]GuardState guardState;
+
+    [Header("combat stats")]
+    [SerializeField] int damage;
+    [SerializeField] float range;
+    [SerializeField] GuardState guardState;
+
+    [SerializeField] List<HumanBehaviour> targets = new List<HumanBehaviour>();
+    [SerializeField] HumanBehaviour target;
+
+    [SerializeField]Animator anim;
+    SphereCollider trigger;
+
 
     private void Start()
     {
@@ -41,6 +41,8 @@ public class UnitGuard : MonoBehaviour
             {
                 targets.Add(hb);
             }
+
+            CheckTarget();
         }
     }
 
@@ -55,35 +57,74 @@ public class UnitGuard : MonoBehaviour
                 {
                     targets.Remove(hb);
                 }
+
+                CheckTarget();
             }
         }
     }
 
     private void Update()
     {
-        //check if HumanBehaviour.dead
-        if (targets[0] != null)
+        if (target!=null && target.dead == true)
         {
-            target = targets[0];
-        }
-        else
-        {
-            target=null;
+            if (targets.Contains(target))
+            {
+                targets.Remove(target);
+                target = null;
+            }
+            CheckTarget();
         }
 
         if (target != null)
         {
             guardState=GuardState.Attack;
+            FaceTarget(target.gameObject.transform.position);
 
         }
         else
         {
             guardState = GuardState.Idle;
         }
+
     }
 
-    void FaceTarget(Vector3 direction)
+    void FaceTarget(Vector3 targetPosition)
     {
+        Vector3 dir = targetPosition - transform.position;
+        dir.y = 0f;
 
+        if (dir == Vector3.zero) return;
+
+        transform.rotation = Quaternion.LookRotation(dir);
+    }
+
+    void CheckTarget()
+    {
+        if (targets.Count > 0)
+        {
+            target = targets[0];
+        }
+        else
+        {
+            target = null;
+        }
+
+        UpdateAnimator();
+    }
+    void UpdateAnimator()
+    {
+        if (target != null)
+        {
+            anim.SetBool("target",true);
+        }
+        else
+        {
+            anim.SetBool("target", false);
+        }
+    }
+
+    public void GuardAttack()
+    {
+        target.TakeDamage(damage);
     }
 }
