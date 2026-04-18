@@ -17,6 +17,7 @@ public class HumanBehaviour : MonoBehaviour
 
     public bool dead=false;
 
+    [SerializeField] GameObject hat;
     enum HumanState
     {
         Idle,
@@ -53,6 +54,10 @@ public class HumanBehaviour : MonoBehaviour
         doneFighting = false;
         hp = maxHp;
         dead = false;
+
+        float r = Random.value;
+        if (r > 0.5f) { hat.SetActive(false); }
+        else { hat.SetActive(true); }
 
         if (anim != null)
         {
@@ -272,10 +277,16 @@ public class HumanBehaviour : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        hp -= damage;
-        if (hp > 0) hp = 0;
+        print("heath before attack: "+hp+"/"+maxHp);
+        print("damage to take: " + damage);
 
-        if (hp == 0) //or <1?
+        hp -= damage;
+
+        print("health after attack:"+hp+"/"+maxHp);
+
+        if (hp < 0) hp = 0;
+
+        if (hp <= 0)
         {
             state = HumanState.Dead;
             Animate();
@@ -308,6 +319,8 @@ public class HumanBehaviour : MonoBehaviour
                 break;
             case HumanState.Moving:
                 anim.SetTrigger("moving");
+                float rt=Random.value;
+                anim.Play("walk",0,rt);
                 break;
             case HumanState.Dead:
                 anim.SetTrigger("dead");
