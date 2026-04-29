@@ -827,7 +827,7 @@ MonoBehaviour:
   m_IsGlobal: 0
   priority: 0
   blendDistance: 1
-  weight: 1
+  weight: 0.8
   sharedProfile: {fileID: 11400000, guid: e35b31065da0a7b4190d839c3b1dc521, type: 2}
 --- !u!65 &115306709
 BoxCollider:
@@ -16743,7 +16743,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 644, y: 112}
+  m_AnchoredPosition: {x: 600, y: 112}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2109195411

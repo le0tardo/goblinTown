@@ -1,51 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3187327532464203387
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
-  m_Name: DepthOfField
-  m_EditorClassIdentifier: 
-  active: 0
-  mode:
-    m_OverrideState: 1
-    m_Value: 1
-  gaussianStart:
-    m_OverrideState: 1
-    m_Value: 0
-  gaussianEnd:
-    m_OverrideState: 1
-    m_Value: 39.45
-  gaussianMaxRadius:
-    m_OverrideState: 1
-    m_Value: 1.5
-  highQualitySampling:
-    m_OverrideState: 1
-    m_Value: 0
-  focusDistance:
-    m_OverrideState: 1
-    m_Value: 0.36
-  aperture:
-    m_OverrideState: 1
-    m_Value: 32
-  focalLength:
-    m_OverrideState: 1
-    m_Value: 69.2
-  bladeCount:
-    m_OverrideState: 1
-    m_Value: 9
-  bladeCurvature:
-    m_OverrideState: 1
-    m_Value: 1
-  bladeRotation:
-    m_OverrideState: 1
-    m_Value: 99
 --- !u!114 &-2934479223153415198
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -126,5 +80,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: -2000316758156762888}
-  - {fileID: -3187327532464203387}
   - {fileID: -2934479223153415198}
