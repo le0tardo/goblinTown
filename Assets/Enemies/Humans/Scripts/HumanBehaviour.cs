@@ -70,6 +70,9 @@ public class HumanBehaviour : MonoBehaviour
     void FindTargets()
     {
         UnitStatus[] allUnits = FindObjectsByType<UnitStatus>(FindObjectsSortMode.None);
+        allUnits = System.Array.FindAll(allUnits,
+        unit => unit.transform.position.y >= -1f);
+
 
         // --- NO GOBLINS ---
         if (allUnits.Length == 0)
@@ -114,10 +117,12 @@ public class HumanBehaviour : MonoBehaviour
         targets = validTargets.ToArray();
 
         // --- PICK TARGET SAFELY ---
+        targets = System.Array.FindAll(targets,
+            t => t != null && t.transform.position.y >= -1f);
+
         if (targets.Length > 0)
         {
             target = targets[Random.Range(0, targets.Length)];
-            //print("picked target from " + targets.Length + " candidates");
 
             StartNewRoutine(MoveAndAttack(target));
         }
@@ -170,6 +175,25 @@ public class HumanBehaviour : MonoBehaviour
             Invoke("Kill",1f);
             dead = true;
         }
+
+        if (target != null && target.transform.position.y < -1)
+        {
+            print("target below ground! Abort!");
+
+            // remove target from targets array
+            targets = System.Array.FindAll(targets, t => t != target);
+
+            target = null;
+
+            StopAllCoroutines();
+            currentRoutine = null;
+
+            // if no targets remain, despawn
+            if (targets.Length <= 0)
+            {
+                StartCoroutine(Despawn());
+            }
+        }
     }
     void Kill()
     {
@@ -202,6 +226,11 @@ public class HumanBehaviour : MonoBehaviour
     IEnumerator MoveAndAttack(UnitStatus targ)
     {
         if (targ == null) yield break;
+        if (targ.transform.position.y < -1)
+        {
+            StopAllCoroutines();
+            FindNewTarget();
+        }
 
         agent.isStopped = false;
         agent.SetDestination(targ.transform.position);
@@ -277,12 +306,8 @@ public class HumanBehaviour : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        print("heath before attack: "+hp+"/"+maxHp);
-        print("damage to take: " + damage);
 
         hp -= damage;
-
-        print("health after attack:"+hp+"/"+maxHp);
 
         if (hp < 0) hp = 0;
 

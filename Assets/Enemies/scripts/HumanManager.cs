@@ -6,6 +6,14 @@ public class HumanManager : MonoBehaviour
     [SerializeField] float raidCoolDown = 10f;
     [SerializeField] bool raid=false;
     [SerializeField] int activeHumans;
+
+    private void Start()
+    {
+        for (int i = 0; i < humans.Length; i++)
+        {
+            humans[i].SetActive(false);
+        }
+    }
     private void Update()
     {
         CountHumans();
@@ -33,11 +41,15 @@ public class HumanManager : MonoBehaviour
 
     void StartRaid()
     {
+        if (SeasonManager.inst.elapsedYears < 1) return;
+
         int r = Random.Range(3, humans.Length+1);
         for (int i = 0; i < r; i++)
         {
             humans[i].SetActive(true);
         }
+
+        EventLogManager.inst.AddToLog("Humans are attacking the village!");
     }
 
     void CountHumans()
