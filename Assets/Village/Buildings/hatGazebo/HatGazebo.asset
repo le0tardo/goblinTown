@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb043fc87bc49474588a01066b192508, type: 3}
-  m_Name: Farm1
+  m_Name: HatGazebo
   m_EditorClassIdentifier: 
-  buildingName: Farm Patch
-  buildingIcon: {fileID: 21300000, guid: ce36fd75ee2e3994e8471c1098426460, type: 3}
+  buildingName: Hat Gazebo
+  buildingIcon: {fileID: 21300000, guid: 845abf245251a6f4393111c54b7fccfc, type: 3}
   buildingType: 3
   costs:
-  - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
+  - resource: {fileID: 11400000, guid: 895d39287a19c5547be8f8f519ba6c6d, type: 2}
+    amount: 10
+  - resource: {fileID: 11400000, guid: eb1a2be52701fdb41961315a32b019af, type: 2}
     amount: 10
   - resource: {fileID: 11400000, guid: 3dffbdb2f71999143b87a0d001e566ba, type: 2}
-    amount: 5
+    amount: 1
   footprintSize: {x: 0.5, y: 0.5}
-  previewMesh: {fileID: 3737926356126524597, guid: cd884138fd7b68c4298bed850032b3a0, type: 3}
-  buildingPrefab: {fileID: 2768403888946526540, guid: 5e9297376ef58f34283e1a27ceb6d43c, type: 3}
+  previewMesh: {fileID: -4490429631187107398, guid: 6ef9e8eb947edd84181bc96eff4d3848, type: 3}
+  buildingPrefab: {fileID: 1858014716346427263, guid: 9fd985718a79ef645becb8c764db85b4, type: 3}
