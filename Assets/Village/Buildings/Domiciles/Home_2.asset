@@ -16,12 +16,10 @@ MonoBehaviour:
   buildingIcon: {fileID: 21300000, guid: c144e02cb8ceb834bb41c10c77eed811, type: 3}
   buildingType: 1
   costs:
-  - resource: {fileID: 11400000, guid: 10472c2fa2e85e94d8a447da2647383a, type: 2}
-    amount: 5
   - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
     amount: 10
   - resource: {fileID: 11400000, guid: 1ee6286c1cce41a48a6703a3bfba8e71, type: 2}
-    amount: 5
+    amount: 2
   footprintSize: {x: 1, y: 1}
   previewMesh: {fileID: -6634670199637318623, guid: 15a22317d694df142977e835052a424a, type: 3}
   buildingPrefab: {fileID: 1952111672110791234, guid: b4a060f5dda95c94fa8c77d21616a4c6, type: 3}

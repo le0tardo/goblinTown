@@ -17,9 +17,9 @@ MonoBehaviour:
   buildingType: 4
   costs:
   - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
-    amount: 10
+    amount: 3
   - resource: {fileID: 11400000, guid: 3e7ce838c868bce49899709c7f9460e0, type: 2}
-    amount: 10
+    amount: 3
   footprintSize: {x: 0.5, y: 0.5}
   previewMesh: {fileID: 1217948765441274416, guid: 4ed93a49853245146ac16cb05629c649, type: 3}
   buildingPrefab: {fileID: 8691825064039696032, guid: fcaeaac460a88614c9fcce1c3627d859, type: 3}

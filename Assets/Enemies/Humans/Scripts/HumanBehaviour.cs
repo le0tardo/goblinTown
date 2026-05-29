@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class HumanBehaviour : MonoBehaviour
 {
     [Header("Combat Stats")]
-    [SerializeField] int hp = 10;
-    [SerializeField] int maxHp = 10;
+    [SerializeField] int hp = 3;
+    [SerializeField] int maxHp = 3;
     [SerializeField] int damage = 3;
     [SerializeField] float despawnTime = 10f;
     [SerializeField] float despawnTimer = 10f;

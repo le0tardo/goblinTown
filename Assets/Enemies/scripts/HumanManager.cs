@@ -7,6 +7,8 @@ public class HumanManager : MonoBehaviour
     [SerializeField] bool raid=false;
     [SerializeField] int activeHumans;
 
+    [SerializeField] int yearDelay;
+
     private void Start()
     {
         for (int i = 0; i < humans.Length; i++)
@@ -41,9 +43,9 @@ public class HumanManager : MonoBehaviour
 
     void StartRaid()
     {
-        if (SeasonManager.inst.elapsedYears < 1) return;
+        if (SeasonManager.inst.elapsedYears < yearDelay) return;
 
-        int r = Random.Range(3, humans.Length+1);
+        int r = Random.Range(2, humans.Length+1);
         for (int i = 0; i < r; i++)
         {
             humans[i].SetActive(true);

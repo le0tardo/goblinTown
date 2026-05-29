@@ -17,7 +17,7 @@ MonoBehaviour:
   buildingType: 3
   costs:
   - resource: {fileID: 11400000, guid: 80ed5c50bb2633e4a801c5e5020f3a80, type: 2}
-    amount: 25
+    amount: 2
   - resource: {fileID: 11400000, guid: 3e7ce838c868bce49899709c7f9460e0, type: 2}
     amount: 10
   footprintSize: {x: 0, y: 0}
