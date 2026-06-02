@@ -4,7 +4,8 @@ public class NodeBehaviour : MonoBehaviour,IForageable
 {
     [SerializeField] public ForageableNodeData node; //what node this is
     [SerializeField] public ForagedResourceData resource; //what resource it drops
-    [SerializeField] GameObject childNode;
+    [SerializeField] GameObject childNode; //boars!!!
+    [SerializeField] CapsuleCollider trunkCollider;
     public bool isDepleted=false;
     public bool needsTool=false;
     public bool IsDepleted => isDepleted;
@@ -30,6 +31,7 @@ public class NodeBehaviour : MonoBehaviour,IForageable
         if (anim != null) anim.enabled = false;
         float r = Random.Range(0,360);
         if(randomRotationSpawn)transform.rotation = new Quaternion(0,r,0,0);
+        trunkCollider = GetComponent<CapsuleCollider>();
     }
     public void Forage(Unit unit)
     {
@@ -74,6 +76,7 @@ public class NodeBehaviour : MonoBehaviour,IForageable
 
             }
             isDepleted = true;
+            if(trunkCollider!=null)trunkCollider.enabled = false;
         }
 
         if (unit.carriedAmount >= unit.carryCapacity)
@@ -86,6 +89,7 @@ public class NodeBehaviour : MonoBehaviour,IForageable
     {
         resourceAmount = resourceCount;
         isDepleted=false;
+        if (trunkCollider != null) trunkCollider.enabled = true;
         if (anim != null)
         {
             anim.enabled = true;
