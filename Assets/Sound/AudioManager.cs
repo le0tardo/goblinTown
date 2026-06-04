@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] AudioClip[] pops;
     [SerializeField] AudioClip multiPop;
+    [SerializeField] AudioClip click;
     private void Awake()
     {
         inst = this;
@@ -30,4 +31,8 @@ public class AudioManager : MonoBehaviour
         source.PlayOneShot(multiPop);
     }
 
+    public void ClickButton()
+    {
+        source.PlayOneShot(click);
+    }
 }

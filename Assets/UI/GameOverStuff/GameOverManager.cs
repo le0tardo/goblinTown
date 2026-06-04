@@ -26,7 +26,7 @@ public class GameOverManager : MonoBehaviour
             foodCount = VillageResourceManager.inst.villageResources[foodResource];
         }
 
-        if (unitCount == 0 && foodCount < 10)
+        if (unitCount == 0 && UnitManager.inst.currentlySpawning<1 && foodCount < 10)
         {
             if (!gameOver)
             {

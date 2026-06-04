@@ -74,6 +74,7 @@ public class DomicileBehaviour : MonoBehaviour, IProducer
         spawning = true;
         Vector3 spawnNear = BuildingManager.inst.selectedBuilding.transform.position;
         spawnPosition = GetNavMeshPointRadial(spawnNear, 2f, 3f);
+        UnitManager.inst.currentlySpawning++;
     }
     Vector3 GetNavMeshPointRadial(Vector3 center, float minRadius, float maxRadius)
     {
@@ -104,6 +105,7 @@ public class DomicileBehaviour : MonoBehaviour, IProducer
 
         spawnTime = maxSpawnTime;
         spawning = false;
+        UnitManager.inst.currentlySpawning--;
     }
 
     private void OnDestroy()

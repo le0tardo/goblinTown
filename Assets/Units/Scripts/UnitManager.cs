@@ -12,6 +12,7 @@ public class UnitManager : MonoBehaviour
     public int maxUnits=1;
     //public int maxSelectedUnits;
 
+    public int currentlySpawning = 0;
     private void Awake()
     {
         if (inst != null && inst != this){ Destroy(gameObject); return; }

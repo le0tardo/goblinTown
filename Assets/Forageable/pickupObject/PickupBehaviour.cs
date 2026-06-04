@@ -31,7 +31,7 @@ public class PickupBehaviour : MonoBehaviour, IPickupable, IHoverable
         transform.rotation = Quaternion.Euler(0f, randomY, 0f);
         coll=GetComponent<SphereCollider>();
 
-        CheckOverlappingColliders();
+        //CheckOverlappingColliders();
     }
 
     public bool TryPickup(Unit unit)
