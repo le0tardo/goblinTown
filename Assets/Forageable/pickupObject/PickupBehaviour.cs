@@ -24,13 +24,14 @@ public class PickupBehaviour : MonoBehaviour, IPickupable, IHoverable
         displayName =resource.resourceName;
         rend = GetComponentInChildren<MeshRenderer>();
         filt = GetComponentInChildren<MeshFilter>();
-        respaw = true;
         filt.mesh=resource.mesh;
         rend.material=resource.material;
 
         float randomY = Random.Range(0f, 360f);
         transform.rotation = Quaternion.Euler(0f, randomY, 0f);
         coll=GetComponent<SphereCollider>();
+
+        CheckOverlappingColliders();
     }
 
     public bool TryPickup(Unit unit)
@@ -82,9 +83,12 @@ public class PickupBehaviour : MonoBehaviour, IPickupable, IHoverable
             radius
         );
 
-        if (overlaps.Length > 1)
+        for ( int i = 0; i < overlaps.Length; i++)
         {
-            Destroy(this.gameObject);
+            if (overlaps[i].name != this.gameObject.name && overlaps[i].name != "ground")
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
