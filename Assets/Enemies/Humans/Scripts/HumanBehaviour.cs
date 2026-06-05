@@ -70,14 +70,11 @@ public class HumanBehaviour : MonoBehaviour
     void FindTargets()
     {
         UnitStatus[] allUnits = FindObjectsByType<UnitStatus>(FindObjectsSortMode.None);
-        allUnits = System.Array.FindAll(allUnits,
-        unit => unit.transform.position.y >= -1f);
-
+        allUnits = System.Array.FindAll(allUnits,unit => unit.transform.position.y >= -1f);
 
         // --- NO GOBLINS ---
         if (allUnits.Length == 0)
         {
-            //print("no goblins found - fallback state");
             targets = new UnitStatus[0];
             target = null;
 
@@ -106,7 +103,6 @@ public class HumanBehaviour : MonoBehaviour
 
         // --- RANDOMLY REMOVE UP TO 2 (BUT NEVER BREAK LIST) ---
         int removeCount = Mathf.Min(2, validTargets.Count - 1);
-        // ensures at least 1 remains if possible
 
         for (int i = 0; i < removeCount; i++)
         {
@@ -147,9 +143,9 @@ public class HumanBehaviour : MonoBehaviour
             }
         }
 
-        if (target == null && !doneFighting)
+        if (target == null)
         {
-            FindNewTarget();
+            FindTargets();
 
             if (target != null)
             {
@@ -197,7 +193,7 @@ public class HumanBehaviour : MonoBehaviour
     }
     void Kill()
     {
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
     void FindNewTarget()
     {

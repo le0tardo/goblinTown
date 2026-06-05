@@ -18,7 +18,13 @@ public class HumanManager : MonoBehaviour
     }
     private void Update()
     {
-        CountHumans();
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            DebugTestRaid();
+        }
+
+        CountHumans(); //if raid true??
 
         if (!raid && raidCoolDown>0)
         {
@@ -41,8 +47,16 @@ public class HumanManager : MonoBehaviour
         }
     }
 
+    public void DebugTestRaid()
+    {
+        yearDelay = 0;
+        print("debugging raid...");
+        StartRaid();
+    }
+
     void StartRaid()
     {
+        print("raid called");
         if (SeasonManager.inst.elapsedYears < yearDelay) return;
 
         int r = Random.Range(2, humans.Length+1);

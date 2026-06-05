@@ -4932,6 +4932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a552f19da55e41242a3e3b5be069128c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  units: []
 --- !u!1 &2889536500890259496
 GameObject:
   m_ObjectHideFlags: 0
@@ -10192,6 +10193,7 @@ GameObject:
   - component: {fileID: 6724110826218093504}
   - component: {fileID: 3696521324478570484}
   - component: {fileID: 1801986404894462349}
+  - component: {fileID: 5749484448540642263}
   - component: {fileID: 6286937043871028930}
   - component: {fileID: 2248017150430472418}
   - component: {fileID: 4507669329503239946}
@@ -10286,6 +10288,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 0.75, z: 2}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &5749484448540642263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691825064039696032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a552f19da55e41242a3e3b5be069128c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  units: []
 --- !u!135 &6286937043871028930
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10303,9 +10318,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2.5
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2248017150430472418
 Rigidbody:
