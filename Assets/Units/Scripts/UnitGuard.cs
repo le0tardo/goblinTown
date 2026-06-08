@@ -20,6 +20,9 @@ public class UnitGuard : MonoBehaviour
     [SerializeField]Animator anim;
     SphereCollider trigger;
 
+    [SerializeField] GameObject spearIdle;
+    [SerializeField] GameObject spearAttack;
+    [SerializeField] GameObject spearFly;
 
     private void Start()
     {
@@ -29,6 +32,9 @@ public class UnitGuard : MonoBehaviour
 
         trigger=GetComponent<SphereCollider>();
         if(range>0)trigger.radius = range;
+
+        spearIdle.SetActive(true);
+        spearAttack.SetActive(false);
 
     }
 
@@ -116,10 +122,14 @@ public class UnitGuard : MonoBehaviour
         if (target != null)
         {
             anim.SetBool("target",true);
+            spearIdle.SetActive(false);
+            spearAttack.SetActive(true);
         }
         else
         {
             anim.SetBool("target", false);
+            spearIdle.SetActive(true);
+            spearAttack.SetActive(false);
         }
     }
 

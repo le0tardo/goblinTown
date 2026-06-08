@@ -12,10 +12,9 @@ public class HumanBehaviour : MonoBehaviour
     [SerializeField] float despawnTime = 10f;
     [SerializeField] float despawnTimer = 10f;
     [SerializeField] bool doneFighting = false;
-
     [SerializeField] float distanceToTarget;
 
-    public bool dead=false;
+    public bool dead = false;
 
     [SerializeField] GameObject hat;
     enum HumanState
@@ -27,6 +26,7 @@ public class HumanBehaviour : MonoBehaviour
     }
 
     [SerializeField] HumanState state;
+    private HumanState lastState; // Tracked to prevent animation trigger spamming
     UnitStatus[] targets;
     [SerializeField] UnitStatus target;
 
@@ -38,6 +38,7 @@ public class HumanBehaviour : MonoBehaviour
     Animator anim;
 
     Coroutine currentRoutine;
+    private float targetSearchCooldown = 0f; // Optimizes Update loop performance
 
     private void Awake()
     {
@@ -50,49 +51,46 @@ public class HumanBehaviour : MonoBehaviour
     {
         target = null;
         despawnTimer = despawnTime;
-        state = HumanState.Moving;
+        state = HumanState.Idle;
+        lastState = HumanState.Dead; // Force animation update on spawn
         doneFighting = false;
         hp = maxHp;
         dead = false;
 
-        float r = Random.value;
-        if (r > 0.5f) { hat.SetActive(false); }
-        else { hat.SetActive(true); }
-
-        if (anim != null)
+        if (hat != null)
         {
-            Animate();
+            hat.SetActive(Random.value <= 0.5f);
         }
 
+        Animate();
         FindTargets();
     }
 
     void FindTargets()
     {
+        // Performance Warning: FindObjectsByType is heavy. Limit usage via timers.
         UnitStatus[] allUnits = FindObjectsByType<UnitStatus>(FindObjectsSortMode.None);
-        allUnits = System.Array.FindAll(allUnits,unit => unit.transform.position.y >= -1f);
+        allUnits = System.Array.FindAll(allUnits, unit => unit != null && unit.transform.position.y >= -1f);
 
-        // --- NO GOBLINS ---
         if (allUnits.Length == 0)
         {
             targets = new UnitStatus[0];
             target = null;
-
-            doneFighting = true;
+            ClearCurrentRoutine();
+            StartNewRoutine(ReturnToSpawnAndDespawn());
             return;
         }
 
-        // --- SORT BY DISTANCE ---
+        // Sort by distance
         System.Array.Sort(allUnits, (a, b) =>
             Vector3.Distance(transform.position, a.transform.position)
             .CompareTo(Vector3.Distance(transform.position, b.transform.position)));
 
         UnitStatus closest = allUnits[0];
-
         List<UnitStatus> validTargets = new List<UnitStatus>();
         float maxDistanceFromClosest = 10f;
 
-        // --- BUILD CLUSTER (up to 5, but works with fewer) ---
+        // Build cluster
         for (int i = 0; i < allUnits.Length && validTargets.Count < 5; i++)
         {
             if (Vector3.Distance(closest.transform.position, allUnits[i].transform.position) <= maxDistanceFromClosest)
@@ -101,9 +99,8 @@ public class HumanBehaviour : MonoBehaviour
             }
         }
 
-        // --- RANDOMLY REMOVE UP TO 2 (BUT NEVER BREAK LIST) ---
+        // Randomly remove up to 2
         int removeCount = Mathf.Min(2, validTargets.Count - 1);
-
         for (int i = 0; i < removeCount; i++)
         {
             int index = Random.Range(0, validTargets.Count);
@@ -112,210 +109,155 @@ public class HumanBehaviour : MonoBehaviour
 
         targets = validTargets.ToArray();
 
-        // --- PICK TARGET SAFELY ---
-        targets = System.Array.FindAll(targets,
-            t => t != null && t.transform.position.y >= -1f);
-
         if (targets.Length > 0)
         {
             target = targets[Random.Range(0, targets.Length)];
-
             StartNewRoutine(MoveAndAttack(target));
         }
         else
         {
-            // fallback if something weird happened
             target = closest;
-
             StartNewRoutine(MoveAndAttack(target));
         }
     }
+
     private void Update()
     {
-        // despawn countdown ONLY when done fighting
+        if (dead) return;
+
+        // Handle Health Check
+        if (hp <= 0)
+        {
+            HandleDeath();
+            return;
+        }
+
+        // Handle Despawn Counter ONLY when fully done fighting
         if (doneFighting)
         {
             despawnTimer -= Time.deltaTime;
-
             if (despawnTimer <= 0)
             {
-                StartNewRoutine(Despawn());
+                gameObject.SetActive(false);
             }
+            return;
         }
 
+        // Optimized Search Engine: Checks for targets safely over frames instead of spiking CPU
         if (target == null)
         {
-            FindTargets();
-
-            if (target != null)
+            targetSearchCooldown -= Time.deltaTime;
+            if (targetSearchCooldown <= 0f)
             {
-                StartNewRoutine(MoveAndAttack(target));
-            }
-            else
-            {
-                // no targets left, exit combat
-                doneFighting = true;
-                state = HumanState.Idle;
-                Animate();
-
-                StartNewRoutine(Despawn());
+                targetSearchCooldown = 0.5f; // Scan every half second max
+                FindTargets();
             }
         }
-        if (hp <= 0 && !dead)
+        else if (target.transform.position.y < -1f)
         {
-            StopAllCoroutines();
-            agent.isStopped= true;
-            state = HumanState.Dead;
-            //Animate();
-            anim.SetTrigger("dead");
-            Invoke("Kill",1f);
-            dead = true;
-        }
-
-        if (target != null && target.transform.position.y < -1)
-        {
-            print("target below ground! Abort!");
-
-            // remove target from targets array
-            targets = System.Array.FindAll(targets, t => t != target);
-
+            // Target fell below map out of bounds
             target = null;
-
-            StopAllCoroutines();
-            currentRoutine = null;
-
-            // if no targets remain, despawn
-            if (targets.Length <= 0)
-            {
-                StartCoroutine(Despawn());
-            }
+            ClearCurrentRoutine();
         }
     }
+
+    void HandleDeath()
+    {
+        dead = true;
+        ClearCurrentRoutine();
+        agent.isStopped = true;
+        state = HumanState.Dead;
+        Animate();
+        Invoke(nameof(Kill), 1f);
+    }
+
     void Kill()
     {
-        this.gameObject.SetActive(false);
-    }
-    void FindNewTarget()
-    {
-        for (int i = 0; i < targets.Length; i++)
-        {
-            if (targets[i] != null)
-            {
-                target = targets[i];
-                return;
-            }
-        }
-
-        target = null;
+        gameObject.SetActive(false);
     }
 
     void StartNewRoutine(IEnumerator routine)
     {
+        ClearCurrentRoutine();
+        currentRoutine = StartCoroutine(routine);
+    }
+
+    void ClearCurrentRoutine()
+    {
         if (currentRoutine != null)
         {
             StopCoroutine(currentRoutine);
+            currentRoutine = null;
         }
-
-        currentRoutine = StartCoroutine(routine);
     }
 
     IEnumerator MoveAndAttack(UnitStatus targ)
     {
-        if (targ == null) yield break;
-        if (targ.transform.position.y < -1)
+        while (targ != null && !dead)
         {
-            StopAllCoroutines();
-            FindNewTarget();
-        }
+            float dist = Vector3.Distance(transform.position, targ.transform.position);
+            distanceToTarget = dist;
 
-        agent.isStopped = false;
-        agent.SetDestination(targ.transform.position);
-        state = HumanState.Moving;
-        Animate();
+            // State Handling: Chasing
+            if (dist > agent.stoppingDistance)
+            {
+                if (agent.isStopped) agent.isStopped = false;
+                agent.SetDestination(targ.transform.position);
+                state = HumanState.Moving;
+                Animate();
+            }
+            // State Handling: Attacking Range
+            else
+            {
+                if (!agent.isStopped) agent.isStopped = true;
+                state = HumanState.Attacking;
+                Animate();
 
-        // wait until close enough
-        while (targ != null && Vector3.Distance(transform.position, targ.transform.position) > agent.stoppingDistance)
-        {
-            agent.SetDestination(targ.transform.position);
+                DealDamage();
+                yield return new WaitForSeconds(1f); // Attack speed delay
+                continue;
+            }
+
             yield return null;
         }
 
-        if (targ == null) yield break;
-
-        agent.isStopped = true;
-        state = HumanState.Attacking;
-        Animate();
-
-        // attack loop
-        float attackRange = agent.stoppingDistance + 0.5f;
-
-        while (targ != null)
-        {
-            float dist = Vector3.Distance(transform.position, targ.transform.position);
-
-            //Target fled → go back to chasing
-            if (dist > attackRange)
-            {
-                agent.isStopped = false;
-                state = HumanState.Moving;
-                Animate();
-
-                // restart movement toward target
-                while (targ != null && Vector3.Distance(transform.position, targ.transform.position) > attackRange)
-                {
-                    agent.SetDestination(targ.transform.position);
-                    yield return null;
-                }
-
-                if (targ == null) break;
-
-                agent.isStopped = true;
-                state = HumanState.Attacking;
-                Animate();
-            }
-
-            //Attack
-            DealDamage();
-            yield return new WaitForSeconds(1f);
-        }
-
+        // If target was destroyed or lost, clear reference to trigger FindTargets next cycle
         target = null;
     }
 
-    IEnumerator Despawn()
+    IEnumerator ReturnToSpawnAndDespawn()
     {
+        doneFighting = true; // Prevents re-entering search updates
         agent.isStopped = false;
         agent.SetDestination(startPos);
         state = HumanState.Moving;
         Animate();
 
-        while (Vector3.Distance(transform.position, startPos) > agent.stoppingDistance)
+        // Pathing back to initial spawn vector
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
         {
+            if (dead) yield break;
             yield return null;
         }
 
+        // Reached Home safely
+        agent.isStopped = true;
         state = HumanState.Idle;
         Animate();
-
-        gameObject.SetActive(false);
     }
 
     public void TakeDamage(int damage)
     {
+        if (dead) return;
 
         hp -= damage;
-
-        if (hp < 0) hp = 0;
-
         if (hp <= 0)
         {
-            state = HumanState.Dead;
-            Animate();
-            agent.isStopped = true;
+            HandleDeath();
             return;
         }
 
-        anim.SetTrigger("hurt");
+        if (anim != null) anim.SetTrigger("hurt");
     }
 
     void DealDamage()
@@ -328,8 +270,9 @@ public class HumanBehaviour : MonoBehaviour
 
     void Animate()
     {
-        if (anim == null) return;
+        if (anim == null || state == lastState) return;
 
+        // Reset any standard movement parameters if necessary, then set updates
         switch (state)
         {
             case HumanState.Idle:
@@ -340,12 +283,14 @@ public class HumanBehaviour : MonoBehaviour
                 break;
             case HumanState.Moving:
                 anim.SetTrigger("moving");
-                float rt=Random.value;
-                anim.Play("walk",0,rt);
+                float rt = Random.value;
+                anim.Play("walk", 0, rt);
                 break;
             case HumanState.Dead:
                 anim.SetTrigger("dead");
                 break;
         }
+
+        lastState = state; // Track current to block spam triggers on following frames
     }
 }

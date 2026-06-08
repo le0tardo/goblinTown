@@ -8,6 +8,7 @@ public class HumanManager : MonoBehaviour
     [SerializeField] int activeHumans;
 
     [SerializeField] int yearDelay;
+    [SerializeField] AudioClip horn;
 
     private void Start()
     {
@@ -18,10 +19,10 @@ public class HumanManager : MonoBehaviour
     }
     private void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.H))
+        if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyDown(KeyCode.R))
         {
-            DebugTestRaid();
+                print("debug Raid event");
+                DebugTestRaid();
         }
 
         CountHumans(); //if raid true??
@@ -50,13 +51,12 @@ public class HumanManager : MonoBehaviour
     public void DebugTestRaid()
     {
         yearDelay = 0;
-        print("debugging raid...");
         StartRaid();
     }
 
     void StartRaid()
     {
-        print("raid called");
+
         if (SeasonManager.inst.elapsedYears < yearDelay) return;
 
         int r = Random.Range(2, humans.Length+1);
@@ -66,6 +66,7 @@ public class HumanManager : MonoBehaviour
         }
 
         EventLogManager.inst.AddToLog("Humans are attacking the village!");
+        AudioManager.inst.PlayGlobalSound(horn);
     }
 
     void CountHumans()

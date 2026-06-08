@@ -5,16 +5,6 @@ public class HatScript : MonoBehaviour
     [SerializeField] GameObject[] hats;
     [SerializeField] Texture2D[] textures;
 
-    private void Update()
-    {
-        //hat debug
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            GetHat();
-            ColorHat();
-        }
-    }
-
     public void GetHat()
     {
         for (int i = 0; i < hats.Length; i++)
