@@ -136,15 +136,19 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
     public void FireWorker()
     {
         if (currentWorker == null) return;
-        //currentWorker.gameObject.SetActive(true);
-        //agent disable instead of entire game object.
         currentWorker.transform.position -= Vector3.down * 5f;
 
+        if (BuildingManager.inst.selectedBuilding != null)
+        {
+            Vector3 spawnNear = BuildingManager.inst.selectedBuilding.transform.position;
+            spawnPosition = GetNavMeshPointRadial(spawnNear, 2f, 3f);
+        }
+        else
+        {
+            spawnPosition = GetNavMeshPointRadial(transform.position, 2f, 3f);
+        }
 
-        Vector3 spawnNear = BuildingManager.inst.selectedBuilding.transform.position;
-        spawnPosition = GetNavMeshPointRadial(spawnNear, 2f, 3f);
-
-        Unit unitWorker = currentWorker.GetComponent<Unit>();
+            Unit unitWorker = currentWorker.GetComponent<Unit>();
         
         if (unitWorker != null)
         {
@@ -162,6 +166,46 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
         currentWorker =null;
         needsWorker = true;
 
+        BuildingManager.inst.DeselectBuilding();
+
+        StopAllCoroutines();
+    }
+    public void FleeWorker()
+    {
+        if (currentWorker == null) return;
+        currentWorker.transform.position -= Vector3.down * 5f;
+
+        if (BuildingManager.inst.selectedBuilding != null)
+        {
+            Vector3 spawnNear = BuildingManager.inst.selectedBuilding.transform.position;
+            spawnPosition = GetNavMeshPointRadial(spawnNear, 2f, 3f);
+        }
+        else
+        {
+            spawnPosition = GetNavMeshPointRadial(transform.position, 2f, 3f);
+        }
+
+        Unit unitWorker = currentWorker.GetComponent<Unit>();
+        if (unitWorker != null)
+        {
+            //set to random empty position on the navmesh
+            unitWorker.transform.position = spawnPosition;
+            unitWorker.ClearEndAction();
+            unitWorker.state = Unit.UnitState.Idle;
+
+            UnitAnimation ua = currentWorker.GetComponent<UnitAnimation>();
+            ua.ApplyState(unitWorker.state);
+
+
+        }
+
+        currentWorker.agent.enabled = true;
+
+        if (workerGfx != null) workerGfx.SetActive(false);
+        currentWorker = null;
+        needsWorker = true;
+
+        unitWorker.FightOrFLight();
         BuildingManager.inst.DeselectBuilding();
 
         StopAllCoroutines();

@@ -12,14 +12,14 @@ public class GuardSpearScript : MonoBehaviour
 
     public void ThrowSpear(Vector3 targetPosition)
     {
-        gameObject.SetActive(true);
+        print("spear is thrown");
         StopAllCoroutines();
         StartCoroutine(ThrowRoutine(targetPosition));
     }
 
     private IEnumerator ThrowRoutine(Vector3 targetPosition)
     {
-        float duration = 1f;
+        float duration = 0.075f;
 
         float elapsed = 0f;
         Vector3 from = startPosition;
@@ -43,8 +43,12 @@ public class GuardSpearScript : MonoBehaviour
             yield return null;
         }
 
-        transform.position = startPosition;
+        ResetSpear();
+    }
 
+    private void ResetSpear()
+    {
+        transform.position = startPosition;
         gameObject.SetActive(false);
     }
 }

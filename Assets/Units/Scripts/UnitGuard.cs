@@ -24,6 +24,7 @@ public class UnitGuard : MonoBehaviour
     [SerializeField] GameObject spearAttack;
     [SerializeField] GameObject spearFly;
 
+    [SerializeField] GuardSpearScript spearScript;
     private void Start()
     {
         guardState = GuardState.Idle;
@@ -35,7 +36,6 @@ public class UnitGuard : MonoBehaviour
 
         spearIdle.SetActive(true);
         spearAttack.SetActive(false);
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -133,6 +133,15 @@ public class UnitGuard : MonoBehaviour
         }
     }
 
+    public void ThrowSpear()
+    {
+        spearScript.gameObject.SetActive(true);
+        if (target != null)
+        {
+            print("aiming spear at target: "+target.name);
+            spearScript.ThrowSpear(target.transform.position);
+        }
+    }
     public void GuardAttack()
     {
         target.TakeDamage(damage);

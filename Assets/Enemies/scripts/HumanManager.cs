@@ -6,6 +6,8 @@ public class HumanManager : MonoBehaviour
     [SerializeField] float raidCoolDown = 10f;
     [SerializeField] bool raid=false;
     [SerializeField] int activeHumans;
+    [SerializeField] float raidDuration = 60f;
+    [SerializeField] float raidDurationCounter;
 
     [SerializeField] int yearDelay;
     [SerializeField] AudioClip horn;
@@ -16,6 +18,7 @@ public class HumanManager : MonoBehaviour
         {
             humans[i].SetActive(false);
         }
+        raidDurationCounter = raidDuration;
     }
     private void Update()
     {
@@ -39,18 +42,29 @@ public class HumanManager : MonoBehaviour
                 StartRaid();
                 raid = true;
             }
+
+            raidDurationCounter-= Time.deltaTime;
         }
 
         if (raid&&activeHumans<=0)
         {
             raid = false;
-            raidCoolDown = 10f;
+            raidCoolDown = 500f;
+            raidDurationCounter = raidDuration;
+        }
+        if (raidDurationCounter <= 0)
+        {
+            raid = false;
+            raidCoolDown = 500f;
+            raidDurationCounter = raidDuration;
         }
     }
 
     public void DebugTestRaid()
     {
         yearDelay = 0;
+        raidCoolDown=0;
+        raid = true;
         StartRaid();
     }
 
