@@ -45065,7 +45065,7 @@ MonoBehaviour:
   raidCoolDown: 500
   raid: 0
   activeHumans: 0
-  raidDuration: 10
+  raidDuration: 60
   raidDurationCounter: 0
   yearDelay: 10
   horn: {fileID: 8300000, guid: 870fe43a6fd3e724b8c833e999747683, type: 3}

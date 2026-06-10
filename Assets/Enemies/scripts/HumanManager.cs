@@ -22,13 +22,24 @@ public class HumanManager : MonoBehaviour
     }
     private void Update()
     {
+        #region Debug
+        
         if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyDown(KeyCode.R))
         {
                 print("debug Raid event");
                 DebugTestRaid();
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            foreach (var human in humans)
+            {
+                HumanBehaviour hb=human.GetComponent<HumanBehaviour>();
+                hb.AbortRaid();
+            }
+        }
+        #endregion
 
-        CountHumans(); //if raid true??
+        if (raid)CountHumans(); //if raid true??
 
         if (!raid && raidCoolDown>0)
         {
@@ -57,6 +68,12 @@ public class HumanManager : MonoBehaviour
             raid = false;
             raidCoolDown = 500f;
             raidDurationCounter = raidDuration;
+            foreach (var human in humans)
+            {
+                if (!human.activeInHierarchy) return;
+                HumanBehaviour hb = human.GetComponent<HumanBehaviour>();
+                hb.AbortRaid();
+            }
         }
     }
 

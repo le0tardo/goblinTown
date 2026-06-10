@@ -123,6 +123,7 @@ public class HumanBehaviour : MonoBehaviour
 
     private void Update()
     {
+
         if (dead) return;
 
         // Handle Health Check
@@ -268,6 +269,15 @@ public class HumanBehaviour : MonoBehaviour
         }
     }
 
+    public void AbortRaid()
+    {
+        for (int i = 0; i < targets.Length; i++)
+        {
+            targets[i] = null;
+        }
+        target = null;
+        StartNewRoutine(ReturnToSpawnAndDespawn());
+    }
     void Animate()
     {
         if (anim == null || state == lastState) return;
