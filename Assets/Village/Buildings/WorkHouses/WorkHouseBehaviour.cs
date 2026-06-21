@@ -169,6 +169,8 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
         BuildingManager.inst.DeselectBuilding();
 
         StopAllCoroutines();
+        ResetEquipmentLevels();
+
     }
     public void FleeWorker()
     {
@@ -209,6 +211,7 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
         BuildingManager.inst.DeselectBuilding();
 
         StopAllCoroutines();
+        ResetEquipmentLevels();
     }
 
     public void WorkerDied()
@@ -272,6 +275,12 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
         }
     }
 
+    void ResetEquipmentLevels()
+    {
+        if(toolLevel>0&&EquipmentManager.inst.toolLevel<=toolLevel)EquipmentManager.inst.toolLevel = 0;
+        if (clothesLevel > 0&&EquipmentManager.inst.clothesLevel<=clothesLevel) EquipmentManager.inst.clothesLevel = 0;
+        //weapon level too??
+    }
     IEnumerator CraftRoutine()
     {
         // Reset progress

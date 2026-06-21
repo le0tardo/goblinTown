@@ -7,6 +7,8 @@ public class WorkHouseGUI : MonoBehaviour
 
     [SerializeField] Button fireWorkerButton;
     [SerializeField] Image workProgressImage;
+
+    [SerializeField] GameObject StopWorkingButton;
     private void Update()
     {
         whb = null;
@@ -15,7 +17,11 @@ public class WorkHouseGUI : MonoBehaviour
             whb = BuildingManager.inst.selectedBuilding.GetComponent<WorkHouseBehaviour>();
             if (whb != null)
             {
-                fireWorkerButton.interactable=!whb.needsWorker;
+                //fireWorkerButton.interactable=!whb.needsWorker;
+
+                if (whb.needsWorker) { StopWorkingButton.SetActive(false); }
+                else { StopWorkingButton.SetActive(true); }
+
             }
             workProgressImage.fillAmount=whb.workProgress/whb.workTime;
         }

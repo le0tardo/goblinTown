@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  resourceCapBoost: 0
+  resourceCapBoost: 5
 --- !u!114 &7584500917297668640
 MonoBehaviour:
   m_ObjectHideFlags: 0

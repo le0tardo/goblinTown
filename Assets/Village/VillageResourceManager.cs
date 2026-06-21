@@ -30,7 +30,7 @@ public class VillageResourceManager : MonoBehaviour
         }
         foreach (var villageResource in villageResourceList) //resourceCap
         {
-            villageCaps.Add(villageResource, 50);
+            villageCaps.Add(villageResource, 5);
         }
 
         foreach (var entry in StartingResources)
@@ -50,6 +50,9 @@ public class VillageResourceManager : MonoBehaviour
     public void AddResource(VillageResource data, int amount)
     {
         villageResources[data] += amount;
+
+        if (villageCaps.TryGetValue(data, out int cap))
+            villageResources[data] = Mathf.Min(villageResources[data], cap);
 
         gui.UpdateResource(data, villageResources[data]);
     }
@@ -87,6 +90,10 @@ public class VillageResourceManager : MonoBehaviour
         gui.UpdateAllResources(villageResources);
     }
 
+    public void EnforceCaps()
+    {
+        //horribly svårt
+    }
 
     public void SpendBuildingCost(BuildingObject building)
     {

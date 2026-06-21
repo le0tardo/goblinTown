@@ -4228,7 +4228,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4437445285091425974}
-  m_Mesh: {fileID: -6988687363872622493, guid: c97bd78cde35b6e479bab4f5fab4f4fc, type: 3}
+  m_Mesh: {fileID: 4854485631724615784, guid: 8f9deb40048a2d74698ec376f270f99e, type: 3}
 --- !u!23 &2945583260889653422
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4252,7 +4252,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e6d76ca806066be47953b32ae54483b6, type: 2}
+  - {fileID: 2100000, guid: fd16cf46dfbcd2943a6ecd25b5156e5c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4882,7 +4882,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5492211559339613098}
-  m_Mesh: {fileID: 3959173107186825003, guid: c97bd78cde35b6e479bab4f5fab4f4fc, type: 3}
+  m_Mesh: {fileID: -4699946896567337666, guid: 8f9deb40048a2d74698ec376f270f99e, type: 3}
 --- !u!23 &1849701005371082161
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4906,7 +4906,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e6d76ca806066be47953b32ae54483b6, type: 2}
+  - {fileID: 2100000, guid: fd16cf46dfbcd2943a6ecd25b5156e5c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6551,7 +6551,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7798826524686817920}
-  m_Mesh: {fileID: -1213624209875795880, guid: c97bd78cde35b6e479bab4f5fab4f4fc, type: 3}
+  m_Mesh: {fileID: 1944697225809317397, guid: 8f9deb40048a2d74698ec376f270f99e, type: 3}
 --- !u!23 &4915978877601499499
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6575,7 +6575,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e6d76ca806066be47953b32ae54483b6, type: 2}
+  - {fileID: 2100000, guid: fd16cf46dfbcd2943a6ecd25b5156e5c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6813,7 +6813,7 @@ MonoBehaviour:
   carriedAmount: 0
   carryCapacity: 5
   forageSpeed: 2
-  slotProviderName: ' '
+  hasSlot: 0
 --- !u!114 &6877582933786813550
 MonoBehaviour:
   m_ObjectHideFlags: 0

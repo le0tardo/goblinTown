@@ -68,8 +68,6 @@ public class SlotProvider : MonoBehaviour, ISlotProvider
         // Fallback if no slots were free
         return transform.position;
     }
-
-
     public void ReleaseSlot(Unit unit)
     {
         occupiedSlots.Remove(unit);

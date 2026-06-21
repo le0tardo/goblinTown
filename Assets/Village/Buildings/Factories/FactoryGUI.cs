@@ -19,6 +19,7 @@ public class FactoryGUI : MonoBehaviour
             {
                 productionCostGUI.SetFactory(factory);
                 productionIcon.sprite=factory.output.resource.resourceIcon;
+
             }
         }
     }

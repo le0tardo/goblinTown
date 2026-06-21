@@ -98,7 +98,7 @@ public class ClickManager : MonoBehaviour
         {
             foreach (Unit unit in UnitManager.inst.selectedUnits)
             {
-                unit.ReleaseSlot();
+                unit.ReleaseSlot(); //print("released slot at line 101"); // why??
             }
         }
 
@@ -126,7 +126,7 @@ public class ClickManager : MonoBehaviour
 
             if (unit.currentSlotProvider != provider)
             {
-                unit.ReleaseSlot();
+                unit.ReleaseSlot();// print("released slot at line 129");
                 unit.currentSlotProvider = provider;
             }
 
@@ -259,6 +259,7 @@ public class ClickManager : MonoBehaviour
         if (forageable != null)
         {
             ISlotProvider slotProvider = hit.collider.GetComponentInParent<ISlotProvider>();
+            //if (slotProvider != null) print("clicked a slotprovider: "+hit.collider.gameObject.name);
 
             foreach (Unit unit in UnitManager.inst.selectedUnits)
             {
@@ -351,6 +352,8 @@ public class ClickManager : MonoBehaviour
 
         if (((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
         {
+            BuildingManager.inst.DeselectBuilding();
+
             var units = UnitManager.inst.selectedUnits;
             if (units.Count == 0) return;
 
@@ -366,6 +369,7 @@ public class ClickManager : MonoBehaviour
 
             return;
         }
+
     }
 
     void HandleBoxSelection(Vector2 start, Vector2 end)

@@ -58,6 +58,7 @@ public class FactoryBehaviour : MonoBehaviour, IProducer
     {
         working = !working;
         workingVisuals.SetActive(working);
+        if (!working) { AbortProduction(); }
     }
 
     void Produce()
@@ -78,7 +79,10 @@ public class FactoryBehaviour : MonoBehaviour, IProducer
         productionTime = maxProductionTime;
     }
 
-
+    void AbortProduction()
+    {
+        //nothing needs to happen here?
+    }
     void StopWorking()
     {
         working = false;

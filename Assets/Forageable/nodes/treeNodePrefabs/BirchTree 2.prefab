@@ -469,6 +469,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 134914698233003144}
+  - component: {fileID: 7251759163627866789}
+  - component: {fileID: 3531329238424014361}
   m_Layer: 0
   m_Name: stump
   m_TagString: Untagged
@@ -493,6 +495,41 @@ Transform:
   - {fileID: 7890977257049940325}
   m_Father: {fileID: 6669746679536399604}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7251759163627866789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197213670450421822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e15da39f5d98464f8a062294942103f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyButton: {fileID: 0}
+  objectToDestroy: {fileID: 2244437752774360324}
+--- !u!135 &3531329238424014361
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197213670450421822}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.66
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4802134317272421621
 GameObject:
   m_ObjectHideFlags: 0

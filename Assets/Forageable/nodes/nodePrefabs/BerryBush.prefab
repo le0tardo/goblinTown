@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2558578077282156750}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 16, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -101,7 +101,7 @@ CapsuleCollider:
   m_Radius: 1.5
   m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!208 &4448848206769719967
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ Transform:
   m_GameObject: {fileID: 6513855430322707791}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -440,7 +440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb743dce659b12849bf0e32cb87008c4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb743dce659b12849bf0e32cb87008c4, type: 3}
       propertyPath: m_LocalPosition.z

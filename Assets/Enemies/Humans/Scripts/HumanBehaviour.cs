@@ -57,6 +57,8 @@ public class HumanBehaviour : MonoBehaviour
         hp = maxHp;
         dead = false;
 
+        transform.position = startPos;
+
         if (hat != null)
         {
             hat.SetActive(Random.value <= 0.5f);
@@ -174,6 +176,7 @@ public class HumanBehaviour : MonoBehaviour
 
     void Kill()
     {
+        transform.position = startPos;
         gameObject.SetActive(false);
     }
 

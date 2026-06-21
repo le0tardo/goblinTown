@@ -49,7 +49,7 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
 
     [Header("Slot")]
     public ISlotProvider currentSlotProvider;
-    public string slotProviderName = " "; //just for debug
+    public bool hasSlot=false;
     private void Start()
     {
         //UnitManager.inst.units.Add(this);
@@ -65,6 +65,9 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
     }
     void Update()
     {
+        //slot debug
+        if(currentSlotProvider!=null)hasSlot=true;else hasSlot=false;
+
         if (agent == null) return;
 
         if (state==UnitState.Moving && HasReachedDestination())

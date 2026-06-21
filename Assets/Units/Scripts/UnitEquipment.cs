@@ -47,6 +47,7 @@ public class UnitEquipment : MonoBehaviour
         clothesLevel=EquipmentManager.inst.clothesLevel;
 
         UneqipTools();
+        EquipClothes();
 
     }
 

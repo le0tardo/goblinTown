@@ -22,6 +22,6 @@ MonoBehaviour:
     amount: 10
   - resource: {fileID: 11400000, guid: 3e7ce838c868bce49899709c7f9460e0, type: 2}
     amount: 5
-  footprintSize: {x: 1, y: 1}
+  footprintSize: {x: 0.5, y: 0.5}
   previewMesh: {fileID: -2124940394850632766, guid: 6fe0e9ff579d37f439ba9d8d08042642, type: 3}
   buildingPrefab: {fileID: 5246256790459047137, guid: aaa405abb8159d14ba31ef8d790fe343, type: 3}
