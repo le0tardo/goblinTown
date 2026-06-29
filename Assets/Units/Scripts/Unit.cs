@@ -245,6 +245,14 @@ public class Unit : MonoBehaviour, ISelectable, IMovable
         //state = UnitState.Idle; //this is ugly sometimes? looks better without...
         anim.ApplyState(state);
     }
+
+    public void DropInventory()
+    {
+        carriedAmount = 0;
+        carriedResource = null;
+        //updateanimations too!
+        anim.ApplyState(state);
+    }
     bool HasReachedDestination()
     {
         if (agent.pathPending)

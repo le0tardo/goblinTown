@@ -11,14 +11,6 @@ public class EventLogManager : MonoBehaviour
         inst = this;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            AddToLog("User pressed a key!");
-        }
-    }
-
     public void AddToLog(string str)
     {
         log.AddString(str);

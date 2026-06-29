@@ -30,7 +30,7 @@ public class VillageResourceManager : MonoBehaviour
         }
         foreach (var villageResource in villageResourceList) //resourceCap
         {
-            villageCaps.Add(villageResource, 5);
+            villageCaps.Add(villageResource, 20);
         }
 
         foreach (var entry in StartingResources)

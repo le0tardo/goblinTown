@@ -15,6 +15,8 @@ public class UnitSelectBox : MonoBehaviour
     Unit cachedUnit;
     UnitEquipment cachedEquip;
 
+    [SerializeField] GameObject dropButton;
+
     private void Update()
     {
         if(UnitManager.inst.selectedUnits.Count<=0) return;
@@ -36,8 +38,9 @@ public class UnitSelectBox : MonoBehaviour
         {
             unitName.text = cachedStatus.unitName;
             healthAmount.text = cachedStatus.hp.ToString() + "/" + cachedStatus.maxHp.ToString();
-            if (unit.carriedAmount <= 0){carryAmount.text = "0/"+unit.carryCapacity.ToString(); }
-            else { carryAmount.text = unit.carriedAmount.ToString() +"/" + unit.carryCapacity.ToString(); }
+            if (unit.carriedAmount <= 0){carryAmount.text = "0/"+unit.carryCapacity.ToString(); dropButton.SetActive(false); }
+            else { carryAmount.text = unit.carriedAmount.ToString() +"/" + unit.carryCapacity.ToString(); dropButton.SetActive(true); }
+
 
             if (unit.carriedResource == null) { carryIcon.sprite = null;carryIcon.enabled = false; }
             else { carryIcon.enabled = true; carryIcon.sprite = unit.carriedResource.resourceSprite; }

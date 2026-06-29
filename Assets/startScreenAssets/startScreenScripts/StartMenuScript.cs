@@ -27,6 +27,10 @@ public class StartMenuScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
     void KillGoblin()
     {
         goblinWalker.SetActive(false);

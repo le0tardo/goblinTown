@@ -60,13 +60,13 @@ public class HumanManager : MonoBehaviour
         if (raid&&activeHumans<=0)
         {
             raid = false;
-            raidCoolDown = 500f;
+            raidCoolDown = 750;
             raidDurationCounter = raidDuration;
         }
         if (raidDurationCounter <= 0)
         {
             raid = false;
-            raidCoolDown = 500f;
+            raidCoolDown = 750;
             raidDurationCounter = raidDuration;
             foreach (var human in humans)
             {

@@ -48,7 +48,6 @@ public class UnitEquipment : MonoBehaviour
 
         UneqipTools();
         EquipClothes();
-
     }
 
     public void UneqipTools()

@@ -59,4 +59,13 @@ public class UnitManager : MonoBehaviour
         }
         selectedUnits.Clear();
     }
+
+    public void DropInventory()
+    {
+        if (selectedUnits[0] != null)
+        {
+            Unit u = selectedUnits[0].GetComponent<Unit>();
+            u.DropInventory();
+        }
+    }
 }
