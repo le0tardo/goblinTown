@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -46,17 +47,24 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
         if (workProgress==0)
         {
             MiniProductionBarManager.inst.Hide(this);
-            return;
+            //return;
         }
         else
         {
             MiniProductionBarManager.inst.Show(this);
         }
 
-        if (BuildingManager.inst.selectedBuilding == this)
+        if (currentWorker != null)
         {
-            //no this wont work...
+            if (!workerGfx.activeInHierarchy)workerGfx.SetActive(true);
+            if(needsWorker)needsWorker = false;
         }
+        else
+        {
+            if (workerGfx.activeInHierarchy)workerGfx.SetActive(false);
+            if(!needsWorker)needsWorker = true;
+        }
+
     }
     public void AssignWorker(Unit unitWorker)
     {
@@ -218,6 +226,7 @@ public class WorkHouseBehaviour : MonoBehaviour, IWorkable, IProducer
     {
         needsWorker=true;
         workerGfx.SetActive(false);
+        currentWorker = null;
         StopAllCoroutines();
     }
 
